@@ -40,15 +40,6 @@ const
     HOST_NAME_MAX = 64
 
 type
-  sSocket* = object
-    fd*: uint32
-    connectTimeout*: uint32
-  Socket* = ptr sSocket
-
-  Semaphore = pointer
-  Thread = pointer
-
-type
   ##  .k =#  .sizeOfTypeId = 
   SentASDU* = object
     sentTime*: uint64_t ##  required for T1 timeout  
@@ -102,7 +93,7 @@ type
     CS104_CONNECTION_STOPDT_CON_RECEIVED = 3
 
   CS104_ConnectionHandler* = proc (parameter: pointer; connection: CS104_Connection;
-                                  event: CS104_ConnectionEvent) {.cdecl.}
+                                  event: CS104_ConnectionEvent) {.stdcall.}
     ## *
     ##  \brief Handler that is called when the connection is established or closed
     ##

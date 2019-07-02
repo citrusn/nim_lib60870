@@ -1,10 +1,7 @@
 import
-  os, strformat, strutils, times, cs104_connection, iec60870_types, iec60870_common, winlean #, hal_time, hal_thread
+  os, strformat, strutils, time, cs104_connection, iec60870_types, iec60870_common #, hal_time, hal_thread
 
 ##  Callback handler to log sent or received messages (optional)
-
-proc Hal_getTimeInMs(): uint64_t =   
-  return cast[uint64_t] (toUnix(getTime())*1000)
                                
 proc rawMessageHandler(parameter: pointer; msg:var array[256, uint8_t]; 
                        msgSize: cint; sent: bool) {.cdecl.} =
@@ -15,9 +12,9 @@ proc rawMessageHandler(parameter: pointer; msg:var array[256, uint8_t];
     s = "RAW RCVD: "
   s = s & fmt"{msgSize} bytes"
   var i: cint = 0  
-  var b : cint  
+  var b : uint8_t  
   while i < msgSize:     
-    b = cast[cint](msg[i])
+    b = msg[i]
     s=s & fmt"{b:#X}" & " " 
     i = i+1
   echo(s)

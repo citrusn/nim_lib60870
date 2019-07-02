@@ -19,13 +19,17 @@
 ##   See COPYING file for the complete license text.
 ##
 
-import
-  hal_time
+import 
+  iec60870_types, winlean, times
 
-proc Hal_getTimeInMs*(): uint64_t =
+proc Hal_getTimeInMs*(): uint64_t = 
+  return cast[uint64_t] (toUnix(getTime())*1000)
+
+
+#[proc Hal_getTimeInMs*(): uint64_t =
   var ft: FILETIME
   var now: uint64_t
   var DIFF_TO_UNIXTIME: uint64_t = 11644473600000'u64
   GetSystemTimeAsFileTime(addr(ft))
   now = cast[LONGLONG](ft.dwLowDateTime) + ((LONGLONG)(ft.dwHighDateTime) shl 32)
-  return (now div 10000) - DIFF_TO_UNIXTIME
+  return (now div 10000) - DIFF_TO_UNIXTIME]#

@@ -20,7 +20,7 @@
 ##
 
 import
-  iec60870_common, tls_config
+  iec60870_types, iec60870_common #, tls_config
 
 ## *
 ##  \file iec60870_slave.h
@@ -50,7 +50,7 @@ import
 
 type
   IMasterConnection* = ptr sIMasterConnection
-  sIMasterConnection* {.bycopy.} = object
+  sIMasterConnection* = object
     sendASDU*: proc (self: IMasterConnection; asdu: CS101_ASDU)
     sendACT_CON*: proc (self: IMasterConnection; asdu: CS101_ASDU; negative: bool)
     sendACT_TERM*: proc (self: IMasterConnection; asdu: CS101_ASDU)
@@ -73,7 +73,7 @@ type
 ##
 
 proc IMasterConnection_sendASDU*(self: IMasterConnection; asdu: CS101_ASDU) {.
-    importc: "IMasterConnection_sendASDU", dynlib: 60870.dll.}
+    importc: "IMasterConnection_sendASDU", dynlib: "60870.dll".}
 ## *
 ##  \brief Send an ACT_CON ASDU to the client/master
 ##
@@ -85,7 +85,7 @@ proc IMasterConnection_sendASDU*(self: IMasterConnection; asdu: CS101_ASDU) {.
 
 proc IMasterConnection_sendACT_CON*(self: IMasterConnection; asdu: CS101_ASDU;
                                    negative: bool) {.
-    importc: "IMasterConnection_sendACT_CON", dynlib: 60870.dll.}
+    importc: "IMasterConnection_sendACT_CON", dynlib: "60870.dll".}
 ## *
 ##  \brief Send an ACT_TERM ASDU to the client/master
 ##
@@ -95,7 +95,7 @@ proc IMasterConnection_sendACT_CON*(self: IMasterConnection; asdu: CS101_ASDU;
 ##
 
 proc IMasterConnection_sendACT_TERM*(self: IMasterConnection; asdu: CS101_ASDU) {.
-    importc: "IMasterConnection_sendACT_TERM", dynlib: 60870.dll.}
+    importc: "IMasterConnection_sendACT_TERM", dynlib: "60870.dll".}
 ## *
 ##  \brief Get the peer address of the master (only for CS 104)
 ##
@@ -107,7 +107,7 @@ proc IMasterConnection_sendACT_TERM*(self: IMasterConnection; asdu: CS101_ASDU) 
 
 proc IMasterConnection_getPeerAddress*(self: IMasterConnection; addrBuf: cstring;
                                       addrBufSize: cint): cint {.
-    importc: "IMasterConnection_getPeerAddress", dynlib: 60870.dll.}
+    importc: "IMasterConnection_getPeerAddress", dynlib: "60870.dll".}
 ## *
 ##  \brief Close the master connection (only for CS 104)
 ##
@@ -115,13 +115,13 @@ proc IMasterConnection_getPeerAddress*(self: IMasterConnection; addrBuf: cstring
 ##
 
 proc IMasterConnection_close*(self: IMasterConnection) {.
-    importc: "IMasterConnection_close", dynlib: 60870.dll.}
+    importc: "IMasterConnection_close", dynlib: "60870.dll".}
 ## *
 ##  \brief Get the application layer parameters used by this connection
 ##
 
 proc IMasterConnection_getApplicationLayerParameters*(self: IMasterConnection): CS101_AppLayerParameters {.
-    importc: "IMasterConnection_getApplicationLayerParameters", dynlib: 60870.dll.}
+    importc: "IMasterConnection_getApplicationLayerParameters", dynlib: "60870.dll".}
 ## *
 ##  @}
 ##
@@ -139,7 +139,7 @@ proc IMasterConnection_getApplicationLayerParameters*(self: IMasterConnection): 
 ##
 
 type
-  CS101_ResetCUHandler* = proc (parameter: pointer)
+  CS101_ResetCUHandler* = proc (parameter: pointer) {.stdcall.}
 
 ## *
 ##  \brief Handler for interrogation command (C_IC_NA_1 - 100).
@@ -148,7 +148,7 @@ type
 type
   CS101_InterrogationHandler* = proc (parameter: pointer;
                                    connection: IMasterConnection;
-                                   asdu: CS101_ASDU; qoi: uint8_t): bool
+                                   asdu: CS101_ASDU; qoi: uint8_t): bool  {.stdcall.}
 
 ## *
 ##  \brief Handler for counter interrogation command (C_CI_NA_1 - 101).
@@ -156,7 +156,7 @@ type
 
 type
   CS101_CounterInterrogationHandler* = proc (parameter: pointer;
-      connection: IMasterConnection; asdu: CS101_ASDU; qcc: QualifierOfCIC): bool
+      connection: IMasterConnection; asdu: CS101_ASDU; qcc: QualifierOfCIC): bool  {.stdcall.}
 
 ## *
 ##  \brief Handler for read command (C_RD_NA_1 - 102)
@@ -164,7 +164,7 @@ type
 
 type
   CS101_ReadHandler* = proc (parameter: pointer; connection: IMasterConnection;
-                          asdu: CS101_ASDU; ioa: cint): bool
+                          asdu: CS101_ASDU; ioa: cint): bool  {.stdcall.}
 
 ## *
 ##  \brief Handler for clock synchronization command (C_CS_NA_1 - 103)
@@ -182,7 +182,7 @@ type
 
 type
   CS101_ClockSynchronizationHandler* = proc (parameter: pointer;
-      connection: IMasterConnection; asdu: CS101_ASDU; newTime: CP56Time2a): bool
+      connection: IMasterConnection; asdu: CS101_ASDU; newTime: CP56Time2a): bool  {.stdcall.}
 
 ## *
 ##  \brief Handler for reset process command (C_RP_NA_1 - 105)
@@ -191,7 +191,7 @@ type
 type
   CS101_ResetProcessHandler* = proc (parameter: pointer;
                                   connection: IMasterConnection; asdu: CS101_ASDU;
-                                  qrp: uint8_t): bool
+                                  qrp: uint8_t): bool  {.stdcall.}
 
 ## *
 ##  \brief Handler for delay acquisition command (C_CD_NA:1 - 106)
@@ -200,7 +200,7 @@ type
 type
   CS101_DelayAcquisitionHandler* = proc (parameter: pointer;
                                       connection: IMasterConnection;
-                                      asdu: CS101_ASDU; delayTime: CP16Time2a): bool
+                                      asdu: CS101_ASDU; delayTime: CP16Time2a): bool  {.stdcall.}
 
 ## *
 ##  \brief Handler for ASDUs that are not handled by other handlers (default handler)
@@ -208,7 +208,7 @@ type
 
 type
   CS101_ASDUHandler* = proc (parameter: pointer; connection: IMasterConnection;
-                          asdu: CS101_ASDU): bool
+                          asdu: CS101_ASDU): bool  {.stdcall.}
 
 ## *
 ##  @}
