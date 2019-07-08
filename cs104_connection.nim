@@ -93,7 +93,7 @@ type
     CS104_CONNECTION_STOPDT_CON_RECEIVED = 3
 
   CS104_ConnectionHandler* = proc (parameter: pointer; connection: CS104_Connection;
-                                  event: CS104_ConnectionEvent) {.stdcall.}
+                                  event: CS104_ConnectionEvent) {.cdecl.}
     ## *
     ##  \brief Handler that is called when the connection is established or closed
     ##
@@ -112,7 +112,7 @@ type
 ##
 
 proc CS104_Connection_create*(hostname: cstring; tcpPort: uint16_t): CS104_Connection {.
-    importc: "CS104_Connection_create", dynlib: "60870.dll".}
+    importc: "CS104_Connection_create", cdecl.} #
 ## *
 ##  \brief Create a new secure connection object (uses TLS)
 ##
@@ -125,7 +125,7 @@ proc CS104_Connection_create*(hostname: cstring; tcpPort: uint16_t): CS104_Conne
 
 #proc CS104_Connection_createSecure*(hostname: cstring; tcpPort: cint;
 #                                   tlsConfig: TLSConfiguration): CS104_Connection {.
-#    importc: "CS104_Connection_createSecure", dynlib: "60870.dll".}
+#    importc: "CS104_Connection_createSecure",  cdecl.}
 ## *
 ##  \brief Set the CS104 specific APCI parameters.
 ##
@@ -138,13 +138,13 @@ proc CS104_Connection_create*(hostname: cstring; tcpPort: uint16_t): CS104_Conne
 
 proc CS104_Connection_setAPCIParameters*(self: CS104_Connection;
                                         parameters: CS104_APCIParameters) {.
-    importc: "CS104_Connection_setAPCIParameters", dynlib: "60870.dll".}
+    importc: "CS104_Connection_setAPCIParameters",  cdecl.}
 ## *
 ##  \brief Get the currently used CS104 specific APCI parameters
 ##
 
 proc CS104_Connection_getAPCIParameters*(self: CS104_Connection): CS104_APCIParameters {.
-    importc: "CS104_Connection_getAPCIParameters", dynlib: "60870.dll".}
+    importc: "CS104_Connection_getAPCIParameters",  cdecl.}
 ## *
 ##  \brief Set the CS101 application layer parameters
 ##
@@ -158,7 +158,7 @@ proc CS104_Connection_getAPCIParameters*(self: CS104_Connection): CS104_APCIPara
 
 proc CS104_Connection_setAppLayerParameters*(self: CS104_Connection;
     parameters: CS101_AppLayerParameters) {.
-    importc: "CS104_Connection_setAppLayerParameters", dynlib: "60870.dll".}
+    importc: "CS104_Connection_setAppLayerParameters",  cdecl.}
 ## *
 ##  \brief Return the currently used application layer parameter
 ##
@@ -170,7 +170,7 @@ proc CS104_Connection_setAppLayerParameters*(self: CS104_Connection;
 ##
 
 proc CS104_Connection_getAppLayerParameters*(self: CS104_Connection): CS101_AppLayerParameters {.
-    importc: "CS104_Connection_getAppLayerParameters", dynlib: "60870.dll".}
+    importc: "CS104_Connection_getAppLayerParameters",  cdecl.}
 ## *
 ##  \brief Sets the timeout for connecting to the server (in ms)
 ##
@@ -179,7 +179,7 @@ proc CS104_Connection_getAppLayerParameters*(self: CS104_Connection): CS101_AppL
 ##
 
 proc CS104_Connection_setConnectTimeout*(self: CS104_Connection; millies: cint) {.
-    importc: "CS104_Connection_setConnectTimeout", dynlib: "60870.dll".}
+    importc: "CS104_Connection_setConnectTimeout",  cdecl.}
 ## *
 ##  \brief non-blocking connect.
 ##
@@ -189,7 +189,7 @@ proc CS104_Connection_setConnectTimeout*(self: CS104_Connection; millies: cint) 
 ##
 
 proc CS104_Connection_connectAsync*(self: CS104_Connection) {.
-    importc: "CS104_Connection_connectAsync", dynlib: "60870.dll".}
+    importc: "CS104_Connection_connectAsync",  cdecl.}
 ## *
 ##  \brief blocking connect
 ##
@@ -201,7 +201,7 @@ proc CS104_Connection_connectAsync*(self: CS104_Connection) {.
 ##
 
 proc CS104_Connection_connect*(self: CS104_Connection): bool {.
-    importc: "CS104_Connection_connect", dynlib: "60870.dll".}
+    importc: "CS104_Connection_connect", cdecl.} #, dynlib: "60870.dll"
 ## *
 ##  \brief start data transmission on this connection
 ##
@@ -210,13 +210,13 @@ proc CS104_Connection_connect*(self: CS104_Connection): bool {.
 ##
 
 proc CS104_Connection_sendStartDT*(self: CS104_Connection) {.
-    importc: "CS104_Connection_sendStartDT", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendStartDT", cdecl.}
 ## *
 ##  \brief stop data transmission on this connection
 ##
 
 proc CS104_Connection_sendStopDT*(self: CS104_Connection) {.
-    importc: "CS104_Connection_sendStopDT", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendStopDT", cdecl.} 
 ## *
 ##  \brief Check if the transmit (send) buffer is full. If true the next send command will fail.
 ##
@@ -226,7 +226,7 @@ proc CS104_Connection_sendStopDT*(self: CS104_Connection) {.
 ##
 
 proc CS104_Connection_isTransmitBufferFull*(self: CS104_Connection): bool {.
-    importc: "CS104_Connection_isTransmitBufferFull", dynlib: "60870.dll".}
+    importc: "CS104_Connection_isTransmitBufferFull",  cdecl.}
 ## *
 ##  \brief send an interrogation command
 ##
@@ -239,7 +239,7 @@ proc CS104_Connection_isTransmitBufferFull*(self: CS104_Connection): bool {.
 
 proc CS104_Connection_sendInterrogationCommand*(self: CS104_Connection;
     cot: CS101_CauseOfTransmission; ca: cint; qoi: QualifierOfInterrogation): bool {.
-    importc: "CS104_Connection_sendInterrogationCommand", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendInterrogationCommand",  cdecl.}
 ## *
 ##  \brief send a counter interrogation command
 ##
@@ -252,7 +252,7 @@ proc CS104_Connection_sendInterrogationCommand*(self: CS104_Connection;
 
 proc CS104_Connection_sendCounterInterrogationCommand*(self: CS104_Connection;
     cot: CS101_CauseOfTransmission; ca: cint; qcc: uint8_t): bool {.
-    importc: "CS104_Connection_sendCounterInterrogationCommand", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendCounterInterrogationCommand",  cdecl.}
 ## *
 ##  \brief  Sends a read command (C_RD_NA_1 typeID: 102)
 ##
@@ -266,7 +266,7 @@ proc CS104_Connection_sendCounterInterrogationCommand*(self: CS104_Connection;
 ##
 
 proc CS104_Connection_sendReadCommand*(self: CS104_Connection; ca: cint; ioa: cint): bool {.
-    importc: "CS104_Connection_sendReadCommand", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendReadCommand",  cdecl.}
 ## *
 ##  \brief Sends a clock synchronization command (C_CS_NA_1 typeID: 103)
 ##
@@ -278,7 +278,7 @@ proc CS104_Connection_sendReadCommand*(self: CS104_Connection; ca: cint; ioa: ci
 
 proc CS104_Connection_sendClockSyncCommand*(self: CS104_Connection; ca: cint;
     newTime: CP56Time2a): bool {.importc: "CS104_Connection_sendClockSyncCommand",
-                              dynlib: "60870.dll".}
+                               cdecl.} #
 ## *
 ##  \brief Send a test command (C_TS_NA_1 typeID: 104)
 ##
@@ -290,7 +290,7 @@ proc CS104_Connection_sendClockSyncCommand*(self: CS104_Connection; ca: cint;
 ##
 
 proc CS104_Connection_sendTestCommand*(self: CS104_Connection; ca: cint): bool {.
-    importc: "CS104_Connection_sendTestCommand", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendTestCommand", cdecl.}
 ## *
 ##  \brief Send a process command to the controlled (or other) station
 ##
@@ -306,7 +306,7 @@ proc CS104_Connection_sendTestCommand*(self: CS104_Connection; ca: cint): bool {
 
 proc CS104_Connection_sendProcessCommand*(self: CS104_Connection; typeId: TypeID;
     cot: CS101_CauseOfTransmission; ca: cint; command: InformationObject): bool {.
-    importc: "CS104_Connection_sendProcessCommand", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendProcessCommand", cdecl.} #
 ## *
 ##  \brief Send a process command to the controlled (or other) station
 ##
@@ -319,7 +319,7 @@ proc CS104_Connection_sendProcessCommand*(self: CS104_Connection; typeId: TypeID
 
 proc CS104_Connection_sendProcessCommandEx*(self: CS104_Connection;
     cot: CS101_CauseOfTransmission; ca: cint; sc: InformationObject): bool {.
-    importc: "CS104_Connection_sendProcessCommandEx", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendProcessCommandEx",  cdecl.} #
 ## *
 ##  \brief Send a user specified ASDU
 ##
@@ -329,7 +329,7 @@ proc CS104_Connection_sendProcessCommandEx*(self: CS104_Connection;
 ##
 
 proc CS104_Connection_sendASDU*(self: CS104_Connection; asdu: CS101_ASDU): bool {.
-    importc: "CS104_Connection_sendASDU", dynlib: "60870.dll".}
+    importc: "CS104_Connection_sendASDU",  cdecl.} 
 ## *
 ##  \brief Register a callback handler for received ASDUs
 ##
@@ -339,7 +339,7 @@ proc CS104_Connection_sendASDU*(self: CS104_Connection; asdu: CS101_ASDU): bool 
 
 proc CS104_Connection_setASDUReceivedHandler*(self: CS104_Connection;
     handler: CS101_ASDUReceivedHandler; parameter: pointer) {.
-    importc: "CS104_Connection_setASDUReceivedHandler", dynlib: "60870.dll".}
+    importc: "CS104_Connection_setASDUReceivedHandler", cdecl.} #, dynlib: "60870.dll"
 
 
 ## *
@@ -351,7 +351,7 @@ proc CS104_Connection_setASDUReceivedHandler*(self: CS104_Connection;
 
 proc CS104_Connection_setConnectionHandler*(self: CS104_Connection;
     handler: CS104_ConnectionHandler; parameter: pointer) {.
-    importc: "CS104_Connection_setConnectionHandler", dynlib: "60870.dll".}
+    importc: "CS104_Connection_setConnectionHandler", cdecl.} #, dynlib: "60870.dll"
 ## *
 ##  \brief Set the raw message callback (called when a message is sent or received)
 ##
@@ -361,18 +361,18 @@ proc CS104_Connection_setConnectionHandler*(self: CS104_Connection;
 
 proc CS104_Connection_setRawMessageHandler*(self: CS104_Connection;
     handler: IEC60870_RawMessageHandler; parameter: pointer) {.
-    importc: "CS104_Connection_setRawMessageHandler", dynlib: "60870.dll".}
+    importc: "CS104_Connection_setRawMessageHandler", cdecl.} # 
 ## *
 ##  \brief Close the connection
 ##
 
 proc CS104_Connection_close*(self: CS104_Connection) {.
-    importc: "CS104_Connection_close", dynlib: "60870.dll".}
+    importc: "CS104_Connection_close", cdecl.} #, dynlib: "60870.dll"
 ## *
 ##  \brief Close the connection and free all related resources
 ##
 
 proc CS104_Connection_destroy*(self: CS104_Connection) {.
-    importc: "CS104_Connection_destroy", dynlib: "60870.dll".}
+    importc: "CS104_Connection_destroy", cdecl.} #, dynlib: "60870.dll"
 ## ! @}
 ## ! @}

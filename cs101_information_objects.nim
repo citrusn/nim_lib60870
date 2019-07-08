@@ -56,7 +56,7 @@ type
 
 
 proc TypeID_toString*(self: TypeID): cstring {.importc: "TypeID_toString",
-    dynlib: "60870.dll".}
+     cdecl, cdecl .}
 
 
 ## *
@@ -273,13 +273,13 @@ type
 
 
 proc SingleEvent_setEventState*(self: SingleEvent; eventState: EventState) {.
-    importc: "SingleEvent_setEventState", dynlib: "60870.dll".}
+    importc: "SingleEvent_setEventState",  cdecl.}
 proc SingleEvent_getEventState*(self: SingleEvent): EventState {.
-    importc: "SingleEvent_getEventState", dynlib: "60870.dll".}
+    importc: "SingleEvent_getEventState",  cdecl.}
 proc SingleEvent_setQDP*(self: SingleEvent; qdp: QualityDescriptorP) {.
-    importc: "SingleEvent_setQDP", dynlib: "60870.dll".}
+    importc: "SingleEvent_setQDP",  cdecl.}
 proc SingleEvent_getQDP*(self: SingleEvent): QualityDescriptorP {.
-    importc: "SingleEvent_getQDP", dynlib: "60870.dll".}
+    importc: "SingleEvent_getQDP",  cdecl.}
 type
   tStatusAndStatusChangeDetection* = sStatusAndStatusChangeDetection
   StatusAndStatusChangeDetection* = ptr tStatusAndStatusChangeDetection
@@ -288,18 +288,18 @@ type
 
 
 proc StatusAndStatusChangeDetection_getSTn*(self: StatusAndStatusChangeDetection): uint16_t {.
-    importc: "StatusAndStatusChangeDetection_getSTn", dynlib: "60870.dll".}
+    importc: "StatusAndStatusChangeDetection_getSTn",  cdecl.}
 proc StatusAndStatusChangeDetection_getCDn*(self: StatusAndStatusChangeDetection): uint16_t {.
-    importc: "StatusAndStatusChangeDetection_getCDn", dynlib: "60870.dll".}
+    importc: "StatusAndStatusChangeDetection_getCDn",  cdecl.}
 proc StatusAndStatusChangeDetection_setSTn*(self: StatusAndStatusChangeDetection;
     value: uint16_t) {.importc: "StatusAndStatusChangeDetection_setSTn",
-                     dynlib: "60870.dll".}
+                      cdecl.}
 proc StatusAndStatusChangeDetection_getST*(self: StatusAndStatusChangeDetection;
     index: cint): bool {.importc: "StatusAndStatusChangeDetection_getST",
-                      dynlib: "60870.dll".}
+                       cdecl.}
 proc StatusAndStatusChangeDetection_getCD*(self: StatusAndStatusChangeDetection;
     index: cint): bool {.importc: "StatusAndStatusChangeDetection_getCD",
-                      dynlib: "60870.dll".}
+                       cdecl.}
 ## ***********************************************
 ##  InformationObject
 ## **********************************************
@@ -313,11 +313,11 @@ include "cs101_information_objects_cpp.nim"
 ##
 
 proc InformationObject_getMaxSizeInMemory*(): cint {.
-    importc: "InformationObject_getMaxSizeInMemory", dynlib: "60870.dll".}
+    importc: "InformationObject_getMaxSizeInMemory",  cdecl.}
 proc InformationObject_getObjectAddress*(self: InformationObject): cint {.
-    importc: "InformationObject_getObjectAddress", dynlib: "60870.dll".}
+    importc: "InformationObject_getObjectAddress",  cdecl.}
 proc InformationObject_getType*(self: InformationObject): TypeID {.
-    importc: "InformationObject_getType", dynlib: "60870.dll".}
+    importc: "InformationObject_getType",  cdecl.}
 ## *
 ##  \brief Destroy object - free all related resources
 ##
@@ -327,7 +327,7 @@ proc InformationObject_getType*(self: InformationObject): TypeID {.
 ##
 
 proc InformationObject_destroy*(self: InformationObject) {.
-    importc: "InformationObject_destroy", dynlib: "60870.dll".}
+    importc: "InformationObject_destroy", cdecl.}
 ## ***********************************************
 ##  SinglePointInformation (:InformationObject)
 ## **********************************************
@@ -339,13 +339,13 @@ type
 
 proc SinglePointInformation_create*(self: SinglePointInformation; ioa: cint;
                                    value: bool; quality: QualityDescriptor): SinglePointInformation {.
-    importc: "SinglePointInformation_create", dynlib: "60870.dll".}
+    importc: "SinglePointInformation_create",  cdecl.}
 proc SinglePointInformation_getValue*(self: SinglePointInformation): bool {.
-    importc: "SinglePointInformation_getValue", dynlib: "60870.dll".}
+    importc: "SinglePointInformation_getValue",  cdecl.}
 proc SinglePointInformation_getQuality*(self: SinglePointInformation): QualityDescriptor {.
-    importc: "SinglePointInformation_getQuality", dynlib: "60870.dll".}
+    importc: "SinglePointInformation_getQuality",  cdecl.}
 proc SinglePointInformation_destroy*(self: SinglePointInformation) {.
-    importc: "SinglePointInformation_destroy", dynlib: "60870.dll".}
+    importc: "SinglePointInformation_destroy",  cdecl.}
 ## *******************************************************
 ##   SinglePointWithCP24Time2a (:SinglePointInformation)
 ## ******************************************************
@@ -356,11 +356,11 @@ type
 proc SinglePointWithCP24Time2a_create*(self: SinglePointWithCP24Time2a; ioa: cint;
                                       value: bool; quality: QualityDescriptor;
                                       timestamp: CP24Time2a): SinglePointWithCP24Time2a {.
-    importc: "SinglePointWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "SinglePointWithCP24Time2a_create",  cdecl.}
 proc SinglePointWithCP24Time2a_destroy*(self: SinglePointWithCP24Time2a) {.
-    importc: "SinglePointWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "SinglePointWithCP24Time2a_destroy",  cdecl.}
 proc SinglePointWithCP24Time2a_getTimestamp*(self: SinglePointWithCP24Time2a): CP24Time2a {.
-    importc: "SinglePointWithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "SinglePointWithCP24Time2a_getTimestamp",  cdecl.}
 ## *******************************************************
 ##   SinglePointWithCP56Time2a (:SinglePointInformation)
 ## ******************************************************
@@ -371,11 +371,11 @@ type
 proc SinglePointWithCP56Time2a_create*(self: SinglePointWithCP56Time2a; ioa: cint;
                                       value: bool; quality: QualityDescriptor;
                                       timestamp: CP56Time2a): SinglePointWithCP56Time2a {.
-    importc: "SinglePointWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "SinglePointWithCP56Time2a_create",  cdecl.}
 proc SinglePointWithCP56Time2a_destroy*(self: SinglePointWithCP56Time2a) {.
-    importc: "SinglePointWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "SinglePointWithCP56Time2a_destroy",  cdecl.}
 proc SinglePointWithCP56Time2a_getTimestamp*(self: SinglePointWithCP56Time2a): CP56Time2a {.
-    importc: "SinglePointWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "SinglePointWithCP56Time2a_getTimestamp",  cdecl.}
 ## ***********************************************
 ##  DoublePointInformation (:InformationObject)
 ## **********************************************
@@ -384,15 +384,15 @@ type
   DoublePointInformation* = ptr sDoublePointInformation
 
 proc DoublePointInformation_destroy*(self: DoublePointInformation) {.
-    importc: "DoublePointInformation_destroy", dynlib: "60870.dll".}
+    importc: "DoublePointInformation_destroy",  cdecl.}
 proc DoublePointInformation_create*(self: DoublePointInformation; ioa: cint;
                                    value: DoublePointValue;
                                    quality: QualityDescriptor): DoublePointInformation {.
-    importc: "DoublePointInformation_create", dynlib: "60870.dll".}
+    importc: "DoublePointInformation_create",  cdecl.}
 proc DoublePointInformation_getValue*(self: DoublePointInformation): DoublePointValue {.
-    importc: "DoublePointInformation_getValue", dynlib: "60870.dll".}
+    importc: "DoublePointInformation_getValue",  cdecl.}
 proc DoublePointInformation_getQuality*(self: DoublePointInformation): QualityDescriptor {.
-    importc: "DoublePointInformation_getQuality", dynlib: "60870.dll".}
+    importc: "DoublePointInformation_getQuality",  cdecl.}
 ## *******************************************************
 ##   DoublePointWithCP24Time2a (:DoublePointInformation)
 ## ******************************************************
@@ -401,14 +401,14 @@ type
   DoublePointWithCP24Time2a* = ptr sDoublePointWithCP24Time2a
 
 proc DoublePointWithCP24Time2a_destroy*(self: DoublePointWithCP24Time2a) {.
-    importc: "DoublePointWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "DoublePointWithCP24Time2a_destroy",  cdecl.}
 proc DoublePointWithCP24Time2a_create*(self: DoublePointWithCP24Time2a; ioa: cint;
                                       value: DoublePointValue;
                                       quality: QualityDescriptor;
                                       timestamp: CP24Time2a): DoublePointWithCP24Time2a {.
-    importc: "DoublePointWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "DoublePointWithCP24Time2a_create",  cdecl.}
 proc DoublePointWithCP24Time2a_getTimestamp*(self: DoublePointWithCP24Time2a): CP24Time2a {.
-    importc: "DoublePointWithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "DoublePointWithCP24Time2a_getTimestamp",  cdecl.}
 ## *******************************************************
 ##   DoublePointWithCP56Time2a (:DoublePointInformation)
 ## ******************************************************
@@ -420,11 +420,11 @@ proc DoublePointWithCP56Time2a_create*(self: DoublePointWithCP56Time2a; ioa: cin
                                       value: DoublePointValue;
                                       quality: QualityDescriptor;
                                       timestamp: CP56Time2a): DoublePointWithCP56Time2a {.
-    importc: "DoublePointWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "DoublePointWithCP56Time2a_create",  cdecl.}
 proc DoublePointWithCP56Time2a_destroy*(self: DoublePointWithCP56Time2a) {.
-    importc: "DoublePointWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "DoublePointWithCP56Time2a_destroy",  cdecl.}
 proc DoublePointWithCP56Time2a_getTimestamp*(self: DoublePointWithCP56Time2a): CP56Time2a {.
-    importc: "DoublePointWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "DoublePointWithCP56Time2a_getTimestamp",  cdecl.}
 ## ***********************************************
 ##  StepPositionInformation (:InformationObject)
 ## **********************************************
@@ -447,21 +447,21 @@ type
 proc StepPositionInformation_create*(self: StepPositionInformation; ioa: cint;
                                     value: cint; isTransient: bool;
                                     quality: QualityDescriptor): StepPositionInformation {.
-    importc: "StepPositionInformation_create", dynlib: "60870.dll".}
+    importc: "StepPositionInformation_create",  cdecl.}
 proc StepPositionInformation_destroy*(self: StepPositionInformation) {.
-    importc: "StepPositionInformation_destroy", dynlib: "60870.dll".}
+    importc: "StepPositionInformation_destroy",  cdecl.}
 proc StepPositionInformation_getObjectAddress*(self: StepPositionInformation): cint {.
-    importc: "StepPositionInformation_getObjectAddress", dynlib: "60870.dll".}
+    importc: "StepPositionInformation_getObjectAddress",  cdecl.}
 ## *
 ##  \brief Step position (range -64 ... +63)
 ##
 
 proc StepPositionInformation_getValue*(self: StepPositionInformation): cint {.
-    importc: "StepPositionInformation_getValue", dynlib: "60870.dll".}
+    importc: "StepPositionInformation_getValue",  cdecl.}
 proc StepPositionInformation_isTransient*(self: StepPositionInformation): bool {.
-    importc: "StepPositionInformation_isTransient", dynlib: "60870.dll".}
+    importc: "StepPositionInformation_isTransient",  cdecl.}
 proc StepPositionInformation_getQuality*(self: StepPositionInformation): QualityDescriptor {.
-    importc: "StepPositionInformation_getQuality", dynlib: "60870.dll".}
+    importc: "StepPositionInformation_getQuality",  cdecl.}
 ## ********************************************************
 ##  StepPositionWithCP24Time2a (:StepPositionInformation)
 ## *******************************************************
@@ -470,14 +470,14 @@ type
   StepPositionWithCP24Time2a* = ptr sStepPositionWithCP24Time2a
 
 proc StepPositionWithCP24Time2a_destroy*(self: StepPositionWithCP24Time2a) {.
-    importc: "StepPositionWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "StepPositionWithCP24Time2a_destroy",  cdecl.}
 proc StepPositionWithCP24Time2a_create*(self: StepPositionWithCP24Time2a;
                                        ioa: cint; value: cint; isTransient: bool;
                                        quality: QualityDescriptor;
                                        timestamp: CP24Time2a): StepPositionWithCP24Time2a {.
-    importc: "StepPositionWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "StepPositionWithCP24Time2a_create",  cdecl.}
 proc StepPositionWithCP24Time2a_getTimestamp*(self: StepPositionWithCP24Time2a): CP24Time2a {.
-    importc: "StepPositionWithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "StepPositionWithCP24Time2a_getTimestamp",  cdecl.}
 ## ********************************************************
 ##  StepPositionWithCP56Time2a (:StepPositionInformation)
 ## *******************************************************
@@ -486,14 +486,14 @@ type
   StepPositionWithCP56Time2a* = ptr sStepPositionWithCP56Time2a
 
 proc StepPositionWithCP56Time2a_destroy*(self: StepPositionWithCP56Time2a) {.
-    importc: "StepPositionWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "StepPositionWithCP56Time2a_destroy",  cdecl.}
 proc StepPositionWithCP56Time2a_create*(self: StepPositionWithCP56Time2a;
                                        ioa: cint; value: cint; isTransient: bool;
                                        quality: QualityDescriptor;
                                        timestamp: CP56Time2a): StepPositionWithCP56Time2a {.
-    importc: "StepPositionWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "StepPositionWithCP56Time2a_create",  cdecl.}
 proc StepPositionWithCP56Time2a_getTimestamp*(self: StepPositionWithCP56Time2a): CP56Time2a {.
-    importc: "StepPositionWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "StepPositionWithCP56Time2a_getTimestamp",  cdecl.}
 ## *********************************************
 ##  BitString32 (:InformationObject)
 ## ********************************************
@@ -502,13 +502,13 @@ type
   BitString32* = ptr sBitString32
 
 proc BitString32_destroy*(self: BitString32) {.importc: "BitString32_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc BitString32_create*(self: BitString32; ioa: cint; value: uint32_t): BitString32 {.
-    importc: "BitString32_create", dynlib: "60870.dll".}
+    importc: "BitString32_create",  cdecl.}
 proc BitString32_getValue*(self: BitString32): uint32_t {.
-    importc: "BitString32_getValue", dynlib: "60870.dll".}
+    importc: "BitString32_getValue",  cdecl.}
 proc BitString32_getQuality*(self: BitString32): QualityDescriptor {.
-    importc: "BitString32_getQuality", dynlib: "60870.dll".}
+    importc: "BitString32_getQuality",  cdecl.}
 ## *********************************************
 ##  Bitstring32WithCP24Time2a (:BitString32)
 ## ********************************************
@@ -517,12 +517,12 @@ type
   Bitstring32WithCP24Time2a* = ptr sBitstring32WithCP24Time2a
 
 proc Bitstring32WithCP24Time2a_destroy*(self: Bitstring32WithCP24Time2a) {.
-    importc: "Bitstring32WithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "Bitstring32WithCP24Time2a_destroy",  cdecl.}
 proc Bitstring32WithCP24Time2a_create*(self: Bitstring32WithCP24Time2a; ioa: cint;
                                       value: uint32_t; timestamp: CP24Time2a): Bitstring32WithCP24Time2a {.
-    importc: "Bitstring32WithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "Bitstring32WithCP24Time2a_create",  cdecl.}
 proc Bitstring32WithCP24Time2a_getTimestamp*(self: Bitstring32WithCP24Time2a): CP24Time2a {.
-    importc: "Bitstring32WithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "Bitstring32WithCP24Time2a_getTimestamp",  cdecl.}
 ## *********************************************
 ##  Bitstring32WithCP56Time2a (:BitString32)
 ## ********************************************
@@ -531,12 +531,12 @@ type
   Bitstring32WithCP56Time2a* = ptr sBitstring32WithCP56Time2a
 
 proc Bitstring32WithCP56Time2a_destroy*(self: Bitstring32WithCP56Time2a) {.
-    importc: "Bitstring32WithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "Bitstring32WithCP56Time2a_destroy",  cdecl.}
 proc Bitstring32WithCP56Time2a_create*(self: Bitstring32WithCP56Time2a; ioa: cint;
                                       value: uint32_t; timestamp: CP56Time2a): Bitstring32WithCP56Time2a {.
-    importc: "Bitstring32WithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "Bitstring32WithCP56Time2a_create",  cdecl.}
 proc Bitstring32WithCP56Time2a_getTimestamp*(self: Bitstring32WithCP56Time2a): CP56Time2a {.
-    importc: "Bitstring32WithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "Bitstring32WithCP56Time2a_getTimestamp",  cdecl.}
 ## ************************************************************
 ##  MeasuredValueNormalizedWithoutQuality : InformationObject
 ## ***********************************************************
@@ -546,16 +546,16 @@ type
 
 proc MeasuredValueNormalizedWithoutQuality_destroy*(
     self: MeasuredValueNormalizedWithoutQuality) {.
-    importc: "MeasuredValueNormalizedWithoutQuality_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithoutQuality_destroy",  cdecl.}
 proc MeasuredValueNormalizedWithoutQuality_create*(
     self: MeasuredValueNormalizedWithoutQuality; ioa: cint; value: cfloat): MeasuredValueNormalizedWithoutQuality {.
-    importc: "MeasuredValueNormalizedWithoutQuality_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithoutQuality_create",  cdecl.}
 proc MeasuredValueNormalizedWithoutQuality_getValue*(
     self: MeasuredValueNormalizedWithoutQuality): cfloat {.
-    importc: "MeasuredValueNormalizedWithoutQuality_getValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithoutQuality_getValue",  cdecl.}
 proc MeasuredValueNormalizedWithoutQuality_setValue*(
     self: MeasuredValueNormalizedWithoutQuality; value: cfloat) {.
-    importc: "MeasuredValueNormalizedWithoutQuality_setValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithoutQuality_setValue",  cdecl.}
 ## *********************************************
 ##  MeasuredValueNormalized
 ## ********************************************
@@ -564,16 +564,16 @@ type
   MeasuredValueNormalized* = ptr sMeasuredValueNormalized
 
 proc MeasuredValueNormalized_destroy*(self: MeasuredValueNormalized) {.
-    importc: "MeasuredValueNormalized_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalized_destroy",  cdecl.}
 proc MeasuredValueNormalized_create*(self: MeasuredValueNormalized; ioa: cint;
                                     value: cfloat; quality: QualityDescriptor): MeasuredValueNormalized {.
-    importc: "MeasuredValueNormalized_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalized_create",  cdecl.}
 proc MeasuredValueNormalized_getValue*(self: MeasuredValueNormalized): cfloat {.
-    importc: "MeasuredValueNormalized_getValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalized_getValue",  cdecl.}
 proc MeasuredValueNormalized_setValue*(self: MeasuredValueNormalized; value: cfloat) {.
-    importc: "MeasuredValueNormalized_setValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalized_setValue",  cdecl.}
 proc MeasuredValueNormalized_getQuality*(self: MeasuredValueNormalized): QualityDescriptor {.
-    importc: "MeasuredValueNormalized_getQuality", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalized_getQuality",  cdecl.}
 ## **********************************************************************
 ##  MeasuredValueNormalizedWithCP24Time2a : MeasuredValueNormalized
 ## *********************************************************************
@@ -583,19 +583,19 @@ type
 
 proc MeasuredValueNormalizedWithCP24Time2a_destroy*(
     self: MeasuredValueNormalizedWithCP24Time2a) {.
-    importc: "MeasuredValueNormalizedWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithCP24Time2a_destroy",  cdecl.}
 proc MeasuredValueNormalizedWithCP24Time2a_create*(
     self: MeasuredValueNormalizedWithCP24Time2a; ioa: cint; value: cfloat;
     quality: QualityDescriptor; timestamp: CP24Time2a): MeasuredValueNormalizedWithCP24Time2a {.
-    importc: "MeasuredValueNormalizedWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithCP24Time2a_create",  cdecl.}
 proc MeasuredValueNormalizedWithCP24Time2a_getTimestamp*(
     self: MeasuredValueNormalizedWithCP24Time2a): CP24Time2a {.
     importc: "MeasuredValueNormalizedWithCP24Time2a_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc MeasuredValueNormalizedWithCP24Time2a_setTimestamp*(
     self: MeasuredValueNormalizedWithCP24Time2a; value: CP24Time2a) {.
     importc: "MeasuredValueNormalizedWithCP24Time2a_setTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## **********************************************************************
 ##  MeasuredValueNormalizedWithCP56Time2a : MeasuredValueNormalized
 ## *********************************************************************
@@ -605,19 +605,19 @@ type
 
 proc MeasuredValueNormalizedWithCP56Time2a_destroy*(
     self: MeasuredValueNormalizedWithCP56Time2a) {.
-    importc: "MeasuredValueNormalizedWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithCP56Time2a_destroy",  cdecl.}
 proc MeasuredValueNormalizedWithCP56Time2a_create*(
     self: MeasuredValueNormalizedWithCP56Time2a; ioa: cint; value: cfloat;
     quality: QualityDescriptor; timestamp: CP56Time2a): MeasuredValueNormalizedWithCP56Time2a {.
-    importc: "MeasuredValueNormalizedWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueNormalizedWithCP56Time2a_create",  cdecl.}
 proc MeasuredValueNormalizedWithCP56Time2a_getTimestamp*(
     self: MeasuredValueNormalizedWithCP56Time2a): CP56Time2a {.
     importc: "MeasuredValueNormalizedWithCP56Time2a_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc MeasuredValueNormalizedWithCP56Time2a_setTimestamp*(
     self: MeasuredValueNormalizedWithCP56Time2a; value: CP56Time2a) {.
     importc: "MeasuredValueNormalizedWithCP56Time2a_setTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## ******************************************
 ##  MeasuredValueScaled : InformationObject
 ## *****************************************
@@ -638,18 +638,18 @@ type
 
 proc MeasuredValueScaled_create*(self: MeasuredValueScaled; ioa: cint; value: cint;
                                 quality: QualityDescriptor): MeasuredValueScaled {.
-    importc: "MeasuredValueScaled_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaled_create",  cdecl.}
 proc MeasuredValueScaled_destroy*(self: MeasuredValueScaled) {.
-    importc: "MeasuredValueScaled_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaled_destroy",  cdecl.}
 proc MeasuredValueScaled_getValue*(self: MeasuredValueScaled): cint {.
-    importc: "MeasuredValueScaled_getValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaled_getValue",  cdecl.}
 proc MeasuredValueScaled_setValue*(self: MeasuredValueScaled; value: cint) {.
-    importc: "MeasuredValueScaled_setValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaled_setValue",  cdecl.}
 proc MeasuredValueScaled_getQuality*(self: MeasuredValueScaled): QualityDescriptor {.
-    importc: "MeasuredValueScaled_getQuality", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaled_getQuality",  cdecl.}
 proc MeasuredValueScaled_setQuality*(self: MeasuredValueScaled;
                                     quality: QualityDescriptor) {.
-    importc: "MeasuredValueScaled_setQuality", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaled_setQuality",  cdecl.}
 ## **********************************************************************
 ##  MeasuredValueScaledWithCP24Time2a : MeasuredValueScaled
 ## *********************************************************************
@@ -659,17 +659,17 @@ type
 
 proc MeasuredValueScaledWithCP24Time2a_destroy*(
     self: MeasuredValueScaledWithCP24Time2a) {.
-    importc: "MeasuredValueScaledWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP24Time2a_destroy",  cdecl.}
 proc MeasuredValueScaledWithCP24Time2a_create*(
     self: MeasuredValueScaledWithCP24Time2a; ioa: cint; value: cint;
     quality: QualityDescriptor; timestamp: CP24Time2a): MeasuredValueScaledWithCP24Time2a {.
-    importc: "MeasuredValueScaledWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP24Time2a_create",  cdecl.}
 proc MeasuredValueScaledWithCP24Time2a_getTimestamp*(
     self: MeasuredValueScaledWithCP24Time2a): CP24Time2a {.
-    importc: "MeasuredValueScaledWithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP24Time2a_getTimestamp",  cdecl.}
 proc MeasuredValueScaledWithCP24Time2a_setTimestamp*(
     self: MeasuredValueScaledWithCP24Time2a; value: CP24Time2a) {.
-    importc: "MeasuredValueScaledWithCP24Time2a_setTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP24Time2a_setTimestamp",  cdecl.}
 ## **********************************************************************
 ##  MeasuredValueScaledWithCP56Time2a : MeasuredValueScaled
 ## *********************************************************************
@@ -679,17 +679,17 @@ type
 
 proc MeasuredValueScaledWithCP56Time2a_destroy*(
     self: MeasuredValueScaledWithCP56Time2a) {.
-    importc: "MeasuredValueScaledWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP56Time2a_destroy",  cdecl.}
 proc MeasuredValueScaledWithCP56Time2a_create*(
     self: MeasuredValueScaledWithCP56Time2a; ioa: cint; value: cint;
     quality: QualityDescriptor; timestamp: CP56Time2a): MeasuredValueScaledWithCP56Time2a {.
-    importc: "MeasuredValueScaledWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP56Time2a_create",  cdecl.}
 proc MeasuredValueScaledWithCP56Time2a_getTimestamp*(
     self: MeasuredValueScaledWithCP56Time2a): CP56Time2a {.
-    importc: "MeasuredValueScaledWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP56Time2a_getTimestamp",  cdecl.}
 proc MeasuredValueScaledWithCP56Time2a_setTimestamp*(
     self: MeasuredValueScaledWithCP56Time2a; value: CP56Time2a) {.
-    importc: "MeasuredValueScaledWithCP56Time2a_setTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueScaledWithCP56Time2a_setTimestamp",  cdecl.}
 ## ******************************************
 ##  MeasuredValueShort : InformationObject
 ## *****************************************
@@ -698,16 +698,16 @@ type
   MeasuredValueShort* = ptr sMeasuredValueShort
 
 proc MeasuredValueShort_destroy*(self: MeasuredValueShort) {.
-    importc: "MeasuredValueShort_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueShort_destroy",  cdecl.}
 proc MeasuredValueShort_create*(self: MeasuredValueShort; ioa: cint; value: cfloat;
                                quality: QualityDescriptor): MeasuredValueShort {.
-    importc: "MeasuredValueShort_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueShort_create",  cdecl.}
 proc MeasuredValueShort_getValue*(self: MeasuredValueShort): cfloat {.
-    importc: "MeasuredValueShort_getValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueShort_getValue",  cdecl.}
 proc MeasuredValueShort_setValue*(self: MeasuredValueShort; value: cfloat) {.
-    importc: "MeasuredValueShort_setValue", dynlib: "60870.dll".}
+    importc: "MeasuredValueShort_setValue",  cdecl.}
 proc MeasuredValueShort_getQuality*(self: MeasuredValueShort): QualityDescriptor {.
-    importc: "MeasuredValueShort_getQuality", dynlib: "60870.dll".}
+    importc: "MeasuredValueShort_getQuality",  cdecl.}
 ## **********************************************************************
 ##  MeasuredValueShortWithCP24Time2a : MeasuredValueShort
 ## *********************************************************************
@@ -717,17 +717,17 @@ type
 
 proc MeasuredValueShortWithCP24Time2a_destroy*(
     self: MeasuredValueShortWithCP24Time2a) {.
-    importc: "MeasuredValueShortWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP24Time2a_destroy",  cdecl.}
 proc MeasuredValueShortWithCP24Time2a_create*(
     self: MeasuredValueShortWithCP24Time2a; ioa: cint; value: cfloat;
     quality: QualityDescriptor; timestamp: CP24Time2a): MeasuredValueShortWithCP24Time2a {.
-    importc: "MeasuredValueShortWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP24Time2a_create",  cdecl.}
 proc MeasuredValueShortWithCP24Time2a_getTimestamp*(
     self: MeasuredValueShortWithCP24Time2a): CP24Time2a {.
-    importc: "MeasuredValueShortWithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP24Time2a_getTimestamp",  cdecl.}
 proc MeasuredValueShortWithCP24Time2a_setTimestamp*(
     self: MeasuredValueShortWithCP24Time2a; value: CP24Time2a) {.
-    importc: "MeasuredValueShortWithCP24Time2a_setTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP24Time2a_setTimestamp",  cdecl.}
 ## **********************************************************************
 ##  MeasuredValueShortWithCP56Time2a : MeasuredValueShort
 ## *********************************************************************
@@ -737,17 +737,17 @@ type
 
 proc MeasuredValueShortWithCP56Time2a_destroy*(
     self: MeasuredValueShortWithCP56Time2a) {.
-    importc: "MeasuredValueShortWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP56Time2a_destroy",  cdecl.}
 proc MeasuredValueShortWithCP56Time2a_create*(
     self: MeasuredValueShortWithCP56Time2a; ioa: cint; value: cfloat;
     quality: QualityDescriptor; timestamp: CP56Time2a): MeasuredValueShortWithCP56Time2a {.
-    importc: "MeasuredValueShortWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP56Time2a_create",  cdecl.}
 proc MeasuredValueShortWithCP56Time2a_getTimestamp*(
     self: MeasuredValueShortWithCP56Time2a): CP56Time2a {.
-    importc: "MeasuredValueShortWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP56Time2a_getTimestamp",  cdecl.}
 proc MeasuredValueShortWithCP56Time2a_setTimestamp*(
     self: MeasuredValueShortWithCP56Time2a; value: CP56Time2a) {.
-    importc: "MeasuredValueShortWithCP56Time2a_setTimestamp", dynlib: "60870.dll".}
+    importc: "MeasuredValueShortWithCP56Time2a_setTimestamp",  cdecl.}
 ## ******************************************
 ##  IntegratedTotals : InformationObject
 ## *****************************************
@@ -756,7 +756,7 @@ type
   IntegratedTotals* = ptr sIntegratedTotals
 
 proc IntegratedTotals_destroy*(self: IntegratedTotals) {.
-    importc: "IntegratedTotals_destroy", dynlib: "60870.dll".}
+    importc: "IntegratedTotals_destroy",  cdecl.}
 ## *
 ##  \brief Create a new instance of IntegratedTotals information object
 ##
@@ -771,11 +771,11 @@ proc IntegratedTotals_destroy*(self: IntegratedTotals) {.
 
 proc IntegratedTotals_create*(self: IntegratedTotals; ioa: cint;
                              value: BinaryCounterReading): IntegratedTotals {.
-    importc: "IntegratedTotals_create", dynlib: "60870.dll".}
+    importc: "IntegratedTotals_create",  cdecl.}
 proc IntegratedTotals_getBCR*(self: IntegratedTotals): BinaryCounterReading {.
-    importc: "IntegratedTotals_getBCR", dynlib: "60870.dll".}
+    importc: "IntegratedTotals_getBCR",  cdecl.}
 proc IntegratedTotals_setBCR*(self: IntegratedTotals; value: BinaryCounterReading) {.
-    importc: "IntegratedTotals_setBCR", dynlib: "60870.dll".}
+    importc: "IntegratedTotals_setBCR",  cdecl.}
 ## **********************************************************************
 ##  IntegratedTotalsWithCP24Time2a : IntegratedTotals
 ## *********************************************************************
@@ -798,15 +798,15 @@ type
 
 proc IntegratedTotalsWithCP24Time2a_create*(self: IntegratedTotalsWithCP24Time2a;
     ioa: cint; value: BinaryCounterReading; timestamp: CP24Time2a): IntegratedTotalsWithCP24Time2a {.
-    importc: "IntegratedTotalsWithCP24Time2a_create", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP24Time2a_create",  cdecl.}
 proc IntegratedTotalsWithCP24Time2a_destroy*(self: IntegratedTotalsWithCP24Time2a) {.
-    importc: "IntegratedTotalsWithCP24Time2a_destroy", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP24Time2a_destroy",  cdecl.}
 proc IntegratedTotalsWithCP24Time2a_getTimestamp*(
     self: IntegratedTotalsWithCP24Time2a): CP24Time2a {.
-    importc: "IntegratedTotalsWithCP24Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP24Time2a_getTimestamp",  cdecl.}
 proc IntegratedTotalsWithCP24Time2a_setTimestamp*(
     self: IntegratedTotalsWithCP24Time2a; value: CP24Time2a) {.
-    importc: "IntegratedTotalsWithCP24Time2a_setTimestamp", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP24Time2a_setTimestamp",  cdecl.}
 ## **********************************************************************
 ##  IntegratedTotalsWithCP56Time2a : IntegratedTotals
 ## *********************************************************************
@@ -829,15 +829,15 @@ type
 
 proc IntegratedTotalsWithCP56Time2a_create*(self: IntegratedTotalsWithCP56Time2a;
     ioa: cint; value: BinaryCounterReading; timestamp: CP56Time2a): IntegratedTotalsWithCP56Time2a {.
-    importc: "IntegratedTotalsWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP56Time2a_create",  cdecl.}
 proc IntegratedTotalsWithCP56Time2a_destroy*(self: IntegratedTotalsWithCP56Time2a) {.
-    importc: "IntegratedTotalsWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP56Time2a_destroy",  cdecl.}
 proc IntegratedTotalsWithCP56Time2a_getTimestamp*(
     self: IntegratedTotalsWithCP56Time2a): CP56Time2a {.
-    importc: "IntegratedTotalsWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP56Time2a_getTimestamp",  cdecl.}
 proc IntegratedTotalsWithCP56Time2a_setTimestamp*(
     self: IntegratedTotalsWithCP56Time2a; value: CP56Time2a) {.
-    importc: "IntegratedTotalsWithCP56Time2a_setTimestamp", dynlib: "60870.dll".}
+    importc: "IntegratedTotalsWithCP56Time2a_setTimestamp",  cdecl.}
 ## **********************************************************************
 ##  EventOfProtectionEquipment : InformationObject
 ## *********************************************************************
@@ -846,18 +846,18 @@ type
   EventOfProtectionEquipment* = ptr sEventOfProtectionEquipment
 
 proc EventOfProtectionEquipment_destroy*(self: EventOfProtectionEquipment) {.
-    importc: "EventOfProtectionEquipment_destroy", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipment_destroy",  cdecl.}
 proc EventOfProtectionEquipment_create*(self: EventOfProtectionEquipment;
                                        ioa: cint; event: SingleEvent;
                                        elapsedTime: CP16Time2a;
                                        timestamp: CP24Time2a): EventOfProtectionEquipment {.
-    importc: "EventOfProtectionEquipment_create", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipment_create",  cdecl.}
 proc EventOfProtectionEquipment_getEvent*(self: EventOfProtectionEquipment): SingleEvent {.
-    importc: "EventOfProtectionEquipment_getEvent", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipment_getEvent",  cdecl.}
 proc EventOfProtectionEquipment_getElapsedTime*(self: EventOfProtectionEquipment): CP16Time2a {.
-    importc: "EventOfProtectionEquipment_getElapsedTime", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipment_getElapsedTime",  cdecl.}
 proc EventOfProtectionEquipment_getTimestamp*(self: EventOfProtectionEquipment): CP24Time2a {.
-    importc: "EventOfProtectionEquipment_getTimestamp", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipment_getTimestamp",  cdecl.}
 ## **********************************************************************
 ##  PackedStartEventsOfProtectionEquipment : InformationObject
 ## *********************************************************************
@@ -868,25 +868,25 @@ type
 proc PackedStartEventsOfProtectionEquipment_create*(
     self: PackedStartEventsOfProtectionEquipment; ioa: cint; event: StartEvent;
     qdp: QualityDescriptorP; elapsedTime: CP16Time2a; timestamp: CP24Time2a): PackedStartEventsOfProtectionEquipment {.
-    importc: "PackedStartEventsOfProtectionEquipment_create", dynlib: "60870.dll".}
+    importc: "PackedStartEventsOfProtectionEquipment_create",  cdecl.}
 proc PackedStartEventsOfProtectionEquipment_destroy*(
     self: PackedStartEventsOfProtectionEquipment) {.
-    importc: "PackedStartEventsOfProtectionEquipment_destroy", dynlib: "60870.dll".}
+    importc: "PackedStartEventsOfProtectionEquipment_destroy",  cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getEvent*(
     self: PackedStartEventsOfProtectionEquipment): StartEvent {.
-    importc: "PackedStartEventsOfProtectionEquipment_getEvent", dynlib: "60870.dll".}
+    importc: "PackedStartEventsOfProtectionEquipment_getEvent",  cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getQuality*(
     self: PackedStartEventsOfProtectionEquipment): QualityDescriptorP {.
     importc: "PackedStartEventsOfProtectionEquipment_getQuality",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getElapsedTime*(
     self: PackedStartEventsOfProtectionEquipment): CP16Time2a {.
     importc: "PackedStartEventsOfProtectionEquipment_getElapsedTime",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getTimestamp*(
     self: PackedStartEventsOfProtectionEquipment): CP24Time2a {.
     importc: "PackedStartEventsOfProtectionEquipment_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## **********************************************************************
 ##  PacketOutputCircuitInfo : InformationObject
 ## *********************************************************************
@@ -895,21 +895,21 @@ type
   PackedOutputCircuitInfo* = ptr sPackedOutputCircuitInfo
 
 proc PackedOutputCircuitInfo_destroy*(self: PackedOutputCircuitInfo) {.
-    importc: "PackedOutputCircuitInfo_destroy", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfo_destroy",  cdecl.}
 proc PackedOutputCircuitInfo_create*(self: PackedOutputCircuitInfo; ioa: cint;
                                     oci: OutputCircuitInfo;
                                     qdp: QualityDescriptorP;
                                     operatingTime: CP16Time2a;
                                     timestamp: CP24Time2a): PackedOutputCircuitInfo {.
-    importc: "PackedOutputCircuitInfo_create", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfo_create",  cdecl.}
 proc PackedOutputCircuitInfo_getOCI*(self: PackedOutputCircuitInfo): OutputCircuitInfo {.
-    importc: "PackedOutputCircuitInfo_getOCI", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfo_getOCI",  cdecl.}
 proc PackedOutputCircuitInfo_getQuality*(self: PackedOutputCircuitInfo): QualityDescriptorP {.
-    importc: "PackedOutputCircuitInfo_getQuality", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfo_getQuality",  cdecl.}
 proc PackedOutputCircuitInfo_getOperatingTime*(self: PackedOutputCircuitInfo): CP16Time2a {.
-    importc: "PackedOutputCircuitInfo_getOperatingTime", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfo_getOperatingTime",  cdecl.}
 proc PackedOutputCircuitInfo_getTimestamp*(self: PackedOutputCircuitInfo): CP24Time2a {.
-    importc: "PackedOutputCircuitInfo_getTimestamp", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfo_getTimestamp",  cdecl.}
 ## **********************************************************************
 ##  PackedSinglePointWithSCD : InformationObject
 ## *********************************************************************
@@ -918,15 +918,15 @@ type
   PackedSinglePointWithSCD* = ptr sPackedSinglePointWithSCD
 
 proc PackedSinglePointWithSCD_destroy*(self: PackedSinglePointWithSCD) {.
-    importc: "PackedSinglePointWithSCD_destroy", dynlib: "60870.dll".}
+    importc: "PackedSinglePointWithSCD_destroy",  cdecl.}
 proc PackedSinglePointWithSCD_create*(self: PackedSinglePointWithSCD; ioa: cint;
                                      scd: StatusAndStatusChangeDetection;
                                      qds: QualityDescriptor): PackedSinglePointWithSCD {.
-    importc: "PackedSinglePointWithSCD_create", dynlib: "60870.dll".}
+    importc: "PackedSinglePointWithSCD_create",  cdecl.}
 proc PackedSinglePointWithSCD_getQuality*(self: PackedSinglePointWithSCD): QualityDescriptor {.
-    importc: "PackedSinglePointWithSCD_getQuality", dynlib: "60870.dll".}
+    importc: "PackedSinglePointWithSCD_getQuality",  cdecl.}
 proc PackedSinglePointWithSCD_getSCD*(self: PackedSinglePointWithSCD): StatusAndStatusChangeDetection {.
-    importc: "PackedSinglePointWithSCD_getSCD", dynlib: "60870.dll".}
+    importc: "PackedSinglePointWithSCD_getSCD",  cdecl.}
 ## ******************************************
 ##  SingleCommand
 ## *****************************************
@@ -948,9 +948,9 @@ type
 
 proc SingleCommand_create*(self: SingleCommand; ioa: cint; command: bool;
                           selectCommand: bool; qu: cint): SingleCommand {.
-    importc: "SingleCommand_create", dynlib: "60870.dll".}
+    importc: "SingleCommand_create",  cdecl.}
 proc SingleCommand_destroy*(self: SingleCommand) {.
-    importc: "SingleCommand_destroy", dynlib: "60870.dll".}
+    importc: "SingleCommand_destroy",  cdecl.}
 ## *
 ##  \brief Get the qualifier of command QU value
 ##
@@ -958,13 +958,13 @@ proc SingleCommand_destroy*(self: SingleCommand) {.
 ##
 
 proc SingleCommand_getQU*(self: SingleCommand): cint {.
-    importc: "SingleCommand_getQU", dynlib: "60870.dll".}
+    importc: "SingleCommand_getQU",  cdecl.}
 ## *
 ##  \brief Get the state (command) value
 ##
 
 proc SingleCommand_getState*(self: SingleCommand): bool {.
-    importc: "SingleCommand_getState", dynlib: "60870.dll".}
+    importc: "SingleCommand_getState",  cdecl.}
 ## *
 ##  \brief Return the value of the S/E bit of the qualifier of command
 ##
@@ -972,7 +972,7 @@ proc SingleCommand_getState*(self: SingleCommand): bool {.
 ##
 
 proc SingleCommand_isSelect*(self: SingleCommand): bool {.
-    importc: "SingleCommand_isSelect", dynlib: "60870.dll".}
+    importc: "SingleCommand_isSelect",  cdecl.}
 ## **********************************************************************
 ##  SingleCommandWithCP56Time2a : SingleCommand
 ## *********************************************************************
@@ -981,7 +981,7 @@ type
   SingleCommandWithCP56Time2a* = ptr sSingleCommandWithCP56Time2a
 
 proc SingleCommandWithCP56Time2a_destroy*(self: SingleCommandWithCP56Time2a) {.
-    importc: "SingleCommandWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "SingleCommandWithCP56Time2a_destroy",  cdecl.}
 ## *
 ##  \brief Create a single command with CP56Time2a time stamp information object
 ##
@@ -999,7 +999,7 @@ proc SingleCommandWithCP56Time2a_create*(self: SingleCommandWithCP56Time2a;
                                         ioa: cint; command: bool;
                                         selectCommand: bool; qu: cint;
                                         timestamp: CP56Time2a): SingleCommandWithCP56Time2a {.
-    importc: "SingleCommandWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "SingleCommandWithCP56Time2a_create",  cdecl.}
 ## *
 ##  \brief Get the time stamp of the command.
 ##
@@ -1010,7 +1010,7 @@ proc SingleCommandWithCP56Time2a_create*(self: SingleCommandWithCP56Time2a;
 ##
 
 proc SingleCommandWithCP56Time2a_getTimestamp*(self: SingleCommandWithCP56Time2a): CP56Time2a {.
-    importc: "SingleCommandWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "SingleCommandWithCP56Time2a_getTimestamp",  cdecl.}
 ## ******************************************
 ##  DoubleCommand : InformationObject
 ## *****************************************
@@ -1019,7 +1019,7 @@ type
   DoubleCommand* = ptr sDoubleCommand
 
 proc DoubleCommand_destroy*(self: DoubleCommand) {.
-    importc: "DoubleCommand_destroy", dynlib: "60870.dll".}
+    importc: "DoubleCommand_destroy",  cdecl.}
 ## *
 ##  \brief Create a double command information object
 ##
@@ -1034,7 +1034,7 @@ proc DoubleCommand_destroy*(self: DoubleCommand) {.
 
 proc DoubleCommand_create*(self: DoubleCommand; ioa: cint; command: cint;
                           selectCommand: bool; qu: cint): DoubleCommand {.
-    importc: "DoubleCommand_create", dynlib: "60870.dll".}
+    importc: "DoubleCommand_create",  cdecl.}
 ## *
 ##  \brief Get the qualifier of command QU value
 ##
@@ -1042,7 +1042,7 @@ proc DoubleCommand_create*(self: DoubleCommand; ioa: cint; command: cint;
 ##
 
 proc DoubleCommand_getQU*(self: DoubleCommand): cint {.
-    importc: "DoubleCommand_getQU", dynlib: "60870.dll".}
+    importc: "DoubleCommand_getQU",  cdecl.}
 ## *
 ##  \brief Get the state (command) value
 ##
@@ -1050,7 +1050,7 @@ proc DoubleCommand_getQU*(self: DoubleCommand): cint {.
 ##
 
 proc DoubleCommand_getState*(self: DoubleCommand): cint {.
-    importc: "DoubleCommand_getState", dynlib: "60870.dll".}
+    importc: "DoubleCommand_getState",  cdecl.}
 ## *
 ##  \brief Return the value of the S/E bit of the qualifier of command
 ##
@@ -1058,7 +1058,7 @@ proc DoubleCommand_getState*(self: DoubleCommand): cint {.
 ##
 
 proc DoubleCommand_isSelect*(self: DoubleCommand): bool {.
-    importc: "DoubleCommand_isSelect", dynlib: "60870.dll".}
+    importc: "DoubleCommand_isSelect",  cdecl.}
 ## ******************************************
 ##  StepCommand : InformationObject
 ## *****************************************
@@ -1067,10 +1067,10 @@ type
   StepCommand* = ptr sStepCommand
 
 proc StepCommand_destroy*(self: StepCommand) {.importc: "StepCommand_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc StepCommand_create*(self: StepCommand; ioa: cint; command: StepCommandValue;
                         selectCommand: bool; qu: cint): StepCommand {.
-    importc: "StepCommand_create", dynlib: "60870.dll".}
+    importc: "StepCommand_create",  cdecl.}
 ## *
 ##  \brief Get the qualifier of command QU value
 ##
@@ -1078,9 +1078,9 @@ proc StepCommand_create*(self: StepCommand; ioa: cint; command: StepCommandValue
 ##
 
 proc StepCommand_getQU*(self: StepCommand): cint {.importc: "StepCommand_getQU",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc StepCommand_getState*(self: StepCommand): StepCommandValue {.
-    importc: "StepCommand_getState", dynlib: "60870.dll".}
+    importc: "StepCommand_getState",  cdecl.}
 ## *
 ##  \brief Return the value of the S/E bit of the qualifier of command
 ##
@@ -1088,7 +1088,7 @@ proc StepCommand_getState*(self: StepCommand): StepCommandValue {.
 ##
 
 proc StepCommand_isSelect*(self: StepCommand): bool {.
-    importc: "StepCommand_isSelect", dynlib: "60870.dll".}
+    importc: "StepCommand_isSelect",  cdecl.}
 ## ************************************************
 ##  SetpointCommandNormalized : InformationObject
 ## **********************************************
@@ -1097,7 +1097,7 @@ type
   SetpointCommandNormalized* = ptr sSetpointCommandNormalized
 
 proc SetpointCommandNormalized_destroy*(self: SetpointCommandNormalized) {.
-    importc: "SetpointCommandNormalized_destroy", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalized_destroy",  cdecl.}
 ## *
 ##  \brief Create a normalized set point command information object
 ##
@@ -1112,11 +1112,11 @@ proc SetpointCommandNormalized_destroy*(self: SetpointCommandNormalized) {.
 
 proc SetpointCommandNormalized_create*(self: SetpointCommandNormalized; ioa: cint;
                                       value: cfloat; selectCommand: bool; ql: cint): SetpointCommandNormalized {.
-    importc: "SetpointCommandNormalized_create", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalized_create",  cdecl.}
 proc SetpointCommandNormalized_getValue*(self: SetpointCommandNormalized): cfloat {.
-    importc: "SetpointCommandNormalized_getValue", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalized_getValue",  cdecl.}
 proc SetpointCommandNormalized_getQL*(self: SetpointCommandNormalized): cint {.
-    importc: "SetpointCommandNormalized_getQL", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalized_getQL",  cdecl.}
 ## *
 ##  \brief Return the value of the S/E bit of the qualifier of command
 ##
@@ -1124,7 +1124,7 @@ proc SetpointCommandNormalized_getQL*(self: SetpointCommandNormalized): cint {.
 ##
 
 proc SetpointCommandNormalized_isSelect*(self: SetpointCommandNormalized): bool {.
-    importc: "SetpointCommandNormalized_isSelect", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalized_isSelect",  cdecl.}
 ## ************************************************
 ##  SetpointCommandScaled : InformationObject
 ## **********************************************
@@ -1133,7 +1133,7 @@ type
   SetpointCommandScaled* = ptr sSetpointCommandScaled
 
 proc SetpointCommandScaled_destroy*(self: SetpointCommandScaled) {.
-    importc: "SetpointCommandScaled_destroy", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaled_destroy",  cdecl.}
 ## *
 ##  \brief Create a scaled set point command information object
 ##
@@ -1148,11 +1148,11 @@ proc SetpointCommandScaled_destroy*(self: SetpointCommandScaled) {.
 
 proc SetpointCommandScaled_create*(self: SetpointCommandScaled; ioa: cint;
                                   value: cint; selectCommand: bool; ql: cint): SetpointCommandScaled {.
-    importc: "SetpointCommandScaled_create", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaled_create",  cdecl.}
 proc SetpointCommandScaled_getValue*(self: SetpointCommandScaled): cint {.
-    importc: "SetpointCommandScaled_getValue", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaled_getValue",  cdecl.}
 proc SetpointCommandScaled_getQL*(self: SetpointCommandScaled): cint {.
-    importc: "SetpointCommandScaled_getQL", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaled_getQL",  cdecl.}
 ## *
 ##  \brief Return the value of the S/E bit of the qualifier of command
 ##
@@ -1160,7 +1160,7 @@ proc SetpointCommandScaled_getQL*(self: SetpointCommandScaled): cint {.
 ##
 
 proc SetpointCommandScaled_isSelect*(self: SetpointCommandScaled): bool {.
-    importc: "SetpointCommandScaled_isSelect", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaled_isSelect",  cdecl.}
 ## ************************************************
 ##  SetpointCommandShort: InformationObject
 ## **********************************************
@@ -1169,7 +1169,7 @@ type
   SetpointCommandShort* = ptr sSetpointCommandShort
 
 proc SetpointCommandShort_destroy*(self: SetpointCommandShort) {.
-    importc: "SetpointCommandShort_destroy", dynlib: "60870.dll".}
+    importc: "SetpointCommandShort_destroy",  cdecl.}
 ## *
 ##  \brief Create a short floating point set point command information object
 ##
@@ -1184,11 +1184,11 @@ proc SetpointCommandShort_destroy*(self: SetpointCommandShort) {.
 
 proc SetpointCommandShort_create*(self: SetpointCommandShort; ioa: cint;
                                  value: cfloat; selectCommand: bool; ql: cint): SetpointCommandShort {.
-    importc: "SetpointCommandShort_create", dynlib: "60870.dll".}
+    importc: "SetpointCommandShort_create",  cdecl.}
 proc SetpointCommandShort_getValue*(self: SetpointCommandShort): cfloat {.
-    importc: "SetpointCommandShort_getValue", dynlib: "60870.dll".}
+    importc: "SetpointCommandShort_getValue",  cdecl.}
 proc SetpointCommandShort_getQL*(self: SetpointCommandShort): cint {.
-    importc: "SetpointCommandShort_getQL", dynlib: "60870.dll".}
+    importc: "SetpointCommandShort_getQL",  cdecl.}
 ## *
 ##  \brief Return the value of the S/E bit of the qualifier of command
 ##
@@ -1196,7 +1196,7 @@ proc SetpointCommandShort_getQL*(self: SetpointCommandShort): cint {.
 ##
 
 proc SetpointCommandShort_isSelect*(self: SetpointCommandShort): bool {.
-    importc: "SetpointCommandShort_isSelect", dynlib: "60870.dll".}
+    importc: "SetpointCommandShort_isSelect",  cdecl.}
 ## ************************************************
 ##  Bitstring32Command : InformationObject
 ## **********************************************
@@ -1205,11 +1205,11 @@ type
   Bitstring32Command* = ptr sBitstring32Command
 
 proc Bitstring32Command_create*(self: Bitstring32Command; ioa: cint; value: uint32_t): Bitstring32Command {.
-    importc: "Bitstring32Command_create", dynlib: "60870.dll".}
+    importc: "Bitstring32Command_create",  cdecl.}
 proc Bitstring32Command_destroy*(self: Bitstring32Command) {.
-    importc: "Bitstring32Command_destroy", dynlib: "60870.dll".}
+    importc: "Bitstring32Command_destroy",  cdecl.}
 proc Bitstring32Command_getValue*(self: Bitstring32Command): uint32_t {.
-    importc: "Bitstring32Command_getValue", dynlib: "60870.dll".}
+    importc: "Bitstring32Command_getValue",  cdecl.}
 ## ************************************************
 ##  InterrogationCommand : InformationObject
 ## **********************************************
@@ -1218,11 +1218,11 @@ type
   InterrogationCommand* = ptr sInterrogationCommand
 
 proc InterrogationCommand_create*(self: InterrogationCommand; ioa: cint; qoi: uint8_t): InterrogationCommand {.
-    importc: "InterrogationCommand_create", dynlib: "60870.dll".}
+    importc: "InterrogationCommand_create",  cdecl.}
 proc InterrogationCommand_destroy*(self: InterrogationCommand) {.
-    importc: "InterrogationCommand_destroy", dynlib: "60870.dll".}
+    importc: "InterrogationCommand_destroy",  cdecl.}
 proc InterrogationCommand_getQOI*(self: InterrogationCommand): uint8_t {.
-    importc: "InterrogationCommand_getQOI", dynlib: "60870.dll".}
+    importc: "InterrogationCommand_getQOI",  cdecl.}
 ## ************************************************
 ##  ReadCommand : InformationObject
 ## **********************************************
@@ -1231,9 +1231,9 @@ type
   ReadCommand* = ptr sReadCommand
 
 proc ReadCommand_create*(self: ReadCommand; ioa: cint): ReadCommand {.
-    importc: "ReadCommand_create", dynlib: "60870.dll".}
+    importc: "ReadCommand_create",  cdecl.}
 proc ReadCommand_destroy*(self: ReadCommand) {.importc: "ReadCommand_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## **************************************************
 ##  ClockSynchronizationCommand : InformationObject
 ## ************************************************
@@ -1243,11 +1243,11 @@ type
 
 proc ClockSynchronizationCommand_create*(self: ClockSynchronizationCommand;
                                         ioa: cint; timestamp: CP56Time2a): ClockSynchronizationCommand {.
-    importc: "ClockSynchronizationCommand_create", dynlib: "60870.dll".}
+    importc: "ClockSynchronizationCommand_create",  cdecl.}
 proc ClockSynchronizationCommand_destroy*(self: ClockSynchronizationCommand) {.
-    importc: "ClockSynchronizationCommand_destroy", dynlib: "60870.dll".}
+    importc: "ClockSynchronizationCommand_destroy",  cdecl.}
 proc ClockSynchronizationCommand_getTime*(self: ClockSynchronizationCommand): CP56Time2a {.
-    importc: "ClockSynchronizationCommand_getTime", dynlib: "60870.dll".}
+    importc: "ClockSynchronizationCommand_getTime",  cdecl.}
 ## *****************************************************
 ##  ParameterNormalizedValue : MeasuredValueNormalized
 ## ***************************************************
@@ -1256,7 +1256,7 @@ type
   ParameterNormalizedValue* = ptr sMeasuredValueNormalized
 
 proc ParameterNormalizedValue_destroy*(self: ParameterNormalizedValue) {.
-    importc: "ParameterNormalizedValue_destroy", dynlib: "60870.dll".}
+    importc: "ParameterNormalizedValue_destroy",  cdecl.}
 ## *
 ##  \brief Create a parameter measured values, normalized (P_ME_NA_1) information object
 ##
@@ -1282,12 +1282,12 @@ proc ParameterNormalizedValue_destroy*(self: ParameterNormalizedValue) {.
 
 proc ParameterNormalizedValue_create*(self: ParameterNormalizedValue; ioa: cint;
                                      value: cfloat; qpm: QualifierOfParameterMV): ParameterNormalizedValue {.
-    importc: "ParameterNormalizedValue_create", dynlib: "60870.dll".}
+    importc: "ParameterNormalizedValue_create",  cdecl.}
 proc ParameterNormalizedValue_getValue*(self: ParameterNormalizedValue): cfloat {.
-    importc: "ParameterNormalizedValue_getValue", dynlib: "60870.dll".}
+    importc: "ParameterNormalizedValue_getValue",  cdecl.}
 proc ParameterNormalizedValue_setValue*(self: ParameterNormalizedValue;
                                        value: cfloat) {.
-    importc: "ParameterNormalizedValue_setValue", dynlib: "60870.dll".}
+    importc: "ParameterNormalizedValue_setValue",  cdecl.}
 ## *
 ##  \brief Returns the qualifier of measured values (QPM)
 ##
@@ -1295,7 +1295,7 @@ proc ParameterNormalizedValue_setValue*(self: ParameterNormalizedValue;
 ##
 
 proc ParameterNormalizedValue_getQPM*(self: ParameterNormalizedValue): QualifierOfParameterMV {.
-    importc: "ParameterNormalizedValue_getQPM", dynlib: "60870.dll".}
+    importc: "ParameterNormalizedValue_getQPM",  cdecl.}
 ## *****************************************************
 ##  ParameterScaledValue : MeasuredValueScaled
 ## ***************************************************
@@ -1304,7 +1304,7 @@ type
   ParameterScaledValue* = ptr sMeasuredValueScaled
 
 proc ParameterScaledValue_destroy*(self: ParameterScaledValue) {.
-    importc: "ParameterScaledValue_destroy", dynlib: "60870.dll".}
+    importc: "ParameterScaledValue_destroy",  cdecl.}
 ## *
 ##  \brief Create a parameter measured values, scaled (P_ME_NB_1) information object
 ##
@@ -1330,11 +1330,11 @@ proc ParameterScaledValue_destroy*(self: ParameterScaledValue) {.
 
 proc ParameterScaledValue_create*(self: ParameterScaledValue; ioa: cint; value: cint;
                                  qpm: QualifierOfParameterMV): ParameterScaledValue {.
-    importc: "ParameterScaledValue_create", dynlib: "60870.dll".}
+    importc: "ParameterScaledValue_create",  cdecl.}
 proc ParameterScaledValue_getValue*(self: ParameterScaledValue): cint {.
-    importc: "ParameterScaledValue_getValue", dynlib: "60870.dll".}
+    importc: "ParameterScaledValue_getValue",  cdecl.}
 proc ParameterScaledValue_setValue*(self: ParameterScaledValue; value: cint) {.
-    importc: "ParameterScaledValue_setValue", dynlib: "60870.dll".}
+    importc: "ParameterScaledValue_setValue",  cdecl.}
 ## *
 ##  \brief Returns the qualifier of measured values (QPM)
 ##
@@ -1342,7 +1342,7 @@ proc ParameterScaledValue_setValue*(self: ParameterScaledValue; value: cint) {.
 ##
 
 proc ParameterScaledValue_getQPM*(self: ParameterScaledValue): QualifierOfParameterMV {.
-    importc: "ParameterScaledValue_getQPM", dynlib: "60870.dll".}
+    importc: "ParameterScaledValue_getQPM",  cdecl.}
 ## *****************************************************
 ##  ParameterFloatValue : MeasuredValueShort
 ## ***************************************************
@@ -1351,7 +1351,7 @@ type
   ParameterFloatValue* = ptr sMeasuredValueShort
 
 proc ParameterFloatValue_destroy*(self: ParameterFloatValue) {.
-    importc: "ParameterFloatValue_destroy", dynlib: "60870.dll".}
+    importc: "ParameterFloatValue_destroy",  cdecl.}
 ## *
 ##  \brief Create a parameter measured values, short floating point (P_ME_NC_1) information object
 ##
@@ -1377,11 +1377,11 @@ proc ParameterFloatValue_destroy*(self: ParameterFloatValue) {.
 
 proc ParameterFloatValue_create*(self: ParameterFloatValue; ioa: cint; value: cfloat;
                                 qpm: QualifierOfParameterMV): ParameterFloatValue {.
-    importc: "ParameterFloatValue_create", dynlib: "60870.dll".}
+    importc: "ParameterFloatValue_create",  cdecl.}
 proc ParameterFloatValue_getValue*(self: ParameterFloatValue): cfloat {.
-    importc: "ParameterFloatValue_getValue", dynlib: "60870.dll".}
+    importc: "ParameterFloatValue_getValue",  cdecl.}
 proc ParameterFloatValue_setValue*(self: ParameterFloatValue; value: cfloat) {.
-    importc: "ParameterFloatValue_setValue", dynlib: "60870.dll".}
+    importc: "ParameterFloatValue_setValue",  cdecl.}
 ## *
 ##  \brief Returns the qualifier of measured values (QPM)
 ##
@@ -1389,7 +1389,7 @@ proc ParameterFloatValue_setValue*(self: ParameterFloatValue; value: cfloat) {.
 ##
 
 proc ParameterFloatValue_getQPM*(self: ParameterFloatValue): QualifierOfParameterMV {.
-    importc: "ParameterFloatValue_getQPM", dynlib: "60870.dll".}
+    importc: "ParameterFloatValue_getQPM",  cdecl.}
 ## ******************************************
 ##  ParameterActivation : InformationObject
 ## *****************************************
@@ -1398,7 +1398,7 @@ type
   ParameterActivation* = ptr sParameterActivation
 
 proc ParameterActivation_destroy*(self: ParameterActivation) {.
-    importc: "ParameterActivation_destroy", dynlib: "60870.dll".}
+    importc: "ParameterActivation_destroy",  cdecl.}
 ## *
 ##  \brief Create a parameter activation (P_AC_NA_1) information object
 ##
@@ -1411,7 +1411,7 @@ proc ParameterActivation_destroy*(self: ParameterActivation) {.
 
 proc ParameterActivation_create*(self: ParameterActivation; ioa: cint;
                                 qpa: QualifierOfParameterActivation): ParameterActivation {.
-    importc: "ParameterActivation_create", dynlib: "60870.dll".}
+    importc: "ParameterActivation_create",  cdecl.}
 ## *
 ##  \brief Get the qualifier of parameter activation (QPA) value
 ##
@@ -1419,7 +1419,7 @@ proc ParameterActivation_create*(self: ParameterActivation; ioa: cint;
 ##
 
 proc ParameterActivation_getQuality*(self: ParameterActivation): QualifierOfParameterActivation {.
-    importc: "ParameterActivation_getQuality", dynlib: "60870.dll".}
+    importc: "ParameterActivation_getQuality",  cdecl.}
 ## **********************************************************************
 ##  EventOfProtectionEquipmentWithCP56Time2a : InformationObject
 ## *********************************************************************
@@ -1429,23 +1429,23 @@ type
 
 proc EventOfProtectionEquipmentWithCP56Time2a_destroy*(
     self: EventOfProtectionEquipmentWithCP56Time2a) {.
-    importc: "EventOfProtectionEquipmentWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipmentWithCP56Time2a_destroy",  cdecl.}
 proc EventOfProtectionEquipmentWithCP56Time2a_create*(
     self: EventOfProtectionEquipmentWithCP56Time2a; ioa: cint; event: SingleEvent;
     elapsedTime: CP16Time2a; timestamp: CP56Time2a): EventOfProtectionEquipmentWithCP56Time2a {.
-    importc: "EventOfProtectionEquipmentWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "EventOfProtectionEquipmentWithCP56Time2a_create",  cdecl.}
 proc EventOfProtectionEquipmentWithCP56Time2a_getEvent*(
     self: EventOfProtectionEquipmentWithCP56Time2a): SingleEvent {.
     importc: "EventOfProtectionEquipmentWithCP56Time2a_getEvent",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc EventOfProtectionEquipmentWithCP56Time2a_getElapsedTime*(
     self: EventOfProtectionEquipmentWithCP56Time2a): CP16Time2a {.
     importc: "EventOfProtectionEquipmentWithCP56Time2a_getElapsedTime",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc EventOfProtectionEquipmentWithCP56Time2a_getTimestamp*(
     self: EventOfProtectionEquipmentWithCP56Time2a): CP56Time2a {.
     importc: "EventOfProtectionEquipmentWithCP56Time2a_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## **************************************************************************
 ##  PackedStartEventsOfProtectionEquipmentWithCP56Time2a : InformationObject
 ## *************************************************************************
@@ -1456,27 +1456,27 @@ type
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_destroy*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a) {.
     importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_create*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a; ioa: cint;
     event: StartEvent; qdp: QualityDescriptorP; elapsedTime: CP16Time2a;
     timestamp: CP56Time2a): PackedStartEventsOfProtectionEquipmentWithCP56Time2a {.
     importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_create",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getEvent*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): StartEvent {.
     importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getEvent",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getQuality*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): QualityDescriptorP {.
     importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getQuality",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getElapsedTime*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): CP16Time2a {.importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getElapsedTime",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getTimestamp*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): CP56Time2a {.importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## **********************************************************************
 ##  PackedOutputCircuitInfoWithCP56Time2a : InformationObject
 ## *********************************************************************
@@ -1486,25 +1486,25 @@ type
 
 proc PackedOutputCircuitInfoWithCP56Time2a_destroy*(
     self: PackedOutputCircuitInfoWithCP56Time2a) {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_destroy",  cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_create*(
     self: PackedOutputCircuitInfoWithCP56Time2a; ioa: cint; oci: OutputCircuitInfo;
     qdp: QualityDescriptorP; operatingTime: CP16Time2a; timestamp: CP56Time2a): PackedOutputCircuitInfoWithCP56Time2a {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_create",  cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getOCI*(
     self: PackedOutputCircuitInfoWithCP56Time2a): OutputCircuitInfo {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_getOCI", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_getOCI",  cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getQuality*(
     self: PackedOutputCircuitInfoWithCP56Time2a): QualityDescriptorP {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_getQuality", dynlib: "60870.dll".}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_getQuality",  cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getOperatingTime*(
     self: PackedOutputCircuitInfoWithCP56Time2a): CP16Time2a {.
     importc: "PackedOutputCircuitInfoWithCP56Time2a_getOperatingTime",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getTimestamp*(
     self: PackedOutputCircuitInfoWithCP56Time2a): CP56Time2a {.
     importc: "PackedOutputCircuitInfoWithCP56Time2a_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## *********************************************
 ##  DoubleCommandWithCP56Time2a : DoubleCommand
 ## ********************************************
@@ -1513,20 +1513,20 @@ type
   DoubleCommandWithCP56Time2a* = ptr sDoubleCommandWithCP56Time2a
 
 proc DoubleCommandWithCP56Time2a_destroy*(self: DoubleCommandWithCP56Time2a) {.
-    importc: "DoubleCommandWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "DoubleCommandWithCP56Time2a_destroy",  cdecl.}
 proc DoubleCommandWithCP56Time2a_create*(self: DoubleCommandWithCP56Time2a;
                                         ioa: cint; command: cint;
                                         selectCommand: bool; qu: cint;
                                         timestamp: CP56Time2a): DoubleCommandWithCP56Time2a {.
-    importc: "DoubleCommandWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "DoubleCommandWithCP56Time2a_create",  cdecl.}
 proc DoubleCommandWithCP56Time2a_getQU*(self: DoubleCommandWithCP56Time2a): cint {.
-    importc: "DoubleCommandWithCP56Time2a_getQU", dynlib: "60870.dll".}
+    importc: "DoubleCommandWithCP56Time2a_getQU",  cdecl.}
 proc DoubleCommandWithCP56Time2a_getState*(self: DoubleCommandWithCP56Time2a): cint {.
-    importc: "DoubleCommandWithCP56Time2a_getState", dynlib: "60870.dll".}
+    importc: "DoubleCommandWithCP56Time2a_getState",  cdecl.}
 proc DoubleCommandWithCP56Time2a_isSelect*(self: DoubleCommandWithCP56Time2a): bool {.
-    importc: "DoubleCommandWithCP56Time2a_isSelect", dynlib: "60870.dll".}
+    importc: "DoubleCommandWithCP56Time2a_isSelect",  cdecl.}
 proc DoubleCommandWithCP56Time2a_getTimestamp*(self: DoubleCommandWithCP56Time2a): CP56Time2a {.
-    importc: "DoubleCommandWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "DoubleCommandWithCP56Time2a_getTimestamp",  cdecl.}
 ## ************************************************
 ##  StepCommandWithCP56Time2a : InformationObject
 ## ***********************************************
@@ -1535,20 +1535,20 @@ type
   StepCommandWithCP56Time2a* = ptr sStepCommandWithCP56Time2a
 
 proc StepCommandWithCP56Time2a_destroy*(self: StepCommand) {.
-    importc: "StepCommandWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "StepCommandWithCP56Time2a_destroy",  cdecl.}
 proc StepCommandWithCP56Time2a_create*(self: StepCommandWithCP56Time2a; ioa: cint;
                                       command: StepCommandValue;
                                       selectCommand: bool; qu: cint;
                                       timestamp: CP56Time2a): StepCommandWithCP56Time2a {.
-    importc: "StepCommandWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "StepCommandWithCP56Time2a_create",  cdecl.}
 proc StepCommandWithCP56Time2a_getQU*(self: StepCommandWithCP56Time2a): cint {.
-    importc: "StepCommandWithCP56Time2a_getQU", dynlib: "60870.dll".}
+    importc: "StepCommandWithCP56Time2a_getQU",  cdecl.}
 proc StepCommandWithCP56Time2a_getState*(self: StepCommandWithCP56Time2a): StepCommandValue {.
-    importc: "StepCommandWithCP56Time2a_getState", dynlib: "60870.dll".}
+    importc: "StepCommandWithCP56Time2a_getState",  cdecl.}
 proc StepCommandWithCP56Time2a_isSelect*(self: StepCommandWithCP56Time2a): bool {.
-    importc: "StepCommandWithCP56Time2a_isSelect", dynlib: "60870.dll".}
+    importc: "StepCommandWithCP56Time2a_isSelect",  cdecl.}
 proc StepCommandWithCP56Time2a_getTimestamp*(self: StepCommandWithCP56Time2a): CP56Time2a {.
-    importc: "StepCommandWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "StepCommandWithCP56Time2a_getTimestamp",  cdecl.}
 ## *********************************************************************
 ##  SetpointCommandNormalizedWithCP56Time2a : SetpointCommandNormalized
 ## ********************************************************************
@@ -1558,24 +1558,24 @@ type
 
 proc SetpointCommandNormalizedWithCP56Time2a_destroy*(
     self: SetpointCommandNormalizedWithCP56Time2a) {.
-    importc: "SetpointCommandNormalizedWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalizedWithCP56Time2a_destroy",  cdecl.}
 proc SetpointCommandNormalizedWithCP56Time2a_create*(
     self: SetpointCommandNormalizedWithCP56Time2a; ioa: cint; value: cfloat;
     selectCommand: bool; ql: cint; timestamp: CP56Time2a): SetpointCommandNormalizedWithCP56Time2a {.
-    importc: "SetpointCommandNormalizedWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalizedWithCP56Time2a_create",  cdecl.}
 proc SetpointCommandNormalizedWithCP56Time2a_getValue*(
     self: SetpointCommandNormalizedWithCP56Time2a): cfloat {.
-    importc: "SetpointCommandNormalizedWithCP56Time2a_getValue", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalizedWithCP56Time2a_getValue",  cdecl.}
 proc SetpointCommandNormalizedWithCP56Time2a_getQL*(
     self: SetpointCommandNormalizedWithCP56Time2a): cint {.
-    importc: "SetpointCommandNormalizedWithCP56Time2a_getQL", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalizedWithCP56Time2a_getQL",  cdecl.}
 proc SetpointCommandNormalizedWithCP56Time2a_isSelect*(
     self: SetpointCommandNormalizedWithCP56Time2a): bool {.
-    importc: "SetpointCommandNormalizedWithCP56Time2a_isSelect", dynlib: "60870.dll".}
+    importc: "SetpointCommandNormalizedWithCP56Time2a_isSelect",  cdecl.}
 proc SetpointCommandNormalizedWithCP56Time2a_getTimestamp*(
     self: SetpointCommandNormalizedWithCP56Time2a): CP56Time2a {.
     importc: "SetpointCommandNormalizedWithCP56Time2a_getTimestamp",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## *********************************************************************
 ##  SetpointCommandScaledWithCP56Time2a : SetpointCommandScaled
 ## ********************************************************************
@@ -1585,23 +1585,23 @@ type
 
 proc SetpointCommandScaledWithCP56Time2a_destroy*(
     self: SetpointCommandScaledWithCP56Time2a) {.
-    importc: "SetpointCommandScaledWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaledWithCP56Time2a_destroy",  cdecl.}
 proc SetpointCommandScaledWithCP56Time2a_create*(
     self: SetpointCommandScaledWithCP56Time2a; ioa: cint; value: cint;
     selectCommand: bool; ql: cint; timestamp: CP56Time2a): SetpointCommandScaledWithCP56Time2a {.
-    importc: "SetpointCommandScaledWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaledWithCP56Time2a_create",  cdecl.}
 proc SetpointCommandScaledWithCP56Time2a_getValue*(
     self: SetpointCommandScaledWithCP56Time2a): cint {.
-    importc: "SetpointCommandScaledWithCP56Time2a_getValue", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaledWithCP56Time2a_getValue",  cdecl.}
 proc SetpointCommandScaledWithCP56Time2a_getQL*(
     self: SetpointCommandScaledWithCP56Time2a): cint {.
-    importc: "SetpointCommandScaledWithCP56Time2a_getQL", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaledWithCP56Time2a_getQL",  cdecl.}
 proc SetpointCommandScaledWithCP56Time2a_isSelect*(
     self: SetpointCommandScaledWithCP56Time2a): bool {.
-    importc: "SetpointCommandScaledWithCP56Time2a_isSelect", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaledWithCP56Time2a_isSelect",  cdecl.}
 proc SetpointCommandScaledWithCP56Time2a_getTimestamp*(
     self: SetpointCommandScaledWithCP56Time2a): CP56Time2a {.
-    importc: "SetpointCommandScaledWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "SetpointCommandScaledWithCP56Time2a_getTimestamp",  cdecl.}
 ## *********************************************************************
 ##  SetpointCommandShortWithCP56Time2a : SetpointCommandShort
 ## ********************************************************************
@@ -1611,23 +1611,23 @@ type
 
 proc SetpointCommandShortWithCP56Time2a_destroy*(
     self: SetpointCommandShortWithCP56Time2a) {.
-    importc: "SetpointCommandShortWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "SetpointCommandShortWithCP56Time2a_destroy",  cdecl.}
 proc SetpointCommandShortWithCP56Time2a_create*(
     self: SetpointCommandShortWithCP56Time2a; ioa: cint; value: cfloat;
     selectCommand: bool; ql: cint; timestamp: CP56Time2a): SetpointCommandShortWithCP56Time2a {.
-    importc: "SetpointCommandShortWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "SetpointCommandShortWithCP56Time2a_create",  cdecl.}
 proc SetpointCommandShortWithCP56Time2a_getValue*(
     self: SetpointCommandShortWithCP56Time2a): cfloat {.
-    importc: "SetpointCommandShortWithCP56Time2a_getValue", dynlib: "60870.dll".}
+    importc: "SetpointCommandShortWithCP56Time2a_getValue",  cdecl.}
 proc SetpointCommandShortWithCP56Time2a_getQL*(
     self: SetpointCommandShortWithCP56Time2a): cint {.
-    importc: "SetpointCommandShortWithCP56Time2a_getQL", dynlib: "60870.dll".}
+    importc: "SetpointCommandShortWithCP56Time2a_getQL",  cdecl.}
 proc SetpointCommandShortWithCP56Time2a_isSelect*(
     self: SetpointCommandShortWithCP56Time2a): bool {.
-    importc: "SetpointCommandShortWithCP56Time2a_isSelect", dynlib: "60870.dll".}
+    importc: "SetpointCommandShortWithCP56Time2a_isSelect",  cdecl.}
 proc SetpointCommandShortWithCP56Time2a_getTimestamp*(
     self: SetpointCommandShortWithCP56Time2a): CP56Time2a {.
-    importc: "SetpointCommandShortWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "SetpointCommandShortWithCP56Time2a_getTimestamp",  cdecl.}
 ## ******************************************************
 ##  Bitstring32CommandWithCP56Time2a: Bitstring32Command
 ## *****************************************************
@@ -1638,16 +1638,16 @@ type
 proc Bitstring32CommandWithCP56Time2a_create*(
     self: Bitstring32CommandWithCP56Time2a; ioa: cint; value: uint32_t;
     timestamp: CP56Time2a): Bitstring32CommandWithCP56Time2a {.
-    importc: "Bitstring32CommandWithCP56Time2a_create", dynlib: "60870.dll".}
+    importc: "Bitstring32CommandWithCP56Time2a_create",  cdecl.}
 proc Bitstring32CommandWithCP56Time2a_destroy*(
     self: Bitstring32CommandWithCP56Time2a) {.
-    importc: "Bitstring32CommandWithCP56Time2a_destroy", dynlib: "60870.dll".}
+    importc: "Bitstring32CommandWithCP56Time2a_destroy",  cdecl.}
 proc Bitstring32CommandWithCP56Time2a_getValue*(
     self: Bitstring32CommandWithCP56Time2a): uint32_t {.
-    importc: "Bitstring32CommandWithCP56Time2a_getValue", dynlib: "60870.dll".}
+    importc: "Bitstring32CommandWithCP56Time2a_getValue",  cdecl.}
 proc Bitstring32CommandWithCP56Time2a_getTimestamp*(
     self: Bitstring32CommandWithCP56Time2a): CP56Time2a {.
-    importc: "Bitstring32CommandWithCP56Time2a_getTimestamp", dynlib: "60870.dll".}
+    importc: "Bitstring32CommandWithCP56Time2a_getTimestamp",  cdecl.}
 ## *************************************************
 ##  CounterInterrogationCommand : InformationObject
 ## ************************************************
@@ -1657,11 +1657,11 @@ type
 
 proc CounterInterrogationCommand_create*(self: CounterInterrogationCommand;
                                         ioa: cint; qcc: QualifierOfCIC): CounterInterrogationCommand {.
-    importc: "CounterInterrogationCommand_create", dynlib: "60870.dll".}
+    importc: "CounterInterrogationCommand_create",  cdecl.}
 proc CounterInterrogationCommand_destroy*(self: CounterInterrogationCommand) {.
-    importc: "CounterInterrogationCommand_destroy", dynlib: "60870.dll".}
+    importc: "CounterInterrogationCommand_destroy",  cdecl.}
 proc CounterInterrogationCommand_getQCC*(self: CounterInterrogationCommand): QualifierOfCIC {.
-    importc: "CounterInterrogationCommand_getQCC", dynlib: "60870.dll".}
+    importc: "CounterInterrogationCommand_getQCC",  cdecl.}
 ## ************************************************
 ##  TestCommand : InformationObject
 ## **********************************************
@@ -1670,11 +1670,11 @@ type
   TestCommand* = ptr sTestCommand
 
 proc TestCommand_create*(self: TestCommand): TestCommand {.
-    importc: "TestCommand_create", dynlib: "60870.dll".}
+    importc: "TestCommand_create",  cdecl.}
 proc TestCommand_destroy*(self: TestCommand) {.importc: "TestCommand_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc TestCommand_isValid*(self: TestCommand): bool {.importc: "TestCommand_isValid",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## ************************************************
 ##  ResetProcessCommand : InformationObject
 ## **********************************************
@@ -1684,11 +1684,11 @@ type
 
 proc ResetProcessCommand_create*(self: ResetProcessCommand; ioa: cint;
                                 qrp: QualifierOfRPC): ResetProcessCommand {.
-    importc: "ResetProcessCommand_create", dynlib: "60870.dll".}
+    importc: "ResetProcessCommand_create",  cdecl.}
 proc ResetProcessCommand_destroy*(self: ResetProcessCommand) {.
-    importc: "ResetProcessCommand_destroy", dynlib: "60870.dll".}
+    importc: "ResetProcessCommand_destroy",  cdecl.}
 proc ResetProcessCommand_getQRP*(self: ResetProcessCommand): QualifierOfRPC {.
-    importc: "ResetProcessCommand_getQRP", dynlib: "60870.dll".}
+    importc: "ResetProcessCommand_getQRP",  cdecl.}
 ## ************************************************
 ##  DelayAcquisitionCommand : InformationObject
 ## **********************************************
@@ -1698,11 +1698,11 @@ type
 
 proc DelayAcquisitionCommand_create*(self: DelayAcquisitionCommand; ioa: cint;
                                     delay: CP16Time2a): DelayAcquisitionCommand {.
-    importc: "DelayAcquisitionCommand_create", dynlib: "60870.dll".}
+    importc: "DelayAcquisitionCommand_create",  cdecl.}
 proc DelayAcquisitionCommand_destroy*(self: DelayAcquisitionCommand) {.
-    importc: "DelayAcquisitionCommand_destroy", dynlib: "60870.dll".}
+    importc: "DelayAcquisitionCommand_destroy",  cdecl.}
 proc DelayAcquisitionCommand_getDelay*(self: DelayAcquisitionCommand): CP16Time2a {.
-    importc: "DelayAcquisitionCommand_getDelay", dynlib: "60870.dll".}
+    importc: "DelayAcquisitionCommand_getDelay",  cdecl.}
 ## ******************************************
 ##  EndOfInitialization : InformationObject
 ## *****************************************
@@ -1711,11 +1711,11 @@ type
   EndOfInitialization* = ptr sEndOfInitialization
 
 proc EndOfInitialization_create*(self: EndOfInitialization; coi: uint8_t): EndOfInitialization {.
-    importc: "EndOfInitialization_create", dynlib: "60870.dll".}
+    importc: "EndOfInitialization_create",  cdecl.}
 proc EndOfInitialization_destroy*(self: EndOfInitialization) {.
-    importc: "EndOfInitialization_destroy", dynlib: "60870.dll".}
+    importc: "EndOfInitialization_destroy",  cdecl.}
 proc EndOfInitialization_getCOI*(self: EndOfInitialization): uint8_t {.
-    importc: "EndOfInitialization_getCOI", dynlib: "60870.dll".}
+    importc: "EndOfInitialization_getCOI",  cdecl.}
 ## ******************************************
 ##  FileReady : InformationObject
 ## *****************************************
@@ -1886,21 +1886,21 @@ type
 
 proc FileReady_create*(self: FileReady; ioa: cint; nof: uint16_t;
                       lengthOfFile: uint32_t; positive: bool): FileReady {.
-    importc: "FileReady_create", dynlib: "60870.dll".}
+    importc: "FileReady_create",  cdecl.}
 proc FileReady_destroy*(self: FileReady) {.importc: "FileReady_destroy",
-                                        dynlib: "60870.dll".}
+                                         cdecl.}
 proc FileReady_getFRQ*(self: FileReady): uint8_t {.importc: "FileReady_getFRQ",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc FileReady_setFRQ*(self: FileReady; frq: uint8_t) {.importc: "FileReady_setFRQ",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc FileReady_isPositive*(self: FileReady): bool {.importc: "FileReady_isPositive",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc FileReady_getNOF*(self: FileReady): uint16_t {.importc: "FileReady_getNOF",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc FileReady_getLengthOfFile*(self: FileReady): uint32_t {.
-    importc: "FileReady_getLengthOfFile", dynlib: "60870.dll".}
+    importc: "FileReady_getLengthOfFile",  cdecl.}
 #proc FileReady_destroy*(self: FileReady) {.importc: "FileReady_destroy",
-#                                        dynlib: "60870.dll".}
+#                                         cdecl.}
 ## ******************************************
 ##  SectionReady : InformationObject
 ## *****************************************
@@ -1910,21 +1910,21 @@ type
 
 proc SectionReady_create*(self: SectionReady; ioa: cint; nof: uint16_t; nos: uint8_t;
                          lengthOfSection: uint32_t; notReady: bool): SectionReady {.
-    importc: "SectionReady_create", dynlib: "60870.dll".}
+    importc: "SectionReady_create",  cdecl.}
 proc SectionReady_isNotReady*(self: SectionReady): bool {.
-    importc: "SectionReady_isNotReady", dynlib: "60870.dll".}
+    importc: "SectionReady_isNotReady",  cdecl.}
 proc SectionReady_getSRQ*(self: SectionReady): uint8_t {.
-    importc: "SectionReady_getSRQ", dynlib: "60870.dll".}
+    importc: "SectionReady_getSRQ",  cdecl.}
 proc SectionReady_setSRQ*(self: SectionReady; srq: uint8_t) {.
-    importc: "SectionReady_setSRQ", dynlib: "60870.dll".}
+    importc: "SectionReady_setSRQ",  cdecl.}
 proc SectionReady_getNOF*(self: SectionReady): uint16_t {.
-    importc: "SectionReady_getNOF", dynlib: "60870.dll".}
+    importc: "SectionReady_getNOF",  cdecl.}
 proc SectionReady_getNameOfSection*(self: SectionReady): uint8_t {.
-    importc: "SectionReady_getNameOfSection", dynlib: "60870.dll".}
+    importc: "SectionReady_getNameOfSection",  cdecl.}
 proc SectionReady_getLengthOfSection*(self: SectionReady): uint32_t {.
-    importc: "SectionReady_getLengthOfSection", dynlib: "60870.dll".}
+    importc: "SectionReady_getLengthOfSection",  cdecl.}
 proc SectionReady_destroy*(self: SectionReady) {.importc: "SectionReady_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## ******************************************
 ##  FileCallOrSelect : InformationObject
 ## *****************************************
@@ -1934,15 +1934,15 @@ type
 
 proc FileCallOrSelect_create*(self: FileCallOrSelect; ioa: cint; nof: uint16_t;
                              nos: uint8_t; scq: uint8_t): FileCallOrSelect {.
-    importc: "FileCallOrSelect_create", dynlib: "60870.dll".}
+    importc: "FileCallOrSelect_create",  cdecl.}
 proc FileCallOrSelect_getNOF*(self: FileCallOrSelect): uint16_t {.
-    importc: "FileCallOrSelect_getNOF", dynlib: "60870.dll".}
+    importc: "FileCallOrSelect_getNOF",  cdecl.}
 proc FileCallOrSelect_getNameOfSection*(self: FileCallOrSelect): uint8_t {.
-    importc: "FileCallOrSelect_getNameOfSection", dynlib: "60870.dll".}
+    importc: "FileCallOrSelect_getNameOfSection",  cdecl.}
 proc FileCallOrSelect_getSCQ*(self: FileCallOrSelect): uint8_t {.
-    importc: "FileCallOrSelect_getSCQ", dynlib: "60870.dll".}
+    importc: "FileCallOrSelect_getSCQ",  cdecl.}
 proc FileCallOrSelect_destroy*(self: FileCallOrSelect) {.
-    importc: "FileCallOrSelect_destroy", dynlib: "60870.dll".}
+    importc: "FileCallOrSelect_destroy",  cdecl.}
 ## ************************************************
 ##  FileLastSegmentOrSection : InformationObject
 ## ***********************************************
@@ -1953,17 +1953,17 @@ type
 proc FileLastSegmentOrSection_create*(self: FileLastSegmentOrSection; ioa: cint;
                                      nof: uint16_t; nos: uint8_t; lsq: uint8_t;
                                      chs: uint8_t): FileLastSegmentOrSection {.
-    importc: "FileLastSegmentOrSection_create", dynlib: "60870.dll".}
+    importc: "FileLastSegmentOrSection_create",  cdecl.}
 proc FileLastSegmentOrSection_getNOF*(self: FileLastSegmentOrSection): uint16_t {.
-    importc: "FileLastSegmentOrSection_getNOF", dynlib: "60870.dll".}
+    importc: "FileLastSegmentOrSection_getNOF",  cdecl.}
 proc FileLastSegmentOrSection_getNameOfSection*(self: FileLastSegmentOrSection): uint8_t {.
-    importc: "FileLastSegmentOrSection_getNameOfSection", dynlib: "60870.dll".}
+    importc: "FileLastSegmentOrSection_getNameOfSection",  cdecl.}
 proc FileLastSegmentOrSection_getLSQ*(self: FileLastSegmentOrSection): uint8_t {.
-    importc: "FileLastSegmentOrSection_getLSQ", dynlib: "60870.dll".}
+    importc: "FileLastSegmentOrSection_getLSQ",  cdecl.}
 proc FileLastSegmentOrSection_getCHS*(self: FileLastSegmentOrSection): uint8_t {.
-    importc: "FileLastSegmentOrSection_getCHS", dynlib: "60870.dll".}
+    importc: "FileLastSegmentOrSection_getCHS",  cdecl.}
 proc FileLastSegmentOrSection_destroy*(self: FileLastSegmentOrSection) {.
-    importc: "FileLastSegmentOrSection_destroy", dynlib: "60870.dll".}
+    importc: "FileLastSegmentOrSection_destroy",  cdecl.}
 ## ************************************************
 ##  FileACK : InformationObject
 ## ***********************************************
@@ -1972,14 +1972,14 @@ type
   FileACK* = ptr sFileACK
 
 proc FileACK_create*(self: FileACK; ioa: cint; nof: uint16_t; nos: uint8_t; afq: uint8_t): FileACK {.
-    importc: "FileACK_create", dynlib: "60870.dll".}
+    importc: "FileACK_create",  cdecl.}
 proc FileACK_getNOF*(self: FileACK): uint16_t {.importc: "FileACK_getNOF",
-    dynlib: "60870.dll".}
+     cdecl.}
 proc FileACK_getNameOfSection*(self: FileACK): uint8_t {.
-    importc: "FileACK_getNameOfSection", dynlib: "60870.dll".}
+    importc: "FileACK_getNameOfSection",  cdecl.}
 proc FileACK_getAFQ*(self: FileACK): uint8_t {.importc: "FileACK_getAFQ",
-    dynlib: "60870.dll".}
-proc FileACK_destroy*(self: FileACK) {.importc: "FileACK_destroy", dynlib: "60870.dll".}
+     cdecl.}
+proc FileACK_destroy*(self: FileACK) {.importc: "FileACK_destroy",  cdecl.}
 ## ************************************************
 ##  FileSegment : InformationObject
 ## ***********************************************
@@ -1989,19 +1989,19 @@ type
 
 proc FileSegment_create*(self: FileSegment; ioa: cint; nof: uint16_t; nos: uint8_t;
                         data: ptr uint8_t; los: uint8_t): FileSegment {.
-    importc: "FileSegment_create", dynlib: "60870.dll".}
+    importc: "FileSegment_create",  cdecl.}
 proc FileSegment_getNOF*(self: FileSegment): uint16_t {.
-    importc: "FileSegment_getNOF", dynlib: "60870.dll".}
+    importc: "FileSegment_getNOF",  cdecl.}
 proc FileSegment_getNameOfSection*(self: FileSegment): uint8_t {.
-    importc: "FileSegment_getNameOfSection", dynlib: "60870.dll".}
+    importc: "FileSegment_getNameOfSection",  cdecl.}
 proc FileSegment_getLengthOfSegment*(self: FileSegment): uint8_t {.
-    importc: "FileSegment_getLengthOfSegment", dynlib: "60870.dll".}
+    importc: "FileSegment_getLengthOfSegment",  cdecl.}
 proc FileSegment_getSegmentData*(self: FileSegment): ptr uint8_t {.
-    importc: "FileSegment_getSegmentData", dynlib: "60870.dll".}
+    importc: "FileSegment_getSegmentData",  cdecl.}
 proc FileSegment_GetMaxDataSize*(parameters: CS101_AppLayerParameters): cint {.
-    importc: "FileSegment_GetMaxDataSize", dynlib: "60870.dll".}
+    importc: "FileSegment_GetMaxDataSize",  cdecl.}
 proc FileSegment_destroy*(self: FileSegment) {.importc: "FileSegment_destroy",
-    dynlib: "60870.dll".}
+     cdecl.}
 ## ************************************************
 ##  FileDirectory: InformationObject
 ## ***********************************************
@@ -2011,25 +2011,25 @@ type
 
 proc FileDirectory_create*(self: FileDirectory; ioa: cint; nof: uint16_t;
                           lengthOfFile: cint; sof: uint8_t; creationTime: CP56Time2a): FileDirectory {.
-    importc: "FileDirectory_create", dynlib: "60870.dll".}
+    importc: "FileDirectory_create",  cdecl.}
 proc FileDirectory_getNOF*(self: FileDirectory): uint16_t {.
-    importc: "FileDirectory_getNOF", dynlib: "60870.dll".}
+    importc: "FileDirectory_getNOF",  cdecl.}
 proc FileDirectory_getSOF*(self: FileDirectory): uint8_t {.
-    importc: "FileDirectory_getSOF", dynlib: "60870.dll".}
+    importc: "FileDirectory_getSOF",  cdecl.}
 proc FileDirectory_getSTATUS*(self: FileDirectory): cint {.
-    importc: "FileDirectory_getSTATUS", dynlib: "60870.dll".}
+    importc: "FileDirectory_getSTATUS",  cdecl.}
 proc FileDirectory_getLFD*(self: FileDirectory): bool {.
-    importc: "FileDirectory_getLFD", dynlib: "60870.dll".}
+    importc: "FileDirectory_getLFD",  cdecl.}
 proc FileDirectory_getFOR*(self: FileDirectory): bool {.
-    importc: "FileDirectory_getFOR", dynlib: "60870.dll".}
+    importc: "FileDirectory_getFOR",  cdecl.}
 proc FileDirectory_getFA*(self: FileDirectory): bool {.
-    importc: "FileDirectory_getFA", dynlib: "60870.dll".}
+    importc: "FileDirectory_getFA",  cdecl.}
 proc FileDirectory_getLengthOfFile*(self: FileDirectory): uint8_t {.
-    importc: "FileDirectory_getLengthOfFile", dynlib: "60870.dll".}
+    importc: "FileDirectory_getLengthOfFile",  cdecl.}
 proc FileDirectory_getCreationTime*(self: FileDirectory): CP56Time2a {.
-    importc: "FileDirectory_getCreationTime", dynlib: "60870.dll".}
+    importc: "FileDirectory_getCreationTime",  cdecl.}
 proc FileDirectory_destroy*(self: FileDirectory) {.
-    importc: "FileDirectory_destroy", dynlib: "60870.dll".}
+    importc: "FileDirectory_destroy",  cdecl.}
 ## *
 ##  @}
 ##

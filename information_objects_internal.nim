@@ -711,7 +711,7 @@ type
     sof*: uint8_t              ##  state of file
     creationTime*: sCP56Time2a
 
-  uInformationObject* {.bycopy.} = object {.union.}
+  uInformationObject* {.bycopy, union.} = object 
     m1*: sSinglePointInformation
     m2*: sStepPositionInformation
     m3*: sStepPositionWithCP24Time2a

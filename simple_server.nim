@@ -31,7 +31,7 @@ proc rawMessageHandler*(parameter: pointer; conneciton: IMasterConnection;
   echo(s)
 
 proc clockSyncHandler*(parameter: pointer; connection: IMasterConnection;
-                      asdu: CS101_ASDU; newTime: CP56Time2a): bool {.stdcall.} =
+                      asdu: CS101_ASDU; newTime: CP56Time2a): bool {.cdecl.} =
   echo("Process time sync command with time: ")
   printCP56Time2a(newTime)
   var newSystemTimeInMs: uint64_t = CP56Time2a_toMsTimestamp(newTime)
@@ -42,7 +42,7 @@ proc clockSyncHandler*(parameter: pointer; connection: IMasterConnection;
   return true
 
 proc interrogationHandler*(parameter: pointer; connection: IMasterConnection;
-                          asdu: CS101_ASDU; qoi: uint8_t): bool {.stdcall.} =
+                          asdu: CS101_ASDU; qoi: uint8_t): bool {.cdecl.} =
   echo("Received interrogation for group %i", qoi)
   if qoi == (uint8_t)20:
     ##  only handle station interrogation
@@ -110,7 +110,7 @@ proc interrogationHandler*(parameter: pointer; connection: IMasterConnection;
   return true
 
 proc asduHandler*(parameter: pointer; connection: IMasterConnection;
-    asdu: CS101_ASDU): bool {.stdcall.} =
+    asdu: CS101_ASDU): bool {.cdecl.} =
   if CS101_ASDU_getTypeID(asdu) == C_SC_NA_1:
     echo("received single command")
     if CS101_ASDU_getCOT(asdu) == CS101_COT_ACTIVATION:
@@ -130,7 +130,7 @@ proc asduHandler*(parameter: pointer; connection: IMasterConnection;
   return false
 
 proc connectionRequestHandler*(parameter: pointer; ipAddress: cstring): bool {.
-  stdcall.} =
+  cdecl.} =
   echo fmt("New connection request from {ipAddress}")
   #[when false:
     if strcmp(ipAddress, "127.0.0.1") == 0:
@@ -143,7 +143,7 @@ proc connectionRequestHandler*(parameter: pointer; ipAddress: cstring): bool {.
     return true]#
 
 proc connectionEventHandler*(parameter: pointer; con: IMasterConnection;
-                            event: CS104_PeerConnectionEvent) {.stdcall.} =
+                            event: CS104_PeerConnectionEvent) {.cdecl.} =
   if event == CS104_CON_EVENT_CONNECTION_OPENED:
     echo("Connection opened ", repr con)
   elif event == CS104_CON_EVENT_CONNECTION_CLOSED:

@@ -125,7 +125,7 @@ type
 ##
 
 type
-  CS104_ConnectionRequestHandler* = proc (parameter: pointer; ipAddress: cstring): bool {.stdcall.}
+  CS104_ConnectionRequestHandler* = proc (parameter: pointer; ipAddress: cstring): bool {.cdecl.}
   
   CS104_PeerConnectionEvent* {.size: sizeof(cint).} = enum
     CS104_CON_EVENT_CONNECTION_OPENED = 0, 
@@ -145,7 +145,7 @@ type
 type
   CS104_ConnectionEventHandler* = proc (parameter: pointer;
                                      connection: IMasterConnection;
-                                     event: CS104_PeerConnectionEvent) {.stdcall.}
+                                     event: CS104_PeerConnectionEvent) {.cdecl.}
 
 ## *
 ##  \brief Callback handler for sent and received messages
@@ -164,7 +164,7 @@ type
 type
   CS104_SlaveRawMessageHandler* = proc (parameter: pointer;
                                      connection: IMasterConnection;
-                                     msg: var array[256, uint8_t]; msgSize: cint; send: bool) {.stdcall.}
+                                     msg: var array[256, uint8_t]; msgSize: cint; send: bool) {.cdecl.}
 
 ## **************************************************
 ##  Slave

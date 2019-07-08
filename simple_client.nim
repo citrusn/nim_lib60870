@@ -1,3 +1,9 @@
+#If the symbol begins with a _ but has no @, then it's __cdecl. 
+#If it begins with _ and has a @ it's __cdecl.
+#If it begins with @ and has another @, it's __fastcall.
+
+#{.link: "Ws2_32.lib".}
+{.passL: "lib60870.a libws2_32.a".}  #
 import
   os, strformat, strutils, time, cs104_connection, iec60870_types, iec60870_common #, hal_time, hal_thread
 
@@ -12,10 +18,10 @@ proc rawMessageHandler(parameter: pointer; msg:var array[256, uint8_t];
     s = "RAW RCVD: "
   s = s & fmt"{msgSize} bytes"
   var i: cint = 0  
-  var b : uint8_t  
+  var b : byte
   while i < msgSize:     
-    b = msg[i]
-    s=s & fmt"{b:#X}" & " " 
+    b = (byte)msg[i]
+    s=s & fmt"{X02:b}" & " " 
     i = i+1
   echo(s)
 
@@ -67,7 +73,7 @@ proc asduReceivedHandler*(parameter: pointer; address: cint; asdu: CS101_ASDU): 
       inc(i)
   return true
 
-proc main*() =
+proc main() =
   var ip: cstring = "10.220.7.138"
   var port: uint16_t = IEC_60870_5_104_DEFAULT_PORT
   if paramCount() > 1:
@@ -77,13 +83,14 @@ proc main*() =
   echo("Connecting to ", ip, ":", port)
   var con = CS104_Connection_create(ip, port)
   CS104_Connection_setConnectionHandler(con, connectionHandler, nil)  
-  CS104_Connection_setASDUReceivedHandler(con, asduReceivedHandler, nil)  
+  #CS104_Connection_setASDUReceivedHandler(con, asduReceivedHandler, nil)  
   ## uncomment to log messages
   CS104_Connection_setRawMessageHandler(con, rawMessageHandler, nil)
 
   if CS104_Connection_connect(con):
-    #CS104_Connection_setConnectTimeout(con, 54321)    
+    CS104_Connection_setConnectTimeout(con, 54321)    
     echo "running: " , con.running
+    echo "timeOut: " , con.connectTimeoutInMs
     echo "oldestSentASDU: " , con.oldestSentASDU
     echo("StartDT")
     CS104_Connection_sendStartDT(con)    
@@ -105,8 +112,11 @@ proc main*() =
   else:
     echo("Connect failed!")
   sleep(1000)
+  CS104_Connection_sendStopDT(con)
+  CS104_Connection_close(con)
   CS104_Connection_destroy(con)
   echo("exit")
+  
 
 main()
 

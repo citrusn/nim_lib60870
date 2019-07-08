@@ -60,7 +60,7 @@ type
 proc CS101_Master_create*(port: SerialPort; llParameters: LinkLayerParameters;
                          alParameters: CS101_AppLayerParameters;
                          mode: IEC60870_LinkLayerMode): CS101_Master {.
-    importc: "CS101_Master_create", dynlib: 60870.dll.}
+    importc: "CS101_Master_create", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Receive a new message and run the protocol state machine(s).
 ##
@@ -69,7 +69,7 @@ proc CS101_Master_create*(port: SerialPort; llParameters: LinkLayerParameters;
 ##
 
 proc CS101_Master_run*(self: CS101_Master) {.importc: "CS101_Master_run",
-    dynlib: 60870.dll.}
+    dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Start a background thread that handles the link layer connections
 ##
@@ -81,7 +81,7 @@ proc CS101_Master_run*(self: CS101_Master) {.importc: "CS101_Master_run",
 ##
 
 proc CS101_Master_start*(self: CS101_Master) {.importc: "CS101_Master_start",
-    dynlib: 60870.dll.}
+    dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Stops the background thread that handles the link layer connections
 ##
@@ -89,7 +89,7 @@ proc CS101_Master_start*(self: CS101_Master) {.importc: "CS101_Master_start",
 ##
 
 proc CS101_Master_stop*(self: CS101_Master) {.importc: "CS101_Master_stop",
-    dynlib: 60870.dll.}
+    dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Add a new slave connection
 ##
@@ -101,7 +101,7 @@ proc CS101_Master_stop*(self: CS101_Master) {.importc: "CS101_Master_stop",
 ##
 
 proc CS101_Master_addSlave*(self: CS101_Master; address: cint) {.
-    importc: "CS101_Master_addSlave", dynlib: 60870.dll.}
+    importc: "CS101_Master_addSlave", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Poll a slave (only unbalanced mode)
 ##
@@ -114,13 +114,13 @@ proc CS101_Master_addSlave*(self: CS101_Master; address: cint) {.
 ##
 
 proc CS101_Master_pollSingleSlave*(self: CS101_Master; address: cint) {.
-    importc: "CS101_Master_pollSingleSlave", dynlib: 60870.dll.}
+    importc: "CS101_Master_pollSingleSlave", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Destroy the master instance and release all resources
 ##
 
 proc CS101_Master_destroy*(self: CS101_Master) {.importc: "CS101_Master_destroy",
-    dynlib: 60870.dll.}
+    dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Set the value of the DIR bit when sending messages (only balanced mode)
 ##
@@ -131,7 +131,7 @@ proc CS101_Master_destroy*(self: CS101_Master) {.importc: "CS101_Master_destroy"
 ##
 
 proc CS101_Master_setDIR*(self: CS101_Master; dir: bool) {.
-    importc: "CS101_Master_setDIR", dynlib: 60870.dll.}
+    importc: "CS101_Master_setDIR", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Set the own link layer address (only balanced mode)
 ##
@@ -139,7 +139,7 @@ proc CS101_Master_setDIR*(self: CS101_Master; dir: bool) {.
 ##
 
 proc CS101_Master_setOwnAddress*(self: CS101_Master; address: cint) {.
-    importc: "CS101_Master_setOwnAddress", dynlib: 60870.dll.}
+    importc: "CS101_Master_setOwnAddress", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Set the slave address for the following send functions
 ##
@@ -151,7 +151,7 @@ proc CS101_Master_setOwnAddress*(self: CS101_Master; address: cint) {.
 ##
 
 proc CS101_Master_useSlaveAddress*(self: CS101_Master; address: cint) {.
-    importc: "CS101_Master_useSlaveAddress", dynlib: 60870.dll.}
+    importc: "CS101_Master_useSlaveAddress", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Returns the application layer parameters object of this master instance
 ##
@@ -159,7 +159,7 @@ proc CS101_Master_useSlaveAddress*(self: CS101_Master; address: cint) {.
 ##
 
 proc CS101_Master_getAppLayerParameters*(self: CS101_Master): CS101_AppLayerParameters {.
-    importc: "CS101_Master_getAppLayerParameters", dynlib: 60870.dll.}
+    importc: "CS101_Master_getAppLayerParameters", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Returns the link layer parameters object of this master instance
 ##
@@ -167,7 +167,7 @@ proc CS101_Master_getAppLayerParameters*(self: CS101_Master): CS101_AppLayerPara
 ##
 
 proc CS101_Master_getLinkLayerParameters*(self: CS101_Master): LinkLayerParameters {.
-    importc: "CS101_Master_getLinkLayerParameters", dynlib: 60870.dll.}
+    importc: "CS101_Master_getLinkLayerParameters", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Is the channel ready to transmit an ASDU (only unbalanced mode)
 ##
@@ -180,7 +180,7 @@ proc CS101_Master_getLinkLayerParameters*(self: CS101_Master): LinkLayerParamete
 ##
 
 proc CS101_Master_isChannelReady*(self: CS101_Master; address: cint): bool {.
-    importc: "CS101_Master_isChannelReady", dynlib: 60870.dll.}
+    importc: "CS101_Master_isChannelReady", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Manually send link layer test function.
 ##
@@ -189,7 +189,7 @@ proc CS101_Master_isChannelReady*(self: CS101_Master; address: cint): bool {.
 ##
 
 proc CS101_Master_sendLinkLayerTestFunction*(self: CS101_Master) {.
-    importc: "CS101_Master_sendLinkLayerTestFunction", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendLinkLayerTestFunction", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief send an interrogation command
 ##
@@ -200,7 +200,7 @@ proc CS101_Master_sendLinkLayerTestFunction*(self: CS101_Master) {.
 
 proc CS101_Master_sendInterrogationCommand*(self: CS101_Master;
     cot: CS101_CauseOfTransmission; ca: cint; qoi: QualifierOfInterrogation) {.
-    importc: "CS101_Master_sendInterrogationCommand", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendInterrogationCommand", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief send a counter interrogation command
 ##
@@ -211,7 +211,7 @@ proc CS101_Master_sendInterrogationCommand*(self: CS101_Master;
 
 proc CS101_Master_sendCounterInterrogationCommand*(self: CS101_Master;
     cot: CS101_CauseOfTransmission; ca: cint; qcc: uint8_t) {.
-    importc: "CS101_Master_sendCounterInterrogationCommand", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendCounterInterrogationCommand", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief  Sends a read command (C_RD_NA_1 typeID: 102)
 ##
@@ -223,7 +223,7 @@ proc CS101_Master_sendCounterInterrogationCommand*(self: CS101_Master;
 ##
 
 proc CS101_Master_sendReadCommand*(self: CS101_Master; ca: cint; ioa: cint) {.
-    importc: "CS101_Master_sendReadCommand", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendReadCommand", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Sends a clock synchronization command (C_CS_NA_1 typeID: 103)
 ##
@@ -233,7 +233,7 @@ proc CS101_Master_sendReadCommand*(self: CS101_Master; ca: cint; ioa: cint) {.
 
 proc CS101_Master_sendClockSyncCommand*(self: CS101_Master; ca: cint;
                                        time: CP56Time2a) {.
-    importc: "CS101_Master_sendClockSyncCommand", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendClockSyncCommand", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Send a test command (C_TS_NA_1 typeID: 104)
 ##
@@ -243,7 +243,7 @@ proc CS101_Master_sendClockSyncCommand*(self: CS101_Master; ca: cint;
 ##
 
 proc CS101_Master_sendTestCommand*(self: CS101_Master; ca: cint) {.
-    importc: "CS101_Master_sendTestCommand", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendTestCommand", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Send a process command to the controlled (or other) station
 ##
@@ -256,7 +256,7 @@ proc CS101_Master_sendTestCommand*(self: CS101_Master; ca: cint) {.
 proc CS101_Master_sendProcessCommand*(self: CS101_Master;
                                      cot: CS101_CauseOfTransmission; ca: cint;
                                      command: InformationObject) {.
-    importc: "CS101_Master_sendProcessCommand", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendProcessCommand", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Send a user specified ASDU
 ##
@@ -271,7 +271,7 @@ proc CS101_Master_sendProcessCommand*(self: CS101_Master;
 ##
 
 proc CS101_Master_sendASDU*(self: CS101_Master; asdu: CS101_ASDU) {.
-    importc: "CS101_Master_sendASDU", dynlib: 60870.dll.}
+    importc: "CS101_Master_sendASDU", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Register a callback handler for received ASDUs
 ##
@@ -281,14 +281,14 @@ proc CS101_Master_sendASDU*(self: CS101_Master; asdu: CS101_ASDU) {.
 
 proc CS101_Master_setASDUReceivedHandler*(self: CS101_Master;
     handler: CS101_ASDUReceivedHandler; parameter: pointer) {.
-    importc: "CS101_Master_setASDUReceivedHandler", dynlib: 60870.dll.}
+    importc: "CS101_Master_setASDUReceivedHandler", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Set a callback handler for link layer state changes
 ##
 
 proc CS101_Master_setLinkLayerStateChanged*(self: CS101_Master;
     handler: IEC60870_LinkLayerStateChangedHandler; parameter: pointer) {.
-    importc: "CS101_Master_setLinkLayerStateChanged", dynlib: 60870.dll.}
+    importc: "CS101_Master_setLinkLayerStateChanged", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Set the raw message callback (called when a message is sent or received)
 ##
@@ -299,7 +299,7 @@ proc CS101_Master_setLinkLayerStateChanged*(self: CS101_Master;
 proc CS101_Master_setRawMessageHandler*(self: CS101_Master;
                                        handler: IEC60870_RawMessageHandler;
                                        parameter: pointer) {.
-    importc: "CS101_Master_setRawMessageHandler", dynlib: 60870.dll.}
+    importc: "CS101_Master_setRawMessageHandler", dynlib: "60870.dll", cdecl.}
 ## *
 ##  \brief Set the idle timeout (only for balanced mode)
 ##
@@ -310,7 +310,7 @@ proc CS101_Master_setRawMessageHandler*(self: CS101_Master;
 ##
 
 proc CS101_Master_setIdleTimeout*(self: CS101_Master; timeoutInMs: cint) {.
-    importc: "CS101_Master_setIdleTimeout", dynlib: 60870.dll.}
+    importc: "CS101_Master_setIdleTimeout", dynlib: "60870.dll", cdecl.}
 ## *
 ##  @}
 ##
