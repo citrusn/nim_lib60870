@@ -50,7 +50,7 @@ import
 
 type
   IMasterConnection* = ptr sIMasterConnection
-  sIMasterConnection* = object
+  sIMasterConnection*{.bycopy.} = object
     sendASDU*: proc (self: IMasterConnection; asdu: CS101_ASDU)
     sendACT_CON*: proc (self: IMasterConnection; asdu: CS101_ASDU; negative: bool)
     sendACT_TERM*: proc (self: IMasterConnection; asdu: CS101_ASDU)

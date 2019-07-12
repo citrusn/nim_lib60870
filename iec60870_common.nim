@@ -95,7 +95,7 @@ type
 ##
 
 type
-  IEC60870_RawMessageHandler* = proc (parameter: pointer; msg:var array[256, uint8_t];
+  IEC60870_RawMessageHandler* = proc (parameter: pointer; msg: var array[256, byte];
                                    msgSize: cint; sent: bool)  {.cdecl.}
 
 ## *
@@ -223,59 +223,59 @@ type
 
 
 proc CS101_CauseOfTransmission_toString*(self: CS101_CauseOfTransmission): cstring {.
-    importc: "CS101_CauseOfTransmission_toString", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_CauseOfTransmission_toString",  cdecl.}
 proc Lib60870_enableDebugOutput*(value: bool) {.
-    importc: "Lib60870_enableDebugOutput", dynlib: "60870.dll", cdecl.}
+    importc: "Lib60870_enableDebugOutput",  cdecl.}
 proc Lib60870_getLibraryVersionInfo*(): Lib60870VersionInfo {.
-    importc: "Lib60870_getLibraryVersionInfo", dynlib: "60870.dll", cdecl.}
+    importc: "Lib60870_getLibraryVersionInfo",  cdecl.}
 ## *
 ##  \brief Check if the test flag of the ASDU is set
 ##
 
 proc CS101_ASDU_isTest*(self: CS101_ASDU): bool {.importc: "CS101_ASDU_isTest",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Set the test flag of the ASDU
 ##
 
 proc CS101_ASDU_setTest*(self: CS101_ASDU; value: bool) {.
-    importc: "CS101_ASDU_setTest", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_setTest",  cdecl.}
 ## *
 ##  \brief Check if the negative flag of the ASDU is set
 ##
 
 proc CS101_ASDU_isNegative*(self: CS101_ASDU): bool {.
-    importc: "CS101_ASDU_isNegative", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_isNegative",  cdecl.}
 ## *
 ##  \brief Set the negative flag of the ASDU
 ##
 
 proc CS101_ASDU_setNegative*(self: CS101_ASDU; value: bool) {.
-    importc: "CS101_ASDU_setNegative", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_setNegative",  cdecl.}
 ## *
 ##  \brief get the OA (originator address) of the ASDU.
 ##
 
 proc CS101_ASDU_getOA*(self: CS101_ASDU): cint {.importc: "CS101_ASDU_getOA",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Get the cause of transmission (COT) of the ASDU
 ##
 
 proc CS101_ASDU_getCOT*(self: CS101_ASDU): CS101_CauseOfTransmission {.
-    importc: "CS101_ASDU_getCOT", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_getCOT",  cdecl.}
 ## *
 ##  \brief Set the cause of transmission (COT) of the ASDU
 ##
 
 proc CS101_ASDU_setCOT*(self: CS101_ASDU; value: CS101_CauseOfTransmission) {.
-    importc: "CS101_ASDU_setCOT", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_setCOT",  cdecl.}
 ## *
 ##  \brief Get the common address (CA) of the ASDU
 ##
 
 proc CS101_ASDU_getCA*(self: CS101_ASDU): cint {.importc: "CS101_ASDU_getCA",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Set the common address (CA) of the ASDU
 ##
@@ -283,13 +283,13 @@ proc CS101_ASDU_getCA*(self: CS101_ASDU): cint {.importc: "CS101_ASDU_getCA",
 ##
 
 proc CS101_ASDU_setCA*(self: CS101_ASDU; ca: cint) {.importc: "CS101_ASDU_setCA",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Get the type ID of the ASDU
 ##
 
 proc CS101_ASDU_getTypeID*(self: CS101_ASDU): IEC60870_5_TypeID {.
-    importc: "CS101_ASDU_getTypeID", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_getTypeID",  cdecl.}
 ## *
 ##  \brief Check if the ASDU contains a sequence of consecutive information objects
 ##
@@ -298,13 +298,13 @@ proc CS101_ASDU_getTypeID*(self: CS101_ASDU): IEC60870_5_TypeID {.
 ##
 
 proc CS101_ASDU_isSequence*(self: CS101_ASDU): bool {.
-    importc: "CS101_ASDU_isSequence", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_isSequence",  cdecl.}
 ## *
 ##  \brief Get the number of information objects (elements) in the ASDU
 ##
 
 proc CS101_ASDU_getNumberOfElements*(self: CS101_ASDU): cint {.
-    importc: "CS101_ASDU_getNumberOfElements", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_getNumberOfElements",  cdecl.}
 ## *
 ##  \brief Get the information object with the given index
 ##
@@ -314,7 +314,7 @@ proc CS101_ASDU_getNumberOfElements*(self: CS101_ASDU): cint {.
 ##
 
 proc CS101_ASDU_getElement*(self: CS101_ASDU; index: cint): InformationObject {.
-    importc: "CS101_ASDU_getElement", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_getElement",  cdecl.}
 ## *
 ##  \brief Get the information object with the given index and store it in the provided information object instance
 ##
@@ -325,7 +325,7 @@ proc CS101_ASDU_getElement*(self: CS101_ASDU; index: cint): InformationObject {.
 ##
 
 proc CS101_ASDU_getElementEx*(self: CS101_ASDU; io: InformationObject; index: cint): InformationObject {.
-    importc: "CS101_ASDU_getElementEx", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_getElementEx",  cdecl.}
 ## *
 ##  \brief Create a new ASDU. The type ID will be derived from the first InformationObject that will be added
 ##
@@ -343,7 +343,7 @@ proc CS101_ASDU_getElementEx*(self: CS101_ASDU; io: InformationObject; index: ci
 proc CS101_ASDU_create*(parameters: CS101_AppLayerParameters; isSequence: bool;
                        cot: CS101_CauseOfTransmission; oa: cint; ca: cint;
                        isTest: bool; isNegative: bool): CS101_ASDU {.
-    importc: "CS101_ASDU_create", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_create",  cdecl.}
 ## *
 ##  \brief Create a new ASDU and store it in the provided static ASDU structure.
 ##
@@ -365,13 +365,13 @@ proc CS101_ASDU_initializeStatic*(self: CS101_StaticASDU;
                                  parameters: CS101_AppLayerParameters;
                                  isSequence: bool; cot: CS101_CauseOfTransmission;
                                  oa: cint; ca: cint; isTest: bool; isNegative: bool): CS101_ASDU {.
-    importc: "CS101_ASDU_initializeStatic", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_initializeStatic",  cdecl.}
 ## *
 ##  \brief Destroy the ASDU object (release all resources)
 ##
 
 proc CS101_ASDU_destroy*(self: CS101_ASDU) {.importc: "CS101_ASDU_destroy",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief add an information object to the ASDU
 ##
@@ -382,7 +382,7 @@ proc CS101_ASDU_destroy*(self: CS101_ASDU) {.importc: "CS101_ASDU_destroy",
 ##
 
 proc CS101_ASDU_addInformationObject*(self: CS101_ASDU; io: InformationObject): bool {.
-    importc: "CS101_ASDU_addInformationObject", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_addInformationObject",  cdecl.}
 ## *
 ##  \brief remove all information elements from the ASDU object
 ##
@@ -390,161 +390,161 @@ proc CS101_ASDU_addInformationObject*(self: CS101_ASDU; io: InformationObject): 
 ##
 
 proc CS101_ASDU_removeAllElements*(self: CS101_ASDU) {.
-    importc: "CS101_ASDU_removeAllElements", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_ASDU_removeAllElements",  cdecl.}
 ## *
 ##  \brief Get the elapsed time in ms
 ##
 
 proc CP16Time2a_getEplapsedTimeInMs*(self: CP16Time2a): cint {.
-    importc: "CP16Time2a_getEplapsedTimeInMs", dynlib: "60870.dll", cdecl.}
+    importc: "CP16Time2a_getEplapsedTimeInMs",  cdecl.}
 ## *
 ##  \brief set the elapsed time in ms
 ##
 
 proc CP16Time2a_setEplapsedTimeInMs*(self: CP16Time2a; value: cint) {.
-    importc: "CP16Time2a_setEplapsedTimeInMs", dynlib: "60870.dll", cdecl.}
+    importc: "CP16Time2a_setEplapsedTimeInMs",  cdecl.}
 ## *
 ##  \brief Get the millisecond part of the time value
 ##
 
 proc CP24Time2a_getMillisecond*(self: CP24Time2a): cint {.
-    importc: "CP24Time2a_getMillisecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_getMillisecond",  cdecl.}
 ## *
 ##  \brief Set the millisecond part of the time value
 ##
 
 proc CP24Time2a_setMillisecond*(self: CP24Time2a; value: cint) {.
-    importc: "CP24Time2a_setMillisecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_setMillisecond",  cdecl.}
 ## *
 ##  \brief Get the second part of the time value
 ##
 
 proc CP24Time2a_getSecond*(self: CP24Time2a): cint {.
-    importc: "CP24Time2a_getSecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_getSecond",  cdecl.}
 ## *
 ##  \brief Set the second part of the time value
 ##
 
 proc CP24Time2a_setSecond*(self: CP24Time2a; value: cint) {.
-    importc: "CP24Time2a_setSecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_setSecond",  cdecl.}
 ## *
 ##  \brief Get the minute part of the time value
 ##
 
 proc CP24Time2a_getMinute*(self: CP24Time2a): cint {.
-    importc: "CP24Time2a_getMinute", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_getMinute",  cdecl.}
 ## *
 ##  \brief Set the minute part of the time value
 ##
 
 proc CP24Time2a_setMinute*(self: CP24Time2a; value: cint) {.
-    importc: "CP24Time2a_setMinute", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_setMinute",  cdecl.}
 ## *
 ##  \brief Check if the invalid flag of the time value is set
 ##
 
 proc CP24Time2a_isInvalid*(self: CP24Time2a): bool {.
-    importc: "CP24Time2a_isInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_isInvalid",  cdecl.}
 ## *
 ##  \brief Set the invalid flag of the time value
 ##
 
 proc CP24Time2a_setInvalid*(self: CP24Time2a; value: bool) {.
-    importc: "CP24Time2a_setInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_setInvalid",  cdecl.}
 ## *
 ##  \brief Check if the substituted flag of the time value is set
 ##
 
 proc CP24Time2a_isSubstituted*(self: CP24Time2a): bool {.
-    importc: "CP24Time2a_isSubstituted", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_isSubstituted",  cdecl.}
 ## *
 ##  \brief Set the substituted flag of the time value
 ##
 
 proc CP24Time2a_setSubstituted*(self: CP24Time2a; value: bool) {.
-    importc: "CP24Time2a_setSubstituted", dynlib: "60870.dll", cdecl.}
+    importc: "CP24Time2a_setSubstituted",  cdecl.}
 ## *
 ##  \brief Create a 7 byte time from a UTC ms timestamp
 ##
 
 proc CP56Time2a_createFromMsTimestamp*(self: CP56Time2a; timestamp: uint64_t): CP56Time2a {.
-    importc: "CP56Time2a_createFromMsTimestamp" cdecl.} #, dynlib: "60870.dll",
+    importc: "CP56Time2a_createFromMsTimestamp" cdecl.} #, 
 proc CP32Time2a_create*(self: CP32Time2a): CP32Time2a {.
-    importc: "CP32Time2a_create", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_create",  cdecl.}
 proc CP32Time2a_setFromMsTimestamp*(self: CP32Time2a; timestamp: uint64_t) {.
-    importc: "CP32Time2a_setFromMsTimestamp", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setFromMsTimestamp",  cdecl.}
 proc CP32Time2a_getMillisecond*(self: CP32Time2a): cint {.
-    importc: "CP32Time2a_getMillisecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_getMillisecond",  cdecl.}
 proc CP32Time2a_setMillisecond*(self: CP32Time2a; value: cint) {.
-    importc: "CP32Time2a_setMillisecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setMillisecond",  cdecl.}
 proc CP32Time2a_getSecond*(self: CP32Time2a): cint {.
-    importc: "CP32Time2a_getSecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_getSecond",  cdecl.}
 proc CP32Time2a_setSecond*(self: CP32Time2a; value: cint) {.
-    importc: "CP32Time2a_setSecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setSecond",  cdecl.}
 proc CP32Time2a_getMinute*(self: CP32Time2a): cint {.
-    importc: "CP32Time2a_getMinute", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_getMinute",  cdecl.}
 proc CP32Time2a_setMinute*(self: CP32Time2a; value: cint) {.
-    importc: "CP32Time2a_setMinute", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setMinute",  cdecl.}
 proc CP32Time2a_isInvalid*(self: CP32Time2a): bool {.
-    importc: "CP32Time2a_isInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_isInvalid",  cdecl.}
 proc CP32Time2a_setInvalid*(self: CP32Time2a; value: bool) {.
-    importc: "CP32Time2a_setInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setInvalid",  cdecl.}
 proc CP32Time2a_isSubstituted*(self: CP32Time2a): bool {.
-    importc: "CP32Time2a_isSubstituted", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_isSubstituted",  cdecl.}
 proc CP32Time2a_setSubstituted*(self: CP32Time2a; value: bool) {.
-    importc: "CP32Time2a_setSubstituted", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setSubstituted",  cdecl.}
 proc CP32Time2a_getHour*(self: CP32Time2a): cint {.importc: "CP32Time2a_getHour",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 proc CP32Time2a_setHour*(self: CP32Time2a; value: cint) {.
-    importc: "CP32Time2a_setHour", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setHour",  cdecl.}
 proc CP32Time2a_isSummerTime*(self: CP32Time2a): bool {.
-    importc: "CP32Time2a_isSummerTime", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_isSummerTime",  cdecl.}
 proc CP32Time2a_setSummerTime*(self: CP32Time2a; value: bool) {.
-    importc: "CP32Time2a_setSummerTime", dynlib: "60870.dll", cdecl.}
+    importc: "CP32Time2a_setSummerTime",  cdecl.}
 ## *
 ##  \brief Set the time value of a 7 byte time from a UTC ms timestamp
 ##
 
 proc CP56Time2a_setFromMsTimestamp*(self: CP56Time2a; timestamp: uint64_t) {.
-    importc: "CP56Time2a_setFromMsTimestamp", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setFromMsTimestamp",  cdecl.}
 ## *
 ##  \brief Convert a 7 byte time to a ms timestamp
 ##
 
 proc CP56Time2a_toMsTimestamp*(self: CP56Time2a): uint64_t {.
-    importc: "CP56Time2a_toMsTimestamp", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_toMsTimestamp",  cdecl.}
 ## *
 ##  \brief Get the ms part of a time value
 ##
 
 proc CP56Time2a_getMillisecond*(self: CP56Time2a): cint {.
-    importc: "CP56Time2a_getMillisecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_getMillisecond",  cdecl.}
 ## *
 ##  \brief Set the ms part of a time value
 ##
 
 proc CP56Time2a_setMillisecond*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setMillisecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setMillisecond",  cdecl.}
 proc CP56Time2a_getSecond*(self: CP56Time2a): cint {.
-    importc: "CP56Time2a_getSecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_getSecond",  cdecl.}
 proc CP56Time2a_setSecond*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setSecond", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setSecond",  cdecl.}
 proc CP56Time2a_getMinute*(self: CP56Time2a): cint {.
-    importc: "CP56Time2a_getMinute", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_getMinute",  cdecl.}
 proc CP56Time2a_setMinute*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setMinute", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setMinute",  cdecl.}
 proc CP56Time2a_getHour*(self: CP56Time2a): cint {.importc: "CP56Time2a_getHour",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 proc CP56Time2a_setHour*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setHour", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setHour",  cdecl.}
 proc CP56Time2a_getDayOfWeek*(self: CP56Time2a): cint {.
-    importc: "CP56Time2a_getDayOfWeek", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_getDayOfWeek",  cdecl.}
 proc CP56Time2a_setDayOfWeek*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setDayOfWeek", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setDayOfWeek",  cdecl.}
 proc CP56Time2a_getDayOfMonth*(self: CP56Time2a): cint {.
-    importc: "CP56Time2a_getDayOfMonth", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_getDayOfMonth",  cdecl.}
 proc CP56Time2a_setDayOfMonth*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setDayOfMonth", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setDayOfMonth",  cdecl.}
 ## *
 ##  \brief Get the month field of the time
 ##
@@ -552,7 +552,7 @@ proc CP56Time2a_setDayOfMonth*(self: CP56Time2a; value: cint) {.
 ##
 
 proc CP56Time2a_getMonth*(self: CP56Time2a): cint {.importc: "CP56Time2a_getMonth",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Set the month field of the time
 ##
@@ -560,7 +560,7 @@ proc CP56Time2a_getMonth*(self: CP56Time2a): cint {.importc: "CP56Time2a_getMont
 ##
 
 proc CP56Time2a_setMonth*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setMonth", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setMonth",  cdecl.}
 ## *
 ##  \brief Get the year (range 0..99)
 ##
@@ -568,7 +568,7 @@ proc CP56Time2a_setMonth*(self: CP56Time2a; value: cint) {.
 ##
 
 proc CP56Time2a_getYear*(self: CP56Time2a): cint {.importc: "CP56Time2a_getYear",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Set the year
 ##
@@ -576,58 +576,58 @@ proc CP56Time2a_getYear*(self: CP56Time2a): cint {.importc: "CP56Time2a_getYear"
 ##
 
 proc CP56Time2a_setYear*(self: CP56Time2a; value: cint) {.
-    importc: "CP56Time2a_setYear", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setYear",  cdecl.}
 proc CP56Time2a_isSummerTime*(self: CP56Time2a): bool {.
-    importc: "CP56Time2a_isSummerTime", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_isSummerTime",  cdecl.}
 proc CP56Time2a_setSummerTime*(self: CP56Time2a; value: bool) {.
-    importc: "CP56Time2a_setSummerTime", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setSummerTime",  cdecl.}
 proc CP56Time2a_isInvalid*(self: CP56Time2a): bool {.
-    importc: "CP56Time2a_isInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_isInvalid",  cdecl.}
 proc CP56Time2a_setInvalid*(self: CP56Time2a; value: bool) {.
-    importc: "CP56Time2a_setInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setInvalid",  cdecl.}
 proc CP56Time2a_isSubstituted*(self: CP56Time2a): bool {.
-    importc: "CP56Time2a_isSubstituted", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_isSubstituted",  cdecl.}
 proc CP56Time2a_setSubstituted*(self: CP56Time2a; value: bool) {.
-    importc: "CP56Time2a_setSubstituted", dynlib: "60870.dll", cdecl.}
+    importc: "CP56Time2a_setSubstituted",  cdecl.}
 proc BinaryCounterReading_create*(self: BinaryCounterReading; value: int32_t;
                                  seqNumber: cint; hasCarry: bool; isAdjusted: bool;
                                  isInvalid: bool): BinaryCounterReading {.
-    importc: "BinaryCounterReading_create", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_create",  cdecl.}
 proc BinaryCounterReading_destroy*(self: BinaryCounterReading) {.
-    importc: "BinaryCounterReading_destroy", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_destroy",  cdecl.}
 proc BinaryCounterReading_getValue*(self: BinaryCounterReading): int32_t {.
-    importc: "BinaryCounterReading_getValue", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_getValue",  cdecl.}
 proc BinaryCounterReading_setValue*(self: BinaryCounterReading; value: int32_t) {.
-    importc: "BinaryCounterReading_setValue", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_setValue",  cdecl.}
 proc BinaryCounterReading_getSequenceNumber*(self: BinaryCounterReading): cint {.
-    importc: "BinaryCounterReading_getSequenceNumber", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_getSequenceNumber",  cdecl.}
 proc BinaryCounterReading_hasCarry*(self: BinaryCounterReading): bool {.
-    importc: "BinaryCounterReading_hasCarry", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_hasCarry",  cdecl.}
 proc BinaryCounterReading_isAdjusted*(self: BinaryCounterReading): bool {.
-    importc: "BinaryCounterReading_isAdjusted", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_isAdjusted",  cdecl.}
 proc BinaryCounterReading_isInvalid*(self: BinaryCounterReading): bool {.
-    importc: "BinaryCounterReading_isInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_isInvalid",  cdecl.}
 proc BinaryCounterReading_setSequenceNumber*(self: BinaryCounterReading;
-    value: cint) {.importc: "BinaryCounterReading_setSequenceNumber", dynlib: "60870.dll", cdecl.}
+    value: cint) {.importc: "BinaryCounterReading_setSequenceNumber",  cdecl.}
 proc BinaryCounterReading_setCarry*(self: BinaryCounterReading; value: bool) {.
-    importc: "BinaryCounterReading_setCarry", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_setCarry",  cdecl.}
 proc BinaryCounterReading_setAdjusted*(self: BinaryCounterReading; value: bool) {.
-    importc: "BinaryCounterReading_setAdjusted", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_setAdjusted",  cdecl.}
 proc BinaryCounterReading_setInvalid*(self: BinaryCounterReading; value: bool) {.
-    importc: "BinaryCounterReading_setInvalid", dynlib: "60870.dll", cdecl.}
+    importc: "BinaryCounterReading_setInvalid",  cdecl.}
 ## *
 ##  @}
 ##
 include "frame_cpp.nim"
 
-proc Frame_destroy*(self: Frame) {.importc: "Frame_destroy", dynlib: "60870.dll", cdecl.}
-proc Frame_resetFrame*(self: Frame) {.importc: "Frame_resetFrame", dynlib: "60870.dll", cdecl.}
+proc Frame_destroy*(self: Frame) {.importc: "Frame_destroy",  cdecl.}
+proc Frame_resetFrame*(self: Frame) {.importc: "Frame_resetFrame",  cdecl.}
 proc Frame_setNextByte*(self: Frame; byte: uint8_t) {.importc: "Frame_setNextByte",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 proc Frame_appendBytes*(self: Frame; bytes: ptr uint8_t; numberOfBytes: cint) {.
-    importc: "Frame_appendBytes", dynlib: "60870.dll", cdecl.}
-proc Frame_getMsgSize*(self: Frame): cint {.importc: "Frame_getMsgSize", dynlib: "60870.dll", cdecl.}
+    importc: "Frame_appendBytes",  cdecl.}
+proc Frame_getMsgSize*(self: Frame): cint {.importc: "Frame_getMsgSize",  cdecl.}
 proc Frame_getBuffer*(self: Frame): ptr uint8_t {.importc: "Frame_getBuffer",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 proc Frame_getSpaceLeft*(self: Frame): cint {.importc: "Frame_getSpaceLeft",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}

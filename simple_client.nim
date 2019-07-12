@@ -1,29 +1,33 @@
 #If the symbol begins with a _ but has no @, then it's __cdecl. 
 #If it begins with _ and has a @ it's __cdecl.
 #If it begins with @ and has another @, it's __fastcall.
-
 #{.link: "Ws2_32.lib".}
-{.passL: "lib60870.a libws2_32.a".}  #
+{.passL: "lib60870.a -lws2_32".}
+
 import
-  os, strformat, strutils, time, cs104_connection, iec60870_types, iec60870_common #, hal_time, hal_thread
+  os, strformat, strutils, time, cs104_connection, iec60870_types, iec60870_common
 
 ##  Callback handler to log sent or received messages (optional)
                                
-proc rawMessageHandler(parameter: pointer; msg:var array[256, uint8_t]; 
+proc rawMessageHandler(parameter: pointer; msg: var array[256, byte];
                        msgSize: cint; sent: bool) {.cdecl.} =
-  var s: string  
+  var s: string
   if sent:
-    s = "RAW SEND: "
+    s = "RAW SEND->"
   else:
-    s = "RAW RCVD: "
-  s = s & fmt"{msgSize} bytes"
-  var i: cint = 0  
-  var b : byte
-  while i < msgSize:     
-    b = (byte)msg[i]
-    s=s & fmt"{X02:b}" & " " 
-    i = i+1
-  echo(s)
+    s = "RAW RCVD<-"
+  s = s & ($ msgSize) & " bytes="
+  #echo(s)
+  #return 
+  var i:cint = 0
+  var b:byte
+  #s = ""
+  while i < msgSize:
+  #  b = msg[i]
+  #  s = s & fmt"{b:02X}" & " "
+    inc(i)
+  #echoDebug(s)
+  
 
 ##  Connection event handler
 
@@ -31,13 +35,13 @@ proc connectionHandler(parameter: pointer; connection: CS104_Connection;
                        event: CS104_ConnectionEvent) {.cdecl.} =  
   case event
   of CS104_CONNECTION_OPENED:
-    echo("Connection established\n")
+    echo("Connection established")
   of CS104_CONNECTION_CLOSED:
-    echo("Connection closed\n")
+    echo("Connection closed")
   of CS104_CONNECTION_STARTDT_CON_RECEIVED:
-    echo("Received STARTDT_CON\n")
+    echo("Received STARTDT_CON")
   of CS104_CONNECTION_STOPDT_CON_RECEIVED:
-    echo("Received STOPDT_CON\n")
+    echo("Received STOPDT_CON")
 
 ##
 ##  CS101_ASDUReceivedHandler implementation
@@ -48,27 +52,25 @@ proc connectionHandler(parameter: pointer; connection: CS104_Connection;
 proc asduReceivedHandler*(parameter: pointer; address: cint; asdu: CS101_ASDU): bool {.cdecl.} =
   echo(fmt"RECVD ASDU type: {TypeID_toString(CS101_ASDU_getTypeID(asdu))}({cast[int](CS101_ASDU_getTypeID(asdu))}) " &
        fmt"elements: {CS101_ASDU_getNumberOfElements(asdu)}" )
-  if CS101_ASDU_getTypeID(asdu) == M_ME_TE_1:
-    echo("  measured scaled values with CP56Time2a timestamp:")
+  if CS101_ASDU_getTypeID(asdu) == M_ME_NB_1:
+    #echo("  measured scaled values with CP56Time2a timestamp:")
+    echo("  measured scaled values:")
     var i: cint
     i = 0
     while i < CS101_ASDU_getNumberOfElements(asdu):
-      var io: MeasuredValueScaledWithCP56Time2a = 
-           cast[MeasuredValueScaledWithCP56Time2a](CS101_ASDU_getElement(asdu, i))
+      var io = cast[MeasuredValueScaled](CS101_ASDU_getElement(asdu, i))            
       echo (fmt"    IOA: {InformationObject_getObjectAddress(cast[InformationObject](io))} " &
-            fmt"value: {MeasuredValueScaled_getValue(cast[MeasuredValueScaled](io))}" )
-
-      MeasuredValueScaledWithCP56Time2a_destroy(io)
+                fmt"value: {MeasuredValueScaled_getValue(io)}")
+      MeasuredValueScaled_destroy(io)
       inc(i)
   elif CS101_ASDU_getTypeID(asdu) == M_SP_NA_1:
     echo("  single point information:")
     var i: cint
     i = 0
     while i < CS101_ASDU_getNumberOfElements(asdu):
-      var io: SinglePointInformation = 
-           cast[SinglePointInformation](CS101_ASDU_getElement(asdu, i))
+      var io = cast[SinglePointInformation](CS101_ASDU_getElement(asdu, i))
       echo(fmt"    IOA: {InformationObject_getObjectAddress(cast[InformationObject](io))} " &
-              fmt"value: {SinglePointInformation_getValue(cast[SinglePointInformation](io))}")
+              fmt"value: {SinglePointInformation_getValue(io)}")
       SinglePointInformation_destroy(io)
       inc(i)
   return true
@@ -83,26 +85,28 @@ proc main() =
   echo("Connecting to ", ip, ":", port)
   var con = CS104_Connection_create(ip, port)
   CS104_Connection_setConnectionHandler(con, connectionHandler, nil)  
-  #CS104_Connection_setASDUReceivedHandler(con, asduReceivedHandler, nil)  
+  CS104_Connection_setASDUReceivedHandler(con, asduReceivedHandler, nil)  
   ## uncomment to log messages
   CS104_Connection_setRawMessageHandler(con, rawMessageHandler, nil)
 
   if CS104_Connection_connect(con):
-    CS104_Connection_setConnectTimeout(con, 54321)    
-    echo "running: " , con.running
-    echo "timeOut: " , con.connectTimeoutInMs
-    echo "oldestSentASDU: " , con.oldestSentASDU
-    echo("StartDT")
+    #CS104_Connection_setConnectTimeout(con, 54321)    
+    #echo "running: " , con.running
+    #echo "timeOut: " , con.connectTimeoutInMs
+    #echo "oldestSentASDU: " , con.oldestSentASDU
+    #echo("StartDT")
     CS104_Connection_sendStartDT(con)    
-    sleep(3000)
+    sleep(1000)
     discard CS104_Connection_sendInterrogationCommand(con, CS101_COT_ACTIVATION, 
-      1, cast[QualifierOfInterrogation](IEC60870_QOI_STATION))
-    sleep(3000)
-    var sc: InformationObject = cast[InformationObject](SingleCommand_create(nil,
-        5000, true, false, 0))
+                                                      1, IEC60870_QOI_STATION)
+    sleep(2000)
+
+    var sc: InformationObject = cast[InformationObject]
+                              (SingleCommand_create(nil, 257 , true, false, 0))
     echo("Send control command C_SC_NA_1")
-    discard CS104_Connection_sendProcessCommandEx(con, CS101_COT_ACTIVATION, 1, sc)
+    #discard CS104_Connection_sendProcessCommandEx(con, CS101_COT_ACTIVATION, 1, sc)
     InformationObject_destroy(sc)
+    sleep(3000)
     ##  Send clock synchronization command
     var newTime: sCP56Time2a
     discard CP56Time2a_createFromMsTimestamp(addr newTime, Hal_getTimeInMs())
@@ -115,9 +119,9 @@ proc main() =
   CS104_Connection_sendStopDT(con)
   CS104_Connection_close(con)
   CS104_Connection_destroy(con)
-  echo("exit")
+  #echo("exit")
   
-
 main()
+echo("end program")
 
 

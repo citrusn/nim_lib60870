@@ -227,7 +227,7 @@ type
       serverSocket*: ServerSocket
 
     MasterConnection* = ptr sMasterConnection 
-    sMasterConnection* = object
+    sMasterConnection* {.bycopy.} = object
         socket*: Socket
         ##when (CONFIG_CS104_SUPPORT_TLS == 1):
         ## var tlsSocket*: TLSSocket

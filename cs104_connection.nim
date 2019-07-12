@@ -41,11 +41,11 @@ const
 
 type
   ##  .k =#  .sizeOfTypeId = 
-  SentASDU* = object
+  SentASDU* {.bycopy.} = object
     sentTime*: uint64_t ##  required for T1 timeout  
     seqNo*: cint
 
-  sCS104_Connection* = object
+  sCS104_Connection* {.bycopy.}  = object
     hostname*: array[HOST_NAME_MAX + 1, char]
     tcpPort*: cint
     parameters*: sCS104_APCIParameters
@@ -60,7 +60,7 @@ type
     sentASDUsLock*: Semaphore  
     ## #endif
     ## #if (CONFIG_USE_THREADS == 1)
-    connectionHandlingThread*: Thread 
+    connectionHandlingThread*: pointer # Thread
     ## #endif
     receiveCount*: cint
     sendCount*: cint
@@ -88,7 +88,8 @@ type
   CS104_Connection* = ptr sCS104_Connection
   
   CS104_ConnectionEvent* {.size: sizeof(cint).} = enum
-    CS104_CONNECTION_OPENED = 0, CS104_CONNECTION_CLOSED = 1,
+    CS104_CONNECTION_OPENED = 0, 
+    CS104_CONNECTION_CLOSED = 1,
     CS104_CONNECTION_STARTDT_CON_RECEIVED = 2,
     CS104_CONNECTION_STOPDT_CON_RECEIVED = 3
 
@@ -278,7 +279,7 @@ proc CS104_Connection_sendReadCommand*(self: CS104_Connection; ca: cint; ioa: ci
 
 proc CS104_Connection_sendClockSyncCommand*(self: CS104_Connection; ca: cint;
     newTime: CP56Time2a): bool {.importc: "CS104_Connection_sendClockSyncCommand",
-                               cdecl.} #
+                               cdecl.} 
 ## *
 ##  \brief Send a test command (C_TS_NA_1 typeID: 104)
 ##

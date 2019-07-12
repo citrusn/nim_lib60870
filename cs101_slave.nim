@@ -63,7 +63,7 @@ type
 proc CS101_Slave_create*(serialPort: SerialPort; llParameters: LinkLayerParameters;
                         alParameters: CS101_AppLayerParameters;
                         linkLayerMode: IEC60870_LinkLayerMode): CS101_Slave {.
-    importc: "CS101_Slave_create", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_create",  cdecl.}
 ## *
 ##  \brief Destroy the slave instance and cleanup all resources
 ##
@@ -71,7 +71,7 @@ proc CS101_Slave_create*(serialPort: SerialPort; llParameters: LinkLayerParamete
 ##
 
 proc CS101_Slave_destroy*(self: CS101_Slave) {.importc: "CS101_Slave_destroy",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Set the value of the DIR bit when sending messages (only balanced mode)
 ##
@@ -82,7 +82,7 @@ proc CS101_Slave_destroy*(self: CS101_Slave) {.importc: "CS101_Slave_destroy",
 ##
 
 proc CS101_Slave_setDIR*(self: CS101_Slave; dir: bool) {.
-    importc: "CS101_Slave_setDIR", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setDIR",  cdecl.}
 ## *
 ##  \brief Set the idle timeout
 ##
@@ -93,14 +93,14 @@ proc CS101_Slave_setDIR*(self: CS101_Slave; dir: bool) {.
 ##
 
 proc CS101_Slave_setIdleTimeout*(self: CS101_Slave; timeoutInMs: cint) {.
-    importc: "CS101_Slave_setIdleTimeout", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setIdleTimeout",  cdecl.}
 ## *
 ##  \brief Set a callback handler for link layer state changes
 ##
 
 proc CS101_Slave_setLinkLayerStateChanged*(self: CS101_Slave;
     handler: IEC60870_LinkLayerStateChangedHandler; parameter: pointer) {.
-    importc: "CS101_Slave_setLinkLayerStateChanged", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setLinkLayerStateChanged",  cdecl.}
 ## *
 ##  \brief Set the local link layer address
 ##
@@ -109,7 +109,7 @@ proc CS101_Slave_setLinkLayerStateChanged*(self: CS101_Slave;
 ##
 
 proc CS101_Slave_setLinkLayerAddress*(self: CS101_Slave; address: cint) {.
-    importc: "CS101_Slave_setLinkLayerAddress", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setLinkLayerAddress",  cdecl.}
 ## *
 ##  \brief Set the link layer address of the remote station
 ##
@@ -118,7 +118,7 @@ proc CS101_Slave_setLinkLayerAddress*(self: CS101_Slave; address: cint) {.
 ##
 
 proc CS101_Slave_setLinkLayerAddressOtherStation*(self: CS101_Slave; address: cint) {.
-    importc: "CS101_Slave_setLinkLayerAddressOtherStation", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setLinkLayerAddressOtherStation",  cdecl.}
 ## *
 ##  \brief Check if the class 1 ASDU is full
 ##
@@ -128,7 +128,7 @@ proc CS101_Slave_setLinkLayerAddressOtherStation*(self: CS101_Slave; address: ci
 ##
 
 proc CS101_Slave_isClass1QueueFull*(self: CS101_Slave): bool {.
-    importc: "CS101_Slave_isClass1QueueFull", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_isClass1QueueFull",  cdecl.}
 ## *
 ##  \brief Enqueue an ASDU into the class 1 data queue
 ##
@@ -137,7 +137,7 @@ proc CS101_Slave_isClass1QueueFull*(self: CS101_Slave): bool {.
 ##
 
 proc CS101_Slave_enqueueUserDataClass1*(self: CS101_Slave; asdu: CS101_ASDU) {.
-    importc: "CS101_Slave_enqueueUserDataClass1", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_enqueueUserDataClass1",  cdecl.}
 ## *
 ##  \brief Check if the class 2 ASDU is full
 ##
@@ -147,7 +147,7 @@ proc CS101_Slave_enqueueUserDataClass1*(self: CS101_Slave; asdu: CS101_ASDU) {.
 ##
 
 proc CS101_Slave_isClass2QueueFull*(self: CS101_Slave): bool {.
-    importc: "CS101_Slave_isClass2QueueFull", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_isClass2QueueFull",  cdecl.}
 ## *
 ##  \brief Enqueue an ASDU into the class 2 data queue
 ##
@@ -156,7 +156,7 @@ proc CS101_Slave_isClass2QueueFull*(self: CS101_Slave): bool {.
 ##
 
 proc CS101_Slave_enqueueUserDataClass2*(self: CS101_Slave; asdu: CS101_ASDU) {.
-    importc: "CS101_Slave_enqueueUserDataClass2", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_enqueueUserDataClass2",  cdecl.}
 ## *
 ##  \brief Remove all ASDUs from the class 1/2 data queues
 ##
@@ -164,7 +164,7 @@ proc CS101_Slave_enqueueUserDataClass2*(self: CS101_Slave; asdu: CS101_ASDU) {.
 ##
 
 proc CS101_Slave_flushQueues*(self: CS101_Slave) {.
-    importc: "CS101_Slave_flushQueues", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_flushQueues",  cdecl.}
 ## *
 ##  \brief Receive a new message and run the link layer state machines
 ##
@@ -175,7 +175,7 @@ proc CS101_Slave_flushQueues*(self: CS101_Slave) {.
 ##
 
 proc CS101_Slave_run*(self: CS101_Slave) {.importc: "CS101_Slave_run",
-                                        dynlib: "60870.dll", cdecl.}
+                                         cdecl.}
 ## *
 ##  \brief Start a background thread that handles the link layer connections
 ##
@@ -187,7 +187,7 @@ proc CS101_Slave_run*(self: CS101_Slave) {.importc: "CS101_Slave_run",
 ##
 
 proc CS101_Slave_start*(self: CS101_Slave) {.importc: "CS101_Slave_start",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Stops the background thread that handles the link layer connections
 ##
@@ -195,7 +195,7 @@ proc CS101_Slave_start*(self: CS101_Slave) {.importc: "CS101_Slave_start",
 ##
 
 proc CS101_Slave_stop*(self: CS101_Slave) {.importc: "CS101_Slave_stop",
-    dynlib: "60870.dll", cdecl.}
+     cdecl.}
 ## *
 ##  \brief Returns the application layer parameters object of this slave instance
 ##
@@ -205,7 +205,7 @@ proc CS101_Slave_stop*(self: CS101_Slave) {.importc: "CS101_Slave_stop",
 ##
 
 proc CS101_Slave_getAppLayerParameters*(self: CS101_Slave): CS101_AppLayerParameters {.
-    importc: "CS101_Slave_getAppLayerParameters", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_getAppLayerParameters",  cdecl.}
 ## *
 ##  \brief Returns the link layer parameters object of this slave instance
 ##
@@ -215,7 +215,7 @@ proc CS101_Slave_getAppLayerParameters*(self: CS101_Slave): CS101_AppLayerParame
 ##
 
 proc CS101_Slave_getLinkLayerParameters*(self: CS101_Slave): LinkLayerParameters {.
-    importc: "CS101_Slave_getLinkLayerParameters", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_getLinkLayerParameters",  cdecl.}
 ## *
 ##  \brief Set the handler for the reset CU (communication unit) message
 ##
@@ -226,7 +226,7 @@ proc CS101_Slave_getLinkLayerParameters*(self: CS101_Slave): LinkLayerParameters
 proc CS101_Slave_setResetCUHandler*(self: CS101_Slave;
                                    handler: CS101_ResetCUHandler;
                                    parameter: pointer) {.
-    importc: "CS101_Slave_setResetCUHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setResetCUHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for the general interrogation message
 ##
@@ -236,7 +236,7 @@ proc CS101_Slave_setResetCUHandler*(self: CS101_Slave;
 
 proc CS101_Slave_setInterrogationHandler*(self: CS101_Slave;
     handler: CS101_InterrogationHandler; parameter: pointer) {.
-    importc: "CS101_Slave_setInterrogationHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setInterrogationHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for the counter interrogation message
 ##
@@ -246,7 +246,7 @@ proc CS101_Slave_setInterrogationHandler*(self: CS101_Slave;
 
 proc CS101_Slave_setCounterInterrogationHandler*(self: CS101_Slave;
     handler: CS101_CounterInterrogationHandler; parameter: pointer) {.
-    importc: "CS101_Slave_setCounterInterrogationHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setCounterInterrogationHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for the read message
 ##
@@ -256,7 +256,7 @@ proc CS101_Slave_setCounterInterrogationHandler*(self: CS101_Slave;
 
 proc CS101_Slave_setReadHandler*(self: CS101_Slave; handler: CS101_ReadHandler;
                                 parameter: pointer) {.
-    importc: "CS101_Slave_setReadHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setReadHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for the clock synchronization message
 ##
@@ -266,7 +266,7 @@ proc CS101_Slave_setReadHandler*(self: CS101_Slave; handler: CS101_ReadHandler;
 
 proc CS101_Slave_setClockSyncHandler*(self: CS101_Slave; handler: CS101_ClockSynchronizationHandler;
                                      parameter: pointer) {.
-    importc: "CS101_Slave_setClockSyncHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setClockSyncHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for the reset process message
 ##
@@ -277,7 +277,7 @@ proc CS101_Slave_setClockSyncHandler*(self: CS101_Slave; handler: CS101_ClockSyn
 proc CS101_Slave_setResetProcessHandler*(self: CS101_Slave;
                                         handler: CS101_ResetProcessHandler;
                                         parameter: pointer) {.
-    importc: "CS101_Slave_setResetProcessHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setResetProcessHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for the delay acquisition message
 ##
@@ -287,7 +287,7 @@ proc CS101_Slave_setResetProcessHandler*(self: CS101_Slave;
 
 proc CS101_Slave_setDelayAcquisitionHandler*(self: CS101_Slave;
     handler: CS101_DelayAcquisitionHandler; parameter: pointer) {.
-    importc: "CS101_Slave_setDelayAcquisitionHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setDelayAcquisitionHandler",  cdecl.}
 ## *
 ##  \brief Set the handler for a received ASDU
 ##
@@ -300,7 +300,7 @@ proc CS101_Slave_setDelayAcquisitionHandler*(self: CS101_Slave;
 
 proc CS101_Slave_setASDUHandler*(self: CS101_Slave; handler: CS101_ASDUHandler;
                                 parameter: pointer) {.
-    importc: "CS101_Slave_setASDUHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setASDUHandler",  cdecl.}
 ## *
 ##  \brief Set the raw message callback (called when a message is sent or received)
 ##
@@ -311,7 +311,7 @@ proc CS101_Slave_setASDUHandler*(self: CS101_Slave; handler: CS101_ASDUHandler;
 proc CS101_Slave_setRawMessageHandler*(self: CS101_Slave;
                                       handler: IEC60870_RawMessageHandler;
                                       parameter: pointer) {.
-    importc: "CS101_Slave_setRawMessageHandler", dynlib: "60870.dll", cdecl.}
+    importc: "CS101_Slave_setRawMessageHandler",  cdecl.}
 ## *
 ##  @}
 ##

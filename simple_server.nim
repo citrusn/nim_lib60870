@@ -1,5 +1,7 @@
+{.passL: "lib60870.a libws2_32.a".}  
+
 import os, strformat, iec60870_types, cs104_slave, iec60870_slave,
-  iec60870_common, time # hal_thread, hal_time
+  iec60870_common, time 
 
 var running*: bool = true
 
@@ -14,8 +16,8 @@ proc printCP56Time2a*(time: CP56Time2a) =
 ##  Callback handler to log sent or received messages (optional)
 
 proc rawMessageHandler*(parameter: pointer; conneciton: IMasterConnection;
-                        msg: var array[256, uint8_t]; msgSize: cint;
-                            sent: bool) =
+                        msg: var array[300, uint8_t]; msgSize: cint;
+                            sent: bool) {.cdecl.} =
   var s: string
   if sent:
     s = "RAW SEND: "
@@ -110,7 +112,7 @@ proc interrogationHandler*(parameter: pointer; connection: IMasterConnection;
   return true
 
 proc asduHandler*(parameter: pointer; connection: IMasterConnection;
-    asdu: CS101_ASDU): bool {.cdecl.} =
+                  asdu: CS101_ASDU): bool {.cdecl.} =
   if CS101_ASDU_getTypeID(asdu) == C_SC_NA_1:
     echo("received single command")
     if CS101_ASDU_getCOT(asdu) == CS101_COT_ACTIVATION:
@@ -130,7 +132,7 @@ proc asduHandler*(parameter: pointer; connection: IMasterConnection;
   return false
 
 proc connectionRequestHandler*(parameter: pointer; ipAddress: cstring): bool {.
-  cdecl.} =
+                              cdecl.} =
   echo fmt("New connection request from {ipAddress}")
   #[when false:
     if strcmp(ipAddress, "127.0.0.1") == 0:

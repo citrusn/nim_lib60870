@@ -33,7 +33,8 @@ type
   InformationObjectVFT* = ptr sInformationObjectVFT
   sInformationObjectVFT* {.bycopy.} = object
     encode*: EncodeFunction
-    destroy*: DestroyFunction  ## const char* (*toString)(InformationObject self);
+    destroy*: DestroyFunction  
+    ## const char* (*toString)(InformationObject self);
 
   InformationObject* = ptr sInformationObject
   sInformationObject* {.bycopy.} = object
