@@ -24,7 +24,6 @@ import
 
 type  
   FrameVFT* = ptr sFrameVFT
-  
   sFrameVFT* {.bycopy.} = object
     destroy*: proc (self: Frame)
     resetFrame*: proc (self: Frame)
@@ -35,7 +34,6 @@ type
     getSpaceLeft*: proc (self: Frame): cint
   
   Frame* = ptr sFrame
-
   sFrame* {.bycopy.} = object
     virtualFunctionTable*: FrameVFT 
 

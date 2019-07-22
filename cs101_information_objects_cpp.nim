@@ -20,7 +20,7 @@
 ##
 
 import
-  frame_cpp#, iec60870_common #, apl_types_internal, cs101_information_objects,
+  frame#, iec60870_common #, apl_types_internal, cs101_information_objects,
 #  information_objects_internal, lib_memory, frame, platform_endian
 
 

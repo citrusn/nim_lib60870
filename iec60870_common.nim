@@ -95,7 +95,7 @@ type
 ##
 
 type
-  IEC60870_RawMessageHandler* = proc (parameter: pointer; msg: var array[256, byte];
+  IEC60870_RawMessageHandler* = proc (parameter: pointer; msg: ptr array[256, byte];
                                    msgSize: cint; sent: bool)  {.cdecl.}
 
 ## *

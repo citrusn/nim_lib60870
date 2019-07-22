@@ -544,7 +544,7 @@ type
     `type`*: TypeID
     virtualFunctionTable*: InformationObjectVFT
     encodedValue*: array[2, uint8_t]
-    qos*: uint8_t              ##  Qualifier of setpoint command
+    qos*: uint8_t  ##  Qualifier of setpoint command
 
   sSetpointCommandNormalizedWithCP56Time2a* {.bycopy.} = object
     objectAddress*: cint
@@ -559,7 +559,7 @@ type
     `type`*: TypeID
     virtualFunctionTable*: InformationObjectVFT
     encodedValue*: array[2, uint8_t]
-    qos*: uint8_t              ##  Qualifier of setpoint command
+    qos*: uint8_t         ##  Qualifier of setpoint command
 
   sSetpointCommandScaledWithCP56Time2a* {.bycopy.} = object
     objectAddress*: cint
@@ -574,7 +574,7 @@ type
     `type`*: TypeID
     virtualFunctionTable*: InformationObjectVFT
     value*: cfloat
-    qos*: uint8_t              ##  Qualifier of setpoint command
+    qos*: uint8_t      ##  Qualifier of setpoint command
 
   sSetpointCommandShortWithCP56Time2a* {.bycopy.} = object
     objectAddress*: cint

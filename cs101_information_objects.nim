@@ -55,8 +55,7 @@ type
   TypeID* = IEC60870_5_TypeID
 
 
-proc TypeID_toString*(self: TypeID): cstring {.importc: "TypeID_toString",
-     cdecl, cdecl .}
+proc TypeID_toString*(self: TypeID): cstring {.importc: "TypeID_toString", cdecl.}
 
 
 ## *
