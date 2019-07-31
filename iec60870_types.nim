@@ -24,7 +24,7 @@ type
   ##  maxHandle : SOCKET_t
 
   Semaphore* = pointer
-  #Thread* = pointer
+  Thread* = pointer
   LinkedList* = pointer
 
 ##

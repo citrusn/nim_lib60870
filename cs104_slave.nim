@@ -141,7 +141,6 @@ type
 ##  \param connection the connection object
 ##  \param event event type
 ##
-
 type
   CS104_ConnectionEventHandler* = proc (parameter: pointer;
                                      connection: IMasterConnection;
@@ -162,9 +161,9 @@ type
 ##
 
 type
-  CS104_SlaveRawMessageHandler* = proc (parameter: pointer;
-                                     connection: IMasterConnection;
-                                     msg: var array[256, uint8_t]; msgSize: cint; send: bool) {.cdecl.}
+  CS104_SlaveRawMessageHandler* = 
+    proc (parameter: pointer; connection: IMasterConnection;
+          msg: ptr array[256, byte]; msgSize: cint; send: bool) {.cdecl.}
 
 ## **************************************************
 ##  Slave
@@ -223,7 +222,7 @@ type
       ## when (CONFIG_CS104_SLAVE_POOL == 1):
       localAddress*: array[60, char]
       #localAddress*: cstring
-      listeningThread*: Thread
+      listeningThread*: iec60870_types.Thread
       serverSocket*: ServerSocket
 
     MasterConnection* = ptr sMasterConnection 

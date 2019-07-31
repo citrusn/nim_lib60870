@@ -16,21 +16,15 @@ proc printCP56Time2a*(time: CP56Time2a) =
 ##  Callback handler to log sent or received messages (optional)
 
 proc rawMessageHandler*(parameter: pointer; conneciton: IMasterConnection;
-                        msg: var array[300, uint8_t]; msgSize: cint;
-                            sent: bool) {.cdecl.} =
+                        msg: ptr array[256, byte]; msgSize: cint;
+                        sent: bool) {.cdecl.} =                      
   var s: string
   if sent:
-    s = "RAW SEND: "
+    s = "RAW SEND->"
   else:
-    s = "RAW RCVD: "
-  s = s & fmt"{msgSize} bytes"
-  var i: cint = 0
-  var b: uint8_t
-  while i < msgSize:
-    b = msg[i]
-    s = s & fmt"{b:#X}" & " "
-    inc(i)
-  echo(s)
+    s = "RAW RCVD<-"
+  s = s & ( $ msgSize) & " bytes=" #& (repr msg)  
+  debugEcho(s & " " & repr msg[0..(msgSize-1)])
 
 proc clockSyncHandler*(parameter: pointer; connection: IMasterConnection;
                       asdu: CS101_ASDU; newTime: CP56Time2a): bool {.cdecl.} =
@@ -131,9 +125,11 @@ proc asduHandler*(parameter: pointer; connection: IMasterConnection;
     return true
   return false
 
-proc connectionRequestHandler*(parameter: pointer; ipAddress: cstring): bool {.
-                              cdecl.} =
-  echo fmt("New connection request from {ipAddress}")
+proc connectionRequestHandler*(parameter: pointer; 
+                              ipAddress: cstring): bool {.cdecl.} =
+  setupForeignThreadGc()
+  echo ("connectionRequestHandler: Request from ") , $ipAddress
+  return true
   #[when false:
     if strcmp(ipAddress, "127.0.0.1") == 0:
       echo("Accept connection")
@@ -144,56 +140,77 @@ proc connectionRequestHandler*(parameter: pointer; ipAddress: cstring): bool {.
   else:
     return true]#
 
-proc connectionEventHandler*(parameter: pointer; con: IMasterConnection;
+proc connectionEventHandler*(parameter: pointer; connection: IMasterConnection;
                             event: CS104_PeerConnectionEvent) {.cdecl.} =
+  setupForeignThreadGc()
+  #var alParams: CS101_AppLayerParameters = 
+  var sCon: sIMasterConnection
+  sCon = connection[]
+  echo repr connection.close  #close(connection) # getApplicationLayerParameters(connection)
+
+  var s="ConnectionEventHandler: "
   if event == CS104_CON_EVENT_CONNECTION_OPENED:
-    echo("Connection opened ", repr con)
+    s=s & "Connection opened "
   elif event == CS104_CON_EVENT_CONNECTION_CLOSED:
-    echo("Connection closed ", repr con)
+    s=s & "Connection closed "
   elif event == CS104_CON_EVENT_ACTIVATED:
-    echo("Connection activated ", repr con)
+    s=s & "Connection activated "
   elif event == CS104_CON_EVENT_DEACTIVATED:
-    echo("Connection deactivated", repr con)
+    s=s & "Connection deactivated"
+  echo s
 
 proc main*() =
   ##  Add Ctrl-C handler
   setControlCHook(sigint_handler)
+
   ##  create a new slave/server instance with default connection parameters and
   ##  default message queue size
   var slave: CS104_Slave = CS104_Slave_create(100, 100)
   CS104_Slave_setLocalAddress(slave, "0.0.0.0")
+
   ##  Set mode to a single redundancy group
   ##  NOTE: library has to be compiled with CONFIG_CS104_SUPPORT_SERVER_MODE_SINGLE_REDUNDANCY_GROUP enabled (=1)
   ##
   CS104_Slave_setServerMode(slave, CS104_MODE_SINGLE_REDUNDANCY_GROUP)
+
   ##  get the connection parameters - we need them to create correct ASDUs
-  var alParams: CS101_AppLayerParameters = CS104_Slave_getAppLayerParameters(
-      slave)
+  var alParams: CS101_AppLayerParameters = CS104_Slave_getAppLayerParameters(slave)
+  #echo repr alParams
+
   ##  set the callback handler for the clock synchronization command
   CS104_Slave_setClockSyncHandler(slave, clockSyncHandler, nil)
+
   ##  set the callback handler for the interrogation command
-  CS104_Slave_setInterrogationHandler(slave, interrogationHandler, nil)
+  #CS104_Slave_setInterrogationHandler(slave, interrogationHandler, nil)
+
   ##  set handler for other message types
-  CS104_Slave_setASDUHandler(slave, asduHandler, nil)
+  #CS104_Slave_setASDUHandler(slave, asduHandler, nil)
+
   ##  set handler to handle connection requests (optional)
   CS104_Slave_setConnectionRequestHandler(slave, connectionRequestHandler, nil)
+
   ##  set handler to track connection events (optional)
   CS104_Slave_setConnectionEventHandler(slave, connectionEventHandler, nil)
+
   ##  uncomment to log messages
-  ## CS104_Slave_setRawMessageHandler(slave, rawMessageHandler, NULL);
+  #CS104_Slave_setRawMessageHandler(slave, rawMessageHandler, nil);
+
   CS104_Slave_start(slave)
+  echo("Starting server....")
   if CS104_Slave_isRunning(slave) == false:
     echo("Starting server failed!")
     return #break exit_program
   var scaledValue: int16_t = 0
+  echo("Start server....")
   while running:
     sleep(1000)
+    #echo("Looping....")
     var newAsdu: CS101_ASDU = CS101_ASDU_create(alParams, false,
-        CS101_COT_PERIODIC, 0,
-        1, false, false)
+                                                CS101_COT_PERIODIC, 0,
+                                                1, false, false)
     var io: InformationObject = cast[InformationObject](
-        MeasuredValueScaled_create(
-        nil, 110, scaledValue, IEC60870_QUALITY_GOOD))
+        MeasuredValueScaled_create(nil, 110, scaledValue, 
+                                   IEC60870_QUALITY_GOOD))
     inc(scaledValue)
     discard CS101_ASDU_addInformationObject(newAsdu, io)
     InformationObject_destroy(io)
@@ -203,9 +220,11 @@ proc main*() =
     ##
     CS104_Slave_enqueueASDU(slave, newAsdu)
     CS101_ASDU_destroy(newAsdu)
+
   CS104_Slave_stop(slave)
   CS104_Slave_destroy(slave)
-  sleep(500)
   echo("Wait for exit...")
+  sleep(500)
 
 main()
+echo("Stop server...")

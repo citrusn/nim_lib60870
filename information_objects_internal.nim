@@ -712,41 +712,41 @@ type
     creationTime*: sCP56Time2a
 
   uInformationObject* {.bycopy, union.} = object 
-    m1*: sSinglePointInformation
-    m2*: sStepPositionInformation
-    m3*: sStepPositionWithCP24Time2a
-    m4*: sStepPositionWithCP56Time2a
-    m5*: sDoublePointInformation
-    m6*: sDoublePointWithCP24Time2a
-    m7*: sDoublePointWithCP56Time2a
-    m8*: sSinglePointWithCP24Time2a
-    m9*: sSinglePointWithCP56Time2a
-    m10*: sBitString32
-    m11*: sBitstring32WithCP24Time2a
-    m12*: sBitstring32WithCP56Time2a
-    m13*: sMeasuredValueNormalized
-    m14*: sMeasuredValueNormalizedWithCP24Time2a
-    m15*: sMeasuredValueNormalizedWithCP56Time2a
-    m16*: sMeasuredValueScaled
-    m17*: sMeasuredValueScaledWithCP24Time2a
-    m18*: sMeasuredValueScaledWithCP56Time2a
-    m19*: sMeasuredValueShort
-    m20*: sMeasuredValueShortWithCP24Time2a
-    m21*: sMeasuredValueShortWithCP56Time2a
-    m22*: sIntegratedTotals
-    m23*: sIntegratedTotalsWithCP24Time2a
-    m24*: sIntegratedTotalsWithCP56Time2a
-    m25*: sSingleCommand
-    m26*: sSingleCommandWithCP56Time2a
-    m27*: sDoubleCommand
-    m28*: sStepCommand
-    m29*: sSetpointCommandNormalized
-    m30*: sSetpointCommandScaled
-    m31*: sSetpointCommandShort
-    m32*: sBitstring32Command
-    m33*: sReadCommand
-    m34*: sClockSynchronizationCommand
-    m35*: sInterrogationCommand
-    m36*: sParameterActivation
-    m37*: sEventOfProtectionEquipmentWithCP56Time2a
-    m38*: sStepCommandWithCP56Time2a
+    m1*: sSinglePointInformation      # M_SP_NA_1 1 0x01 Single-point information
+    m8*: sSinglePointWithCP24Time2a   # M_SP_TA_1 2 0x02 Single-point information with time tag
+    m5*: sDoublePointInformation      # M_DP_NA_1 3 0x03 Double-point information
+    m6*: sDoublePointWithCP24Time2a   # M_DP_TA_1 4 0x04 Double-point information with time tag
+    m2*: sStepPositionInformation     # M_ST_NA_1 5 0x05 Step position information
+    m3*: sStepPositionWithCP24Time2a  # M_ST_TA_1 6 0x06 Step position information with time tag
+    m10*: sBitString32                # M_BO_NA_1 7 0x07 Bitstring of 32 bit
+    m11*: sBitstring32WithCP24Time2a  # M_BO_TA_1 8 0x08 Bitstring of 32 bit with time tag
+    m13*: sMeasuredValueNormalized    # M_ME_NA_1 9 0x09 Measured value, normalised value
+    m9*: sSinglePointWithCP56Time2a   # M_SP_TB_1 30 0x1E Single-point information with time tag CP56Time2a 
+    m7*: sDoublePointWithCP56Time2a   # M_DP_TB_1 31 0x1F Double-point information with time tag CP56Time2a
+    m4*: sStepPositionWithCP56Time2a  # M_ST_TB_1 32 0x20 Step position information with time tag CP56Time2a
+    m12*: sBitstring32WithCP56Time2a  # M_BO_TB_1 33 0x21 Bitstring of 32 bit with time tag CP56Time2a    
+    m14*: sMeasuredValueNormalizedWithCP24Time2a  # M_ME_TA_1 10 0x0A Measured value, normalized value with time tag
+    m15*: sMeasuredValueNormalizedWithCP56Time2a  # M_ME_TD_1 34 0x22 Measured value, normalised value with time tag CP56Time2a
+    m16*: sMeasuredValueScaled                    # M_ME_NB_1 11 0x0B Measured value, scaled value
+    m17*: sMeasuredValueScaledWithCP24Time2a      # M_ME_TB_1 12 0x0C Measured value, scaled value wit time tag
+    m18*: sMeasuredValueScaledWithCP56Time2a      # M_ME_TE_1 35 0x23 Measured value, scaled value with time tag CP56Time2a
+    m19*: sMeasuredValueShort                     # M_ME_NC_1 13 0x0D Measured value, short floating point number
+    m20*: sMeasuredValueShortWithCP24Time2a       # M_ME_TC_1 14 0x0E Measured value, short floating point number with time tag
+    m21*: sMeasuredValueShortWithCP56Time2a       # M_ME_TF_1 36 0x24 Measured value, short floating point number with time tag CP56Time2a
+    m22*: sIntegratedTotals                       # M_IT_NA_1 15 0x0F Integrated totals
+    m23*: sIntegratedTotalsWithCP24Time2a         # M_IT_TA_1 16 0x10 Integrated totals with time tag
+    m24*: sIntegratedTotalsWithCP56Time2a         # M_IT_TB_1 37 0x25 Integrated totals with time tag CP56Time2a
+    m25*: sSingleCommand                # C_SC_NA_1 45 0x2D Single command
+    m26*: sSingleCommandWithCP56Time2a  # C_SC_TA_1 58 0x3A Single command with time tag CP56Time2a
+    m27*: sDoubleCommand                # C_DC_NA_1 46 0x2E Double command
+    m28*: sStepCommand                  # C_RC_NA_1 47 0x2F Regulating step command
+    m29*: sSetpointCommandNormalized    # C_SE_NA_1 48 0x30 Set-point Command, normalised value
+    m30*: sSetpointCommandScaled        # C_SE_NB_1 49 0x31 Set-point Command, scaled value
+    m31*: sSetpointCommandShort         # C_SE_NC_1 50 0x32 Set-point Command, short floating point number
+    m32*: sBitstring32Command           # C_BO_NA_1 51 0x33 Bitstring 32 bit command
+    m33*: sReadCommand                  # C_RD_NA_1 102 0x66 Read command
+    m34*: sClockSynchronizationCommand  # C_CS_NA_1 103 0x67 Clock synchronisation command
+    m35*: sInterrogationCommand         # C_IC_NA_1 100 0x64 Interrogation command
+    m36*: sParameterActivation          # P_AC_NA_1 113 0x71 Parameter activation
+    m37*: sEventOfProtectionEquipmentWithCP56Time2a # M_EP_TD_1 38 0x26 Event of protection equipment with time tag CP56Time2a
+    m38*: sStepCommandWithCP56Time2a    # C_RC_TA_1 60 0x3C Regulating step command with time tag CP56Time2a

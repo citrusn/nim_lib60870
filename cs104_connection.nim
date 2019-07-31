@@ -20,7 +20,7 @@
 ##
 
 import
-  iec60870_master, iec60870_types, iec60870_common
+    asyncdispatch, iec60870_master, iec60870_types, iec60870_common
 
 ## *
 ##  \file cs104_connection.h
@@ -60,7 +60,7 @@ type
     sentASDUsLock*: Semaphore  
     ## #endif
     ## #if (CONFIG_USE_THREADS == 1)
-    connectionHandlingThread*: pointer # Thread
+    connectionHandlingThread*: iec60870_types.Thread
     ## #endif
     receiveCount*: cint
     sendCount*: cint
@@ -93,8 +93,8 @@ type
     CS104_CONNECTION_STARTDT_CON_RECEIVED = 2,
     CS104_CONNECTION_STOPDT_CON_RECEIVED = 3
 
-  CS104_ConnectionHandler* = proc (parameter: pointer; connection: CS104_Connection;
-                                  event: CS104_ConnectionEvent) {.cdecl.}
+  CS104_ConnectionHandler = proc (parameter: pointer; connection: CS104_Connection;
+                                  event: CS104_ConnectionEvent)  {.cdecl.}
     ## *
     ##  \brief Handler that is called when the connection is established or closed
     ##

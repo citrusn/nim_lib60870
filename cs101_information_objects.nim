@@ -617,6 +617,7 @@ proc MeasuredValueNormalizedWithCP56Time2a_setTimestamp*(
     self: MeasuredValueNormalizedWithCP56Time2a; value: CP56Time2a) {.
     importc: "MeasuredValueNormalizedWithCP56Time2a_setTimestamp",
      cdecl.}
+     
 ## ******************************************
 ##  MeasuredValueScaled : InformationObject
 ## *****************************************
@@ -649,10 +650,10 @@ proc MeasuredValueScaled_getQuality*(self: MeasuredValueScaled): QualityDescript
 proc MeasuredValueScaled_setQuality*(self: MeasuredValueScaled;
                                     quality: QualityDescriptor) {.
     importc: "MeasuredValueScaled_setQuality",  cdecl.}
+
 ## **********************************************************************
 ##  MeasuredValueScaledWithCP24Time2a : MeasuredValueScaled
 ## *********************************************************************
-
 type
   MeasuredValueScaledWithCP24Time2a* = ptr sMeasuredValueScaledWithCP24Time2a
 
@@ -669,10 +670,10 @@ proc MeasuredValueScaledWithCP24Time2a_getTimestamp*(
 proc MeasuredValueScaledWithCP24Time2a_setTimestamp*(
     self: MeasuredValueScaledWithCP24Time2a; value: CP24Time2a) {.
     importc: "MeasuredValueScaledWithCP24Time2a_setTimestamp",  cdecl.}
+
 ## **********************************************************************
 ##  MeasuredValueScaledWithCP56Time2a : MeasuredValueScaled
 ## *********************************************************************
-
 type
   MeasuredValueScaledWithCP56Time2a* = ptr sMeasuredValueScaledWithCP56Time2a
 
@@ -689,10 +690,10 @@ proc MeasuredValueScaledWithCP56Time2a_getTimestamp*(
 proc MeasuredValueScaledWithCP56Time2a_setTimestamp*(
     self: MeasuredValueScaledWithCP56Time2a; value: CP56Time2a) {.
     importc: "MeasuredValueScaledWithCP56Time2a_setTimestamp",  cdecl.}
+
 ## ******************************************
 ##  MeasuredValueShort : InformationObject
 ## *****************************************
-
 type
   MeasuredValueShort* = ptr sMeasuredValueShort
 
@@ -727,10 +728,10 @@ proc MeasuredValueShortWithCP24Time2a_getTimestamp*(
 proc MeasuredValueShortWithCP24Time2a_setTimestamp*(
     self: MeasuredValueShortWithCP24Time2a; value: CP24Time2a) {.
     importc: "MeasuredValueShortWithCP24Time2a_setTimestamp",  cdecl.}
+
 ## **********************************************************************
 ##  MeasuredValueShortWithCP56Time2a : MeasuredValueShort
 ## *********************************************************************
-
 type
   MeasuredValueShortWithCP56Time2a* = ptr sMeasuredValueShortWithCP56Time2a
 
