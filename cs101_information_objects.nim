@@ -54,16 +54,13 @@ type
     F_DR_TA_1 = 126, F_SC_NB_1 = 127
   TypeID* = IEC60870_5_TypeID
 
-
-proc TypeID_toString*(self: TypeID): cstring {.importc: "TypeID_toString", cdecl.}
+proc TypeID_toString*(self: TypeID): cstring {.
+    importc: "TypeID_toString", cdecl.}
 
 
 ## *
 ##  \brief QDP - Quality descriptor for events of protection equipment according to IEC 60870-5-101:2003 7.2.6.4
 ##
-
-
-
 
 #type
 #  QualityDescriptor* = uint8_t  
@@ -85,7 +82,6 @@ type
 ## *
 ##  \brief SPE - Start events of protection equipment according to IEC 60870-5-101:2003 7.2.6.11
 ##
-
 type
   StartEvent* {.size: sizeof(uint8_t).} = enum
     IEC60870_START_EVENT_NONE = 0
@@ -121,7 +117,6 @@ type
 ##   5..31 = reserved for standard definitions of CS101 (compatible range)
 ##   32..63 = reserved for special use (private range)
 ##
-
 type
   QualifierOfParameterMV* {.size: sizeof(uint8_t).} = enum
     IEC60870_QPM_NOT_USED = 0
@@ -226,7 +221,6 @@ const
 ## *
 ##  \brief QRP (Qualifier of reset process command) according to IEC 60870-5-101:2003 7.2.6.27
 ##
-
 type
   QualifierOfRPC* {.size: sizeof(cint).} = enum
     IEC60870_QRP_NOT_USED = 0
@@ -236,7 +230,6 @@ type
 ## *
 ##  \brief Qualifier of parameter activation (QPA) according to IEC 60870-5-101:2003 7.2.6.25
 ##
-
 type
   QualifierOfParameterActivation* {.size: sizeof(cint).} = enum
     IEC60870_QPA_NOT_USED = 0
@@ -259,7 +252,6 @@ type
 ## *
 ##  \brief Regulating step command state (RCS) according to IEC 60870-5-101:2003 7.2.6.17
 ##
-
 type
   StepCommandValue* {.size: sizeof(cint).} = enum
     IEC60870_STEP_INVALID_0 = 0,
@@ -451,10 +443,10 @@ proc StepPositionInformation_destroy*(self: StepPositionInformation) {.
     importc: "StepPositionInformation_destroy",  cdecl.}
 proc StepPositionInformation_getObjectAddress*(self: StepPositionInformation): cint {.
     importc: "StepPositionInformation_getObjectAddress",  cdecl.}
+
 ## *
 ##  \brief Step position (range -64 ... +63)
 ##
-
 proc StepPositionInformation_getValue*(self: StepPositionInformation): cint {.
     importc: "StepPositionInformation_getValue",  cdecl.}
 proc StepPositionInformation_isTransient*(self: StepPositionInformation): bool {.
@@ -617,6 +609,7 @@ proc MeasuredValueNormalizedWithCP56Time2a_setTimestamp*(
     self: MeasuredValueNormalizedWithCP56Time2a; value: CP56Time2a) {.
     importc: "MeasuredValueNormalizedWithCP56Time2a_setTimestamp",
      cdecl.}
+     
 ## ******************************************
 ##  MeasuredValueScaled : InformationObject
 ## *****************************************
@@ -649,10 +642,10 @@ proc MeasuredValueScaled_getQuality*(self: MeasuredValueScaled): QualityDescript
 proc MeasuredValueScaled_setQuality*(self: MeasuredValueScaled;
                                     quality: QualityDescriptor) {.
     importc: "MeasuredValueScaled_setQuality",  cdecl.}
+
 ## **********************************************************************
 ##  MeasuredValueScaledWithCP24Time2a : MeasuredValueScaled
 ## *********************************************************************
-
 type
   MeasuredValueScaledWithCP24Time2a* = ptr sMeasuredValueScaledWithCP24Time2a
 
@@ -669,10 +662,10 @@ proc MeasuredValueScaledWithCP24Time2a_getTimestamp*(
 proc MeasuredValueScaledWithCP24Time2a_setTimestamp*(
     self: MeasuredValueScaledWithCP24Time2a; value: CP24Time2a) {.
     importc: "MeasuredValueScaledWithCP24Time2a_setTimestamp",  cdecl.}
+
 ## **********************************************************************
 ##  MeasuredValueScaledWithCP56Time2a : MeasuredValueScaled
 ## *********************************************************************
-
 type
   MeasuredValueScaledWithCP56Time2a* = ptr sMeasuredValueScaledWithCP56Time2a
 
@@ -689,10 +682,10 @@ proc MeasuredValueScaledWithCP56Time2a_getTimestamp*(
 proc MeasuredValueScaledWithCP56Time2a_setTimestamp*(
     self: MeasuredValueScaledWithCP56Time2a; value: CP56Time2a) {.
     importc: "MeasuredValueScaledWithCP56Time2a_setTimestamp",  cdecl.}
+
 ## ******************************************
 ##  MeasuredValueShort : InformationObject
 ## *****************************************
-
 type
   MeasuredValueShort* = ptr sMeasuredValueShort
 
@@ -727,10 +720,10 @@ proc MeasuredValueShortWithCP24Time2a_getTimestamp*(
 proc MeasuredValueShortWithCP24Time2a_setTimestamp*(
     self: MeasuredValueShortWithCP24Time2a; value: CP24Time2a) {.
     importc: "MeasuredValueShortWithCP24Time2a_setTimestamp",  cdecl.}
+
 ## **********************************************************************
 ##  MeasuredValueShortWithCP56Time2a : MeasuredValueShort
 ## *********************************************************************
-
 type
   MeasuredValueShortWithCP56Time2a* = ptr sMeasuredValueShortWithCP56Time2a
 
@@ -847,7 +840,8 @@ type
 proc EventOfProtectionEquipment_destroy*(self: EventOfProtectionEquipment) {.
     importc: "EventOfProtectionEquipment_destroy",  cdecl.}
 proc EventOfProtectionEquipment_create*(self: EventOfProtectionEquipment;
-                                       ioa: cint; event: SingleEvent;
+                                       ioa: cint; 
+                                       event: SingleEvent;
                                        elapsedTime: CP16Time2a;
                                        timestamp: CP24Time2a): EventOfProtectionEquipment {.
     importc: "EventOfProtectionEquipment_create",  cdecl.}
@@ -876,16 +870,13 @@ proc PackedStartEventsOfProtectionEquipment_getEvent*(
     importc: "PackedStartEventsOfProtectionEquipment_getEvent",  cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getQuality*(
     self: PackedStartEventsOfProtectionEquipment): QualityDescriptorP {.
-    importc: "PackedStartEventsOfProtectionEquipment_getQuality",
-     cdecl.}
+    importc: "PackedStartEventsOfProtectionEquipment_getQuality",  cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getElapsedTime*(
     self: PackedStartEventsOfProtectionEquipment): CP16Time2a {.
-    importc: "PackedStartEventsOfProtectionEquipment_getElapsedTime",
-     cdecl.}
+    importc: "PackedStartEventsOfProtectionEquipment_getElapsedTime", cdecl.}
 proc PackedStartEventsOfProtectionEquipment_getTimestamp*(
     self: PackedStartEventsOfProtectionEquipment): CP24Time2a {.
-    importc: "PackedStartEventsOfProtectionEquipment_getTimestamp",
-     cdecl.}
+    importc: "PackedStartEventsOfProtectionEquipment_getTimestamp", cdecl.}
 ## **********************************************************************
 ##  PacketOutputCircuitInfo : InformationObject
 ## *********************************************************************
@@ -1326,7 +1317,6 @@ proc ParameterScaledValue_destroy*(self: ParameterScaledValue) {.
 ##
 ##  \return the initialized instance
 ##
-
 proc ParameterScaledValue_create*(self: ParameterScaledValue; ioa: cint; value: cint;
                                  qpm: QualifierOfParameterMV): ParameterScaledValue {.
     importc: "ParameterScaledValue_create",  cdecl.}
@@ -1334,6 +1324,7 @@ proc ParameterScaledValue_getValue*(self: ParameterScaledValue): cint {.
     importc: "ParameterScaledValue_getValue",  cdecl.}
 proc ParameterScaledValue_setValue*(self: ParameterScaledValue; value: cint) {.
     importc: "ParameterScaledValue_setValue",  cdecl.}
+
 ## *
 ##  \brief Returns the qualifier of measured values (QPM)
 ##
@@ -1450,7 +1441,8 @@ proc EventOfProtectionEquipmentWithCP56Time2a_getTimestamp*(
 ## *************************************************************************
 
 type
-  PackedStartEventsOfProtectionEquipmentWithCP56Time2a* = ptr sPackedStartEventsOfProtectionEquipmentWithCP56Time2a
+  PackedStartEventsOfProtectionEquipmentWithCP56Time2a* = 
+    ptr sPackedStartEventsOfProtectionEquipmentWithCP56Time2a
 
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_destroy*(
     self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a) {.
@@ -1471,10 +1463,12 @@ proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getQuality*(
     importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getQuality",
      cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getElapsedTime*(
-    self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): CP16Time2a {.importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getElapsedTime",
+    self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): CP16Time2a {.
+    importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getElapsedTime",
      cdecl.}
 proc PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getTimestamp*(
-    self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): CP56Time2a {.importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getTimestamp",
+    self: PackedStartEventsOfProtectionEquipmentWithCP56Time2a): CP56Time2a {.
+    importc: "PackedStartEventsOfProtectionEquipmentWithCP56Time2a_getTimestamp",
      cdecl.}
 ## **********************************************************************
 ##  PackedOutputCircuitInfoWithCP56Time2a : InformationObject
@@ -1485,29 +1479,28 @@ type
 
 proc PackedOutputCircuitInfoWithCP56Time2a_destroy*(
     self: PackedOutputCircuitInfoWithCP56Time2a) {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_destroy",  cdecl.}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_destroy", cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_create*(
     self: PackedOutputCircuitInfoWithCP56Time2a; ioa: cint; oci: OutputCircuitInfo;
-    qdp: QualityDescriptorP; operatingTime: CP16Time2a; timestamp: CP56Time2a): PackedOutputCircuitInfoWithCP56Time2a {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_create",  cdecl.}
+    qdp: QualityDescriptorP; operatingTime: CP16Time2a; 
+    timestamp: CP56Time2a): PackedOutputCircuitInfoWithCP56Time2a {.
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_create", cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getOCI*(
     self: PackedOutputCircuitInfoWithCP56Time2a): OutputCircuitInfo {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_getOCI",  cdecl.}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_getOCI", cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getQuality*(
     self: PackedOutputCircuitInfoWithCP56Time2a): QualityDescriptorP {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_getQuality",  cdecl.}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_getQuality", cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getOperatingTime*(
     self: PackedOutputCircuitInfoWithCP56Time2a): CP16Time2a {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_getOperatingTime",
-     cdecl.}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_getOperatingTime", cdecl.}
 proc PackedOutputCircuitInfoWithCP56Time2a_getTimestamp*(
     self: PackedOutputCircuitInfoWithCP56Time2a): CP56Time2a {.
-    importc: "PackedOutputCircuitInfoWithCP56Time2a_getTimestamp",
-     cdecl.}
+    importc: "PackedOutputCircuitInfoWithCP56Time2a_getTimestamp", cdecl.}
+
 ## *********************************************
 ##  DoubleCommandWithCP56Time2a : DoubleCommand
 ## ********************************************
-
 type
   DoubleCommandWithCP56Time2a* = ptr sDoubleCommandWithCP56Time2a
 
@@ -1526,10 +1519,10 @@ proc DoubleCommandWithCP56Time2a_isSelect*(self: DoubleCommandWithCP56Time2a): b
     importc: "DoubleCommandWithCP56Time2a_isSelect",  cdecl.}
 proc DoubleCommandWithCP56Time2a_getTimestamp*(self: DoubleCommandWithCP56Time2a): CP56Time2a {.
     importc: "DoubleCommandWithCP56Time2a_getTimestamp",  cdecl.}
+
 ## ************************************************
 ##  StepCommandWithCP56Time2a : InformationObject
 ## ***********************************************
-
 type
   StepCommandWithCP56Time2a* = ptr sStepCommandWithCP56Time2a
 
@@ -1548,10 +1541,10 @@ proc StepCommandWithCP56Time2a_isSelect*(self: StepCommandWithCP56Time2a): bool 
     importc: "StepCommandWithCP56Time2a_isSelect",  cdecl.}
 proc StepCommandWithCP56Time2a_getTimestamp*(self: StepCommandWithCP56Time2a): CP56Time2a {.
     importc: "StepCommandWithCP56Time2a_getTimestamp",  cdecl.}
+
 ## *********************************************************************
 ##  SetpointCommandNormalizedWithCP56Time2a : SetpointCommandNormalized
 ## ********************************************************************
-
 type
   SetpointCommandNormalizedWithCP56Time2a* = ptr sSetpointCommandNormalizedWithCP56Time2a
 
@@ -1614,19 +1607,19 @@ proc SetpointCommandShortWithCP56Time2a_destroy*(
 proc SetpointCommandShortWithCP56Time2a_create*(
     self: SetpointCommandShortWithCP56Time2a; ioa: cint; value: cfloat;
     selectCommand: bool; ql: cint; timestamp: CP56Time2a): SetpointCommandShortWithCP56Time2a {.
-    importc: "SetpointCommandShortWithCP56Time2a_create",  cdecl.}
+    importc: "SetpointCommandShortWithCP56Time2a_create", cdecl.}
 proc SetpointCommandShortWithCP56Time2a_getValue*(
     self: SetpointCommandShortWithCP56Time2a): cfloat {.
-    importc: "SetpointCommandShortWithCP56Time2a_getValue",  cdecl.}
+    importc: "SetpointCommandShortWithCP56Time2a_getValue", cdecl.}
 proc SetpointCommandShortWithCP56Time2a_getQL*(
     self: SetpointCommandShortWithCP56Time2a): cint {.
-    importc: "SetpointCommandShortWithCP56Time2a_getQL",  cdecl.}
+    importc: "SetpointCommandShortWithCP56Time2a_getQL", cdecl.}
 proc SetpointCommandShortWithCP56Time2a_isSelect*(
     self: SetpointCommandShortWithCP56Time2a): bool {.
-    importc: "SetpointCommandShortWithCP56Time2a_isSelect",  cdecl.}
+    importc: "SetpointCommandShortWithCP56Time2a_isSelect", cdecl.}
 proc SetpointCommandShortWithCP56Time2a_getTimestamp*(
     self: SetpointCommandShortWithCP56Time2a): CP56Time2a {.
-    importc: "SetpointCommandShortWithCP56Time2a_getTimestamp",  cdecl.}
+    importc: "SetpointCommandShortWithCP56Time2a_getTimestamp", cdecl.}
 ## ******************************************************
 ##  Bitstring32CommandWithCP56Time2a: Bitstring32Command
 ## *****************************************************
@@ -1637,75 +1630,78 @@ type
 proc Bitstring32CommandWithCP56Time2a_create*(
     self: Bitstring32CommandWithCP56Time2a; ioa: cint; value: uint32_t;
     timestamp: CP56Time2a): Bitstring32CommandWithCP56Time2a {.
-    importc: "Bitstring32CommandWithCP56Time2a_create",  cdecl.}
+    importc: "Bitstring32CommandWithCP56Time2a_create", cdecl.}
 proc Bitstring32CommandWithCP56Time2a_destroy*(
     self: Bitstring32CommandWithCP56Time2a) {.
-    importc: "Bitstring32CommandWithCP56Time2a_destroy",  cdecl.}
+    importc: "Bitstring32CommandWithCP56Time2a_destroy", cdecl.}
 proc Bitstring32CommandWithCP56Time2a_getValue*(
     self: Bitstring32CommandWithCP56Time2a): uint32_t {.
-    importc: "Bitstring32CommandWithCP56Time2a_getValue",  cdecl.}
+    importc: "Bitstring32CommandWithCP56Time2a_getValue", cdecl.}
 proc Bitstring32CommandWithCP56Time2a_getTimestamp*(
     self: Bitstring32CommandWithCP56Time2a): CP56Time2a {.
-    importc: "Bitstring32CommandWithCP56Time2a_getTimestamp",  cdecl.}
+    importc: "Bitstring32CommandWithCP56Time2a_getTimestamp", cdecl.}
+
 ## *************************************************
 ##  CounterInterrogationCommand : InformationObject
 ## ************************************************
-
 type
   CounterInterrogationCommand* = ptr sCounterInterrogationCommand
 
 proc CounterInterrogationCommand_create*(self: CounterInterrogationCommand;
                                         ioa: cint; qcc: QualifierOfCIC): CounterInterrogationCommand {.
-    importc: "CounterInterrogationCommand_create",  cdecl.}
+    importc: "CounterInterrogationCommand_create", cdecl.}
 proc CounterInterrogationCommand_destroy*(self: CounterInterrogationCommand) {.
-    importc: "CounterInterrogationCommand_destroy",  cdecl.}
+    importc: "CounterInterrogationCommand_destroy", cdecl.}
 proc CounterInterrogationCommand_getQCC*(self: CounterInterrogationCommand): QualifierOfCIC {.
-    importc: "CounterInterrogationCommand_getQCC",  cdecl.}
+    importc: "CounterInterrogationCommand_getQCC", cdecl.}
+
 ## ************************************************
 ##  TestCommand : InformationObject
 ## **********************************************
-
 type
   TestCommand* = ptr sTestCommand
 
 proc TestCommand_create*(self: TestCommand): TestCommand {.
     importc: "TestCommand_create",  cdecl.}
-proc TestCommand_destroy*(self: TestCommand) {.importc: "TestCommand_destroy",
-     cdecl.}
-proc TestCommand_isValid*(self: TestCommand): bool {.importc: "TestCommand_isValid",
-     cdecl.}
+proc TestCommand_destroy*(self: TestCommand) {.
+    importc: "TestCommand_destroy", cdecl.}
+proc TestCommand_isValid*(self: TestCommand): bool {.
+    importc: "TestCommand_isValid", cdecl.}
+
 ## ************************************************
 ##  ResetProcessCommand : InformationObject
 ## **********************************************
-
 type
   ResetProcessCommand* = ptr sResetProcessCommand
 
-proc ResetProcessCommand_create*(self: ResetProcessCommand; ioa: cint;
-                                qrp: QualifierOfRPC): ResetProcessCommand {.
+proc ResetProcessCommand_create*(
+    self: ResetProcessCommand; 
+    ioa: cint;
+    qrp: QualifierOfRPC): ResetProcessCommand {.
     importc: "ResetProcessCommand_create",  cdecl.}
 proc ResetProcessCommand_destroy*(self: ResetProcessCommand) {.
     importc: "ResetProcessCommand_destroy",  cdecl.}
 proc ResetProcessCommand_getQRP*(self: ResetProcessCommand): QualifierOfRPC {.
     importc: "ResetProcessCommand_getQRP",  cdecl.}
+
 ## ************************************************
 ##  DelayAcquisitionCommand : InformationObject
 ## **********************************************
-
 type
   DelayAcquisitionCommand* = ptr sDelayAcquisitionCommand
 
-proc DelayAcquisitionCommand_create*(self: DelayAcquisitionCommand; ioa: cint;
-                                    delay: CP16Time2a): DelayAcquisitionCommand {.
+proc DelayAcquisitionCommand_create*(
+    self: DelayAcquisitionCommand; ioa: cint;
+    delay: CP16Time2a): DelayAcquisitionCommand {.
     importc: "DelayAcquisitionCommand_create",  cdecl.}
 proc DelayAcquisitionCommand_destroy*(self: DelayAcquisitionCommand) {.
     importc: "DelayAcquisitionCommand_destroy",  cdecl.}
 proc DelayAcquisitionCommand_getDelay*(self: DelayAcquisitionCommand): CP16Time2a {.
     importc: "DelayAcquisitionCommand_getDelay",  cdecl.}
+
 ## ******************************************
 ##  EndOfInitialization : InformationObject
 ## *****************************************
-
 type
   EndOfInitialization* = ptr sEndOfInitialization
 
@@ -1715,6 +1711,7 @@ proc EndOfInitialization_destroy*(self: EndOfInitialization) {.
     importc: "EndOfInitialization_destroy",  cdecl.}
 proc EndOfInitialization_getCOI*(self: EndOfInitialization): uint8_t {.
     importc: "EndOfInitialization_getCOI",  cdecl.}
+
 ## ******************************************
 ##  FileReady : InformationObject
 ## *****************************************
@@ -1725,12 +1722,12 @@ proc EndOfInitialization_getCOI*(self: EndOfInitialization): uint8_t {.
 ##
 ##  @{
 ##
-
-const
-  CS101_NOF_TRANSPARENT_FILE* = 1
-  CS101_NOF_DISTURBANCE_DATA* = 2
-  CS101_NOF_SEQUENCES_OF_EVENTS* = 3
-  CS101_NOF_SEQUENCES_OF_ANALOGUE_VALUES* = 4
+type
+  CS101_NOF* {.size: sizeof(uint16_t).} = enum
+    CS101_NOF_TRANSPARENT_FILE = 1,
+    CS101_NOF_DISTURBANCE_DATA = 2,
+    CS101_NOF_SEQUENCES_OF_EVENTS = 3,
+    CS101_NOF_SEQUENCES_OF_ANALOGUE_VALUES = 4
 
 ## * @}
 ## *
@@ -1740,16 +1737,16 @@ const
 ##
 ##  @{
 ##
-
-const
-  CS101_SCQ_DEFAULT* = 0
-  CS101_SCQ_SELECT_FILE* = 1
-  CS101_SCQ_REQUEST_FILE* = 2
-  CS101_SCQ_DEACTIVATE_FILE* = 3
-  CS101_SCQ_DELETE_FILE* = 4
-  CS101_SCQ_SELECT_SECTION* = 5
-  CS101_SCQ_REQUEST_SECTION* = 6
-  CS101_SCQ_DEACTIVATE_SECTION* = 7
+type
+  CS101_SCQ* {.size: sizeof(uint8_t).} = enum
+    CS101_SCQ_DEFAULT = 0,
+    CS101_SCQ_SELECT_FILE = 1,
+    CS101_SCQ_REQUEST_FILE = 2,
+    CS101_SCQ_DEACTIVATE_FILE = 3,
+    CS101_SCQ_DELETE_FILE = 4,
+    CS101_SCQ_SELECT_SECTION = 5,
+    CS101_SCQ_REQUEST_SECTION = 6,
+    CS101_SCQ_DEACTIVATE_SECTION = 7
 
 ## * @}
 ## *
@@ -1759,13 +1756,13 @@ const
 ##
 ##  @{
 ##
-
-const
-  CS101_LSQ_NOT_USED* = 0
-  CS101_LSQ_FILE_TRANSFER_WITHOUT_DEACT* = 1
-  CS101_LSQ_FILE_TRANSFER_WITH_DEACT* = 2
-  CS101_LSQ_SECTION_TRANSFER_WITHOUT_DEACT* = 3
-  CS101_LSQ_SECTION_TRANSFER_WITH_DEACT* = 4
+type
+  CS101_LSQ* {.size: sizeof(uint8_t).} = enum
+    CS101_LSQ_NOT_USED = 0,
+    CS101_LSQ_FILE_TRANSFER_WITHOUT_DEACT = 1,
+    CS101_LSQ_FILE_TRANSFER_WITH_DEACT = 2,
+    CS101_LSQ_SECTION_TRANSFER_WITHOUT_DEACT = 3,
+    CS101_LSQ_SECTION_TRANSFER_WITH_DEACT = 4
 
 ## * @}
 ## *
@@ -1775,30 +1772,18 @@ const
 ##
 ##  @{
 ##
-## * \brief AFQ not used
-
-const
-  CS101_AFQ_NOT_USED* = 0
-
-## * \brief acknowledge file positively
-
-const
-  CS101_AFQ_POS_ACK_FILE* = 1
-
-## * \brief acknowledge file negatively
-
-const
-  CS101_AFQ_NEG_ACK_FILE* = 2
-
-## * \brief acknowledge section positively
-
-const
-  CS101_AFQ_POS_ACK_SECTION* = 3
-
-## * \brief acknowledge section negatively
-
-const
-  CS101_AFQ_NEG_ACK_SECTION* = 4
+type
+  CS101_AFQ* {.size: sizeof(uint8_t).} = enum
+    ## * \brief AFQ not used
+    CS101_AFQ_NOT_USED = 0,
+    ## * \brief acknowledge file positively
+    CS101_AFQ_POS_ACK_FILE = 1,
+    ## * \brief acknowledge file negatively
+    CS101_AFQ_NEG_ACK_FILE = 2,
+    ## * \brief acknowledge section positively
+    CS101_AFQ_POS_ACK_SECTION = 3,
+    ## * \brief acknowledge section negatively
+    CS101_AFQ_NEG_ACK_SECTION = 4
 
 ## * @}
 ## *
@@ -1808,35 +1793,20 @@ const
 ##
 ##  @{
 ##
-## * \brief no error
-
-const
-  CS101_FILE_ERROR_DEFAULT* = 0
-
-## * \brief requested memory not available (not enough memory)
-
-const
-  CS101_FILE_ERROR_REQ_MEMORY_NOT_AVAILABLE* = 1
-
-## * \brief checksum test failed
-
-const
-  CS101_FILE_ERROR_CHECKSUM_FAILED* = 2
-
-## * \brief unexpected communication service
-
-const
-  CS101_FILE_ERROR_UNEXPECTED_COMM_SERVICE* = 3
-
-## * \brief unexpected name of file
-
-const
-  CS101_FILE_ERROR_UNEXPECTED_NAME_OF_FILE* = 4
-
-## * \brief unexpected name of section
-
-const
-  CS101_FILE_ERROR_UNEXPECTED_NAME_OF_SECTION* = 5
+type
+  CS101_FILE_ERROR* {.size: sizeof(uint8_t).} = enum
+    ## * \brief no error
+    CS101_FILE_ERROR_DEFAULT = 0,
+    ## * \brief requested memory not available (not enough memory)
+    CS101_FILE_ERROR_REQ_MEMORY_NOT_AVAILABLE = 1,
+    ## * \brief checksum test failed
+    CS101_FILE_ERROR_CHECKSUM_FAILED = 2,
+    ## * \brief unexpected communication service
+    CS101_FILE_ERROR_UNEXPECTED_COMM_SERVICE = 3,
+    ## * \brief unexpected name of file
+     CS101_FILE_ERROR_UNEXPECTED_NAME_OF_FILE = 4,
+    ## * \brief unexpected name of section
+    CS101_FILE_ERROR_UNEXPECTED_NAME_OF_SECTION = 5
 
 ## * @}
 ## *
@@ -1846,25 +1816,16 @@ const
 ##
 ##  @{
 ##
-## * \brief bit mask value for STATUS part of SOF
-
-const
-  CS101_SOF_STATUS* = 0x00000000
-
-## * \brief bit mask value for LFD (last file of the directory) flag
-
-const
-  CS101_SOF_LFD* = 0x00000000
-
-## * \brief bit mask value for FOR (name defines subdirectory) flag
-
-const
-  CS101_SOF_FOR* = 0x00000000
-
-## * \brief bit mask value for FA (file transfer of this file is active) flag
-
-const
-  CS101_SOF_FA* = 0x00000000
+type
+  CS101_SOF* {.size: sizeof(uint8_t).} = enum
+    ## * \brief bit mask value for STATUS part of SOF
+    CS101_SOF_STATUS = 0x1f,    
+    ## * \brief bit mask value for LFD (last file of the directory) flag
+    CS101_SOF_LFD = 0x20,
+    ## * \brief bit mask value for FOR (name defines subdirectory) flag
+    CS101_SOF_FOR = 0x40,
+    ## * \brief bit mask value for FA (file transfer of this file is active) flag
+    CS101_SOF_FA = 0x80
 
 ## * @}
 
@@ -1882,24 +1843,25 @@ type
 ##  \param lengthOfFile
 ##  \param positive when true file is ready to transmit
 ##
-
-proc FileReady_create*(self: FileReady; ioa: cint; nof: uint16_t;
-                      lengthOfFile: uint32_t; positive: bool): FileReady {.
+proc FileReady_create*(self: FileReady; 
+                    ioa: cint; nof: CS101_NOF;
+                    lengthOfFile: uint32_t; positive: bool): FileReady {.
     importc: "FileReady_create",  cdecl.}
-proc FileReady_destroy*(self: FileReady) {.importc: "FileReady_destroy",
-                                         cdecl.}
-proc FileReady_getFRQ*(self: FileReady): uint8_t {.importc: "FileReady_getFRQ",
-     cdecl.}
-proc FileReady_setFRQ*(self: FileReady; frq: uint8_t) {.importc: "FileReady_setFRQ",
-     cdecl.}
-proc FileReady_isPositive*(self: FileReady): bool {.importc: "FileReady_isPositive",
-     cdecl.}
-proc FileReady_getNOF*(self: FileReady): uint16_t {.importc: "FileReady_getNOF",
-     cdecl.}
+proc FileReady_destroy*(self: FileReady) {.
+    importc: "FileReady_destroy", cdecl.}
+proc FileReady_getFRQ*(self: FileReady): uint8_t {.
+    importc: "FileReady_getFRQ", cdecl.}
+proc FileReady_setFRQ*(self: FileReady; frq: uint8_t) {.
+    importc: "FileReady_setFRQ", cdecl.}
+proc FileReady_isPositive*(self: FileReady): bool {.
+    importc: "FileReady_isPositive", cdecl.}
+proc FileReady_getNOF*(self: FileReady): uint16_t {.
+    importc: "FileReady_getNOF", cdecl.}
 proc FileReady_getLengthOfFile*(self: FileReady): uint32_t {.
     importc: "FileReady_getLengthOfFile",  cdecl.}
-#proc FileReady_destroy*(self: FileReady) {.importc: "FileReady_destroy",
-#                                         cdecl.}
+#proc FileReady_destroy*(self: FileReady) {.
+#    importc: "FileReady_destroy", cdecl.}
+
 ## ******************************************
 ##  SectionReady : InformationObject
 ## *****************************************
@@ -1907,7 +1869,7 @@ proc FileReady_getLengthOfFile*(self: FileReady): uint32_t {.
 type
   SectionReady* = ptr sSectionReady
 
-proc SectionReady_create*(self: SectionReady; ioa: cint; nof: uint16_t; nos: uint8_t;
+proc SectionReady_create*(self: SectionReady; ioa: cint; nof: CS101_NOF; nos: uint8_t;
                          lengthOfSection: uint32_t; notReady: bool): SectionReady {.
     importc: "SectionReady_create",  cdecl.}
 proc SectionReady_isNotReady*(self: SectionReady): bool {.
@@ -1922,8 +1884,8 @@ proc SectionReady_getNameOfSection*(self: SectionReady): uint8_t {.
     importc: "SectionReady_getNameOfSection",  cdecl.}
 proc SectionReady_getLengthOfSection*(self: SectionReady): uint32_t {.
     importc: "SectionReady_getLengthOfSection",  cdecl.}
-proc SectionReady_destroy*(self: SectionReady) {.importc: "SectionReady_destroy",
-     cdecl.}
+proc SectionReady_destroy*(self: SectionReady) {.
+    importc: "SectionReady_destroy", cdecl.}
 ## ******************************************
 ##  FileCallOrSelect : InformationObject
 ## *****************************************
@@ -1931,17 +1893,18 @@ proc SectionReady_destroy*(self: SectionReady) {.importc: "SectionReady_destroy"
 type
   FileCallOrSelect* = ptr sFileCallOrSelect
 
-proc FileCallOrSelect_create*(self: FileCallOrSelect; ioa: cint; nof: uint16_t;
-                             nos: uint8_t; scq: uint8_t): FileCallOrSelect {.
+proc FileCallOrSelect_create*(self: FileCallOrSelect; ioa: cint; nof: CS101_NOF;
+                             nos: uint8_t; scq: CS101_SCQ): FileCallOrSelect {.
     importc: "FileCallOrSelect_create",  cdecl.}
 proc FileCallOrSelect_getNOF*(self: FileCallOrSelect): uint16_t {.
     importc: "FileCallOrSelect_getNOF",  cdecl.}
 proc FileCallOrSelect_getNameOfSection*(self: FileCallOrSelect): uint8_t {.
     importc: "FileCallOrSelect_getNameOfSection",  cdecl.}
-proc FileCallOrSelect_getSCQ*(self: FileCallOrSelect): uint8_t {.
+proc FileCallOrSelect_getSCQ*(self: FileCallOrSelect): CS101_SCQ {.
     importc: "FileCallOrSelect_getSCQ",  cdecl.}
 proc FileCallOrSelect_destroy*(self: FileCallOrSelect) {.
     importc: "FileCallOrSelect_destroy",  cdecl.}
+
 ## ************************************************
 ##  FileLastSegmentOrSection : InformationObject
 ## ***********************************************
@@ -1950,43 +1913,45 @@ type
   FileLastSegmentOrSection* = ptr sFileLastSegmentOrSection
 
 proc FileLastSegmentOrSection_create*(self: FileLastSegmentOrSection; ioa: cint;
-                                     nof: uint16_t; nos: uint8_t; lsq: uint8_t;
+                                     nof: CS101_NOF; nos: uint8_t; lsq: uint8_t;
                                      chs: uint8_t): FileLastSegmentOrSection {.
     importc: "FileLastSegmentOrSection_create",  cdecl.}
 proc FileLastSegmentOrSection_getNOF*(self: FileLastSegmentOrSection): uint16_t {.
     importc: "FileLastSegmentOrSection_getNOF",  cdecl.}
 proc FileLastSegmentOrSection_getNameOfSection*(self: FileLastSegmentOrSection): uint8_t {.
-    importc: "FileLastSegmentOrSection_getNameOfSection",  cdecl.}
+    importc: "FileLastSegmentOrSection_getNameOfSection", cdecl.}
 proc FileLastSegmentOrSection_getLSQ*(self: FileLastSegmentOrSection): uint8_t {.
     importc: "FileLastSegmentOrSection_getLSQ",  cdecl.}
 proc FileLastSegmentOrSection_getCHS*(self: FileLastSegmentOrSection): uint8_t {.
     importc: "FileLastSegmentOrSection_getCHS",  cdecl.}
 proc FileLastSegmentOrSection_destroy*(self: FileLastSegmentOrSection) {.
     importc: "FileLastSegmentOrSection_destroy",  cdecl.}
+
 ## ************************************************
 ##  FileACK : InformationObject
 ## ***********************************************
-
 type
   FileACK* = ptr sFileACK
 
-proc FileACK_create*(self: FileACK; ioa: cint; nof: uint16_t; nos: uint8_t; afq: uint8_t): FileACK {.
+proc FileACK_create*(self: FileACK; ioa: cint; nof: CS101_NOF; 
+    nos: uint8_t; afq: uint8_t): FileACK {.
     importc: "FileACK_create",  cdecl.}
-proc FileACK_getNOF*(self: FileACK): uint16_t {.importc: "FileACK_getNOF",
-     cdecl.}
+proc FileACK_getNOF*(self: FileACK): CS101_NOF {.
+    importc: "FileACK_getNOF", cdecl.}
 proc FileACK_getNameOfSection*(self: FileACK): uint8_t {.
     importc: "FileACK_getNameOfSection",  cdecl.}
-proc FileACK_getAFQ*(self: FileACK): uint8_t {.importc: "FileACK_getAFQ",
-     cdecl.}
-proc FileACK_destroy*(self: FileACK) {.importc: "FileACK_destroy",  cdecl.}
+proc FileACK_getAFQ*(self: FileACK): CS101_AFQ {.
+    importc: "FileACK_getAFQ", cdecl.}
+proc FileACK_destroy*(self: FileACK) {.
+    importc: "FileACK_destroy",  cdecl.}
+
 ## ************************************************
 ##  FileSegment : InformationObject
 ## ***********************************************
-
 type
   FileSegment* = ptr sFileSegment
 
-proc FileSegment_create*(self: FileSegment; ioa: cint; nof: uint16_t; nos: uint8_t;
+proc FileSegment_create*(self: FileSegment; ioa: cint; nof: CS101_NOF; nos: uint8_t;
                         data: ptr uint8_t; los: uint8_t): FileSegment {.
     importc: "FileSegment_create",  cdecl.}
 proc FileSegment_getNOF*(self: FileSegment): uint16_t {.
@@ -1999,21 +1964,22 @@ proc FileSegment_getSegmentData*(self: FileSegment): ptr uint8_t {.
     importc: "FileSegment_getSegmentData",  cdecl.}
 proc FileSegment_GetMaxDataSize*(parameters: CS101_AppLayerParameters): cint {.
     importc: "FileSegment_GetMaxDataSize",  cdecl.}
-proc FileSegment_destroy*(self: FileSegment) {.importc: "FileSegment_destroy",
-     cdecl.}
+proc FileSegment_destroy*(self: FileSegment) {.
+    importc: "FileSegment_destroy", cdecl.}
+
 ## ************************************************
 ##  FileDirectory: InformationObject
 ## ***********************************************
-
 type
   FileDirectory* = ptr sFileDirectory
 
-proc FileDirectory_create*(self: FileDirectory; ioa: cint; nof: uint16_t;
-                          lengthOfFile: cint; sof: uint8_t; creationTime: CP56Time2a): FileDirectory {.
+proc FileDirectory_create*(self: FileDirectory; ioa: cint; nof: CS101_NOF;
+                          lengthOfFile: cint; sof: CS101_SOF; 
+                          creationTime: CP56Time2a): FileDirectory {.
     importc: "FileDirectory_create",  cdecl.}
-proc FileDirectory_getNOF*(self: FileDirectory): uint16_t {.
+proc FileDirectory_getNOF*(self: FileDirectory): CS101_NOF {.
     importc: "FileDirectory_getNOF",  cdecl.}
-proc FileDirectory_getSOF*(self: FileDirectory): uint8_t {.
+proc FileDirectory_getSOF*(self: FileDirectory): CS101_SOF {.
     importc: "FileDirectory_getSOF",  cdecl.}
 proc FileDirectory_getSTATUS*(self: FileDirectory): cint {.
     importc: "FileDirectory_getSTATUS",  cdecl.}
@@ -2023,7 +1989,7 @@ proc FileDirectory_getFOR*(self: FileDirectory): bool {.
     importc: "FileDirectory_getFOR",  cdecl.}
 proc FileDirectory_getFA*(self: FileDirectory): bool {.
     importc: "FileDirectory_getFA",  cdecl.}
-proc FileDirectory_getLengthOfFile*(self: FileDirectory): uint8_t {.
+proc FileDirectory_getLengthOfFile*(self: FileDirectory): int {.
     importc: "FileDirectory_getLengthOfFile",  cdecl.}
 proc FileDirectory_getCreationTime*(self: FileDirectory): CP56Time2a {.
     importc: "FileDirectory_getCreationTime",  cdecl.}

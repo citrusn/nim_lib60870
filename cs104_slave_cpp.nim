@@ -50,23 +50,24 @@ type                          ##  .k =
     msg*: array[256, uint8_t]
     msgSize*: cint
 
-  QueueEntryState* = enum
-    QUEUE_ENTRY_STATE_NOT_USED, QUEUE_ENTRY_STATE_WAITING_FOR_TRANSMISSION,
+  QueueEntryState* {.size: sizeof(cint).} = enum
+    QUEUE_ENTRY_STATE_NOT_USED, 
+    QUEUE_ENTRY_STATE_WAITING_FOR_TRANSMISSION,
     QUEUE_ENTRY_STATE_SENT_BUT_NOT_CONFIRMED
 
 
 type
+  ASDUQueueEntry* = ptr sASDUQueueEntry
   sASDUQueueEntry* {.bycopy.} = object
     entryTimestamp*: uint64_t
     asdu*: FrameBuffer
     state*: QueueEntryState
 
-  ASDUQueueEntry* = ptr sASDUQueueEntry
+  
 
 ## **************************************************
 ##  MessageQueue
 ## *************************************************
-
 type
   sMessageQueue* {.bycopy.} = object
     size*: cint

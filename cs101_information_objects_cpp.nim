@@ -27,8 +27,9 @@ import
 
 type
   EncodeFunction* = proc (self: InformationObject; frame: Frame;
-                       parameters: CS101_AppLayerParameters; isSequence: bool): bool
-  DestroyFunction* = proc (self: InformationObject)
+                          parameters: CS101_AppLayerParameters; 
+                          isSequence: bool): bool {.cdecl.}
+  DestroyFunction* = proc (self: InformationObject) {.cdecl.}
   
   InformationObjectVFT* = ptr sInformationObjectVFT
   sInformationObjectVFT* {.bycopy.} = object

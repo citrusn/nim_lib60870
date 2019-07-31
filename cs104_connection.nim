@@ -20,7 +20,7 @@
 ##
 
 import
-  iec60870_master, iec60870_types, iec60870_common
+    asyncdispatch, iec60870_master, iec60870_types, iec60870_common
 
 ## *
 ##  \file cs104_connection.h
@@ -44,7 +44,8 @@ type
   SentASDU* {.bycopy.} = object
     sentTime*: uint64_t ##  required for T1 timeout  
     seqNo*: cint
-
+  
+  CS104_Connection* = ptr sCS104_Connection
   sCS104_Connection* {.bycopy.}  = object
     hostname*: array[HOST_NAME_MAX + 1, char]
     tcpPort*: cint
@@ -60,7 +61,7 @@ type
     sentASDUsLock*: Semaphore  
     ## #endif
     ## #if (CONFIG_USE_THREADS == 1)
-    connectionHandlingThread*: pointer # Thread
+    connectionHandlingThread*: iec60870_types.Thread
     ## #endif
     receiveCount*: cint
     sendCount*: cint
@@ -85,7 +86,6 @@ type
     rawMessageHandler*: IEC60870_RawMessageHandler
     rawMessageHandlerParameter*: pointer
 
-  CS104_Connection* = ptr sCS104_Connection
   
   CS104_ConnectionEvent* {.size: sizeof(cint).} = enum
     CS104_CONNECTION_OPENED = 0, 
@@ -93,8 +93,9 @@ type
     CS104_CONNECTION_STARTDT_CON_RECEIVED = 2,
     CS104_CONNECTION_STOPDT_CON_RECEIVED = 3
 
-  CS104_ConnectionHandler* = proc (parameter: pointer; connection: CS104_Connection;
-                                  event: CS104_ConnectionEvent) {.cdecl.}
+
+  CS104_ConnectionHandler = proc (parameter: pointer; connection: CS104_Connection;
+                                  event: CS104_ConnectionEvent)  {.cdecl.}
     ## *
     ##  \brief Handler that is called when the connection is established or closed
     ##
@@ -278,8 +279,7 @@ proc CS104_Connection_sendReadCommand*(self: CS104_Connection; ca: cint; ioa: ci
 ##
 
 proc CS104_Connection_sendClockSyncCommand*(self: CS104_Connection; ca: cint;
-    newTime: CP56Time2a): bool {.importc: "CS104_Connection_sendClockSyncCommand",
-                               cdecl.} 
+    newTime: CP56Time2a): bool {.importc: "CS104_Connection_sendClockSyncCommand", cdecl.} 
 ## *
 ##  \brief Send a test command (C_TS_NA_1 typeID: 104)
 ##

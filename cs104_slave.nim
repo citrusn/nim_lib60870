@@ -54,15 +54,14 @@ type
     msgSize*: cint
       
 type
-    SentASDUSlave* {.bycopy.} = object
-        entryTime*: uint64_t       ##  required to identify message in server (low-priority) queue
-        queueIndex*: cint          ##  -1 if ASDU is not from low-priority queue
-                        ##  required for T1 timeout
-        sentTime*: uint64_t
-        seqNo*: cint
+  SentASDUSlave* {.bycopy.} = object
+    entryTime*: uint64_t      ##  required to identify message in server (low-priority) queue
+    queueIndex*: cint         ##  -1 if ASDU is not from low-priority queue
+    sentTime*: uint64_t       ##  required for T1 timeout
+    seqNo*: cint
       
 type
-  QueueEntryState* = enum
+  QueueEntryState* {.size: sizeof(cint).} = enum
     QUEUE_ENTRY_STATE_NOT_USED, QUEUE_ENTRY_STATE_WAITING_FOR_TRANSMISSION,
     QUEUE_ENTRY_STATE_SENT_BUT_NOT_CONFIRMED    
     
@@ -84,12 +83,15 @@ type
       size*: cint
       entryCounter*: cint
       lastMsgIndex*: cint
-      firstMsgIndex*: cint       ## #if (CONFIG_CS104_SLAVE_POOL == 1)
-      asdus*: array[CONFIG_CS104_MESSAGE_QUEUE_HIGH_PRIO_SIZE, FrameBuffer] ## #else
-                                                                         ##     FrameBuffer* asdus;
-                                                                         ## #endif
-                                                                         ## #if (CONFIG_USE_SEMAPHORES == 1)
-      queueLock*: Semaphore      ## #endif  
+      firstMsgIndex*: cint       
+      ## #if (CONFIG_CS104_SLAVE_POOL == 1)
+      asdus*: array[CONFIG_CS104_MESSAGE_QUEUE_HIGH_PRIO_SIZE, FrameBuffer] 
+      ## #else
+      ##    FrameBuffer* asdus;
+      ## #endif
+      ## #if (CONFIG_USE_SEMAPHORES == 1)
+      queueLock*: Semaphore
+      ## #endif  
 
 ## **************************************************
 ##  MessageQueue
@@ -101,12 +103,15 @@ type
       size*: cint
       entryCounter*: cint
       lastMsgIndex*: cint
-      firstMsgIndex*: cint       ## #if (CONFIG_CS104_SLAVE_POOL == 1)
-      asdus*: array[CONFIG_CS104_MESSAGE_QUEUE_SIZE, sASDUQueueEntry] ## #else
-                                                                   ##     ASDUQueueEntry asdus;
-                                                                   ## #endif
-   ## #if (CONFIG_USE_SEMAPHORES == 1)
-      queueLock*: Semaphore      ## #endif
+      firstMsgIndex*: cint       
+      ## #if (CONFIG_CS104_SLAVE_POOL == 1)
+      asdus*: array[CONFIG_CS104_MESSAGE_QUEUE_SIZE, sASDUQueueEntry] 
+      ## #else
+      ##   ASDUQueueEntry asdus;
+      ## #endif
+      ## #if (CONFIG_USE_SEMAPHORES == 1)
+      queueLock*: Semaphore      
+      ## #endif
       
     CS104_RedundancyGroup* = ptr sCS104_RedundancyGroup
     sCS104_RedundancyGroup* {.bycopy.} = object
@@ -141,11 +146,10 @@ type
 ##  \param connection the connection object
 ##  \param event event type
 ##
-
 type
   CS104_ConnectionEventHandler* = proc (parameter: pointer;
                                      connection: IMasterConnection;
-                                     event: CS104_PeerConnectionEvent) {.cdecl.}
+                                     event: CS104_PeerConnectionEvent) {.noconv.}
 
 ## *
 ##  \brief Callback handler for sent and received messages
@@ -162,9 +166,9 @@ type
 ##
 
 type
-  CS104_SlaveRawMessageHandler* = proc (parameter: pointer;
-                                     connection: IMasterConnection;
-                                     msg: var array[256, uint8_t]; msgSize: cint; send: bool) {.cdecl.}
+  CS104_SlaveRawMessageHandler* = 
+    proc (parameter: pointer; connection: IMasterConnection;
+          msg: ptr array[256, byte]; msgSize: cint; send: bool) {.noconv.} # {.cdecl.}
 
 ## **************************************************
 ##  Slave
@@ -218,12 +222,12 @@ type
       stopRunning*: bool
       tcpPort*: cint
       ## when (CONFIG_CS104_SUPPORT_SERVER_MODE_MULTIPLE_REDUNDANCY_GROUPS):
-      redundancyGroups*: LinkedList
+      redundancyGroups*: pointer #LinkedList
       serverMode*: CS104_ServerMode
       ## when (CONFIG_CS104_SLAVE_POOL == 1):
-      localAddress*: array[60, char]
-      #localAddress*: cstring
-      listeningThread*: Thread
+        #_localAddress*: array[60, char]
+      localAddress*: cstring
+      listeningThread*: iec60870_types.Thread
       serverSocket*: ServerSocket
 
     MasterConnection* = ptr sMasterConnection 
