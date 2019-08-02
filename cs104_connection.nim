@@ -93,7 +93,6 @@ type
     CS104_CONNECTION_STARTDT_CON_RECEIVED = 2,
     CS104_CONNECTION_STOPDT_CON_RECEIVED = 3
 
-
   CS104_ConnectionHandler = proc (parameter: pointer; connection: CS104_Connection;
                                   event: CS104_ConnectionEvent)  {.cdecl.}
     ## *

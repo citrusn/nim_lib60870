@@ -8,7 +8,6 @@ import
   os, strformat, strutils, asyncdispatch, time, cs104_connection,
       iec60870_types, iec60870_common
 
-
 var running*: bool = true
 proc sigint_handler*() {.cdecl.} =
   running = false
