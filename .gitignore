@@ -1,5 +1,5 @@
 .vscode/
-/output/*
-output/60870.dll
-output/simple_client.exe
+.gitignore
+output/
 1
+output/simple_client.exe

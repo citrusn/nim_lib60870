@@ -10,15 +10,14 @@ proc sigint_handler*() {.noconv.} =
   echo "Ctrl-c"
 
 proc printCP56Time2a*(time: CP56Time2a) =
-  echo fmt"""{CP56Time2a_getHour(time):02}:
-           {CP56Time2a_getMinute(time):02}:
-           {CP56Time2a_getSecond(time):02} 
-           {CP56Time2a_getDayOfMonth(time):02}/
-           {CP56Time2a_getMonth(time):02}/
-           {CP56Time2a_getYear(time) + 2000}"""
+  echo fmt("{CP56Time2a_getHour(time):02}:" &
+           "{CP56Time2a_getMinute(time):02}:" &
+           "{CP56Time2a_getSecond(time):02} " & 
+           "{CP56Time2a_getDayOfMonth(time):02}/" &
+           "{CP56Time2a_getMonth(time):02}/" &
+           "{CP56Time2a_getYear(time) + 2000}")
 
 ##  Callback handler to log sent or received messages (optional)
-
 proc rawMessageHandler*(parameter: pointer; connection: IMasterConnection;
                         msg: ptr array[256, byte]; msgSize: cint;
                         sent: bool) {.noconv.} =    

@@ -8,9 +8,8 @@ import
   os, strformat, strutils, asyncdispatch, time, cs104_connection,
       iec60870_types, iec60870_common
 
-
 var running*: bool = true
-proc sigint_handler*() {.cdecl.} =
+proc sigint_handler*() {.noconv.} =
   running = false
   echo "Ctrl-c"
 
